@@ -1,0 +1,65 @@
+[
+  {
+    "timestamp": "2026-09-27 16:40:41",
+    "category": "AC Mains Cables",
+    "item": "Polycab - Copper Armoured 1.1kV (4 Core 6 sqmm)",
+    "old_price": 210.0,
+    "new_price": 180.0,
+    "diff": -30.0,
+    "user": "TestAdmin"
+  },
+  {
+    "timestamp": "2026-09-27 16:40:41",
+    "category": "AC Mains Cables",
+    "item": "Polycab - Copper Armoured 1.1kV (4 Core 6 sqmm)",
+    "old_price": 180.0,
+    "new_price": 210.0,
+    "diff": 30.0,
+    "user": "TestAdmin"
+  },
+  {
+    "timestamp": "2026-09-27 16:16:10",
+    "category": "AC Mains Cables",
+    "item": "Polycab - Copper Armoured 1.1kV (4 Core 6 sqmm)",
+    "old_price": 210.0,
+    "new_price": 180.0,
+    "diff": -30.0,
+    "user": "TestAdmin"
+  },
+  {
+    "timestamp": "2026-09-27 16:16:10",
+    "category": "AC Mains Cables",
+    "item": "Polycab - Copper Armoured 1.1kV (4 Core 6 sqmm)",
+    "old_price": 180,
+    "new_price": 210.0,
+    "diff": 30.0,
+    "user": "TestAdmin"
+  },
+  {
+    "timestamp": "2026-09-27 12:12:54",
+    "category": "Solar PV Modules",
+    "item": "Waaree Energies - Waaree WS-550 Mono (550 Wp)",
+    "old_price": 18.18,
+    "new_price": 24.5,
+    "diff": 6.32,
+    "user": "Admin"
+  },
+  {
+    "timestamp": "2026-09-27 01:22:44",
+    "category": "Solar PV Modules",
+    "item": "Waaree Energies - Waaree WS-550 Mono (550 Wp)",
+    "old_price": 18.18,
+    "new_price": 24.5,
+    "diff": 6.32,
+    "user": "Admin"
+  },
+  {
+    "timestamp": "2026-09-27 01:21:07",
+    "category": "Solar PV Modules",
+    "item": "Waaree Energies - Waaree WS-550 Mono (550 Wp)",
+    "old_price": 18.18,
+    "new_price": 24.5,
+    "diff": 6.32,
+    "user": "TestAdmin"
+  }
+]

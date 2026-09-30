@@ -1,0 +1,87 @@
+[
+  {
+    "id": "POL-2026-07",
+    "type": "regulation",
+    "title": "Grid Interconnection Standard 2026",
+    "authority": "KERC / MNRE / BESCOM",
+    "effective_date": "2026-09-27 12:12",
+    "summary": "",
+    "sanctioned_load_cap": "100% of sanctioned load",
+    "tariff_inr": "\u20b98.05 / kWh",
+    "subsidy_slabs": "Standard Subsidy",
+    "file_url": "",
+    "status": "Active"
+  },
+  {
+    "id": "POL-2026-06",
+    "type": "regulation",
+    "title": "Grid Interconnection Standard 2026",
+    "authority": "KERC / MNRE / BESCOM",
+    "effective_date": "2026-09-27 01:22",
+    "summary": "",
+    "sanctioned_load_cap": "100% of sanctioned load",
+    "tariff_inr": "\u20b98.05 / kWh",
+    "subsidy_slabs": "Standard Subsidy",
+    "file_url": "",
+    "status": "Active"
+  },
+  {
+    "id": "POL-2026-05",
+    "type": "regulation",
+    "title": "Solar Subsidy Policy 2026",
+    "authority": "KERC / MNRE / BESCOM",
+    "effective_date": "2026-09-27 01:21",
+    "summary": "",
+    "sanctioned_load_cap": "100% of sanctioned load",
+    "tariff_inr": "\u20b98.05 / kWh",
+    "subsidy_slabs": "Standard Subsidy",
+    "file_url": "",
+    "status": "Active"
+  },
+  {
+    "id": "POL-2026-04",
+    "type": "regulation",
+    "title": "Solar Subsidy Policy 2026",
+    "authority": "KERC / MNRE / BESCOM",
+    "effective_date": "2026-09-27 01:20",
+    "summary": "",
+    "sanctioned_load_cap": "100% of sanctioned load",
+    "tariff_inr": "\u20b98.05 / kWh",
+    "subsidy_slabs": "Standard Subsidy",
+    "file_url": "",
+    "status": "Active"
+  },
+  {
+    "id": "POL-2026-01",
+    "type": "regulation",
+    "title": "KERC Rooftop Solar Grid Connectivity Regulations (Order 2026)",
+    "authority": "Karnataka Electricity Regulatory Commission (KERC)",
+    "effective_date": "01-Apr-2026",
+    "summary": "Governs net-metering and gross-metering connectivity for LT consumers up to 20 kW. Mandates IEEE 1547 and CEA safety compliance.",
+    "sanctioned_load_cap": "100% of sanctioned load for LT installations",
+    "tariff_inr": "\u20b98.05 / kWh benchmark",
+    "file_url": "/uploads/policies/KERC_Solar_Regulations_2026.pdf",
+    "status": "Active"
+  },
+  {
+    "id": "POL-2026-02",
+    "type": "subsidy",
+    "title": "PM Surya Ghar Muft Bijli Yojana Central Financial Assistance",
+    "authority": "Ministry of New and Renewable Energy (MNRE)",
+    "effective_date": "01-Jan-2026",
+    "summary": "Provides capital subsidy of \u20b930,000 for 1 kW, \u20b960,000 for 2 kW, and \u20b978,000 for systems 3 kW and above for residential rooftops.",
+    "subsidy_slabs": "1 kW: \u20b930k | 2 kW: \u20b960k | 3 kW+: \u20b978k max",
+    "file_url": "/uploads/policies/MNRE_Surya_Ghar_Guidelines.pdf",
+    "status": "Active"
+  },
+  {
+    "id": "POL-2026-03",
+    "type": "technical",
+    "title": "BESCOM Technical Interconnection Standards for Rooftop Solar",
+    "authority": "Bangalore Electricity Supply Company (BESCOM)",
+    "effective_date": "15-Feb-2026",
+    "summary": "Technical criteria for 415V three-phase interconnection, islanding protection, and Class 1.0 bidirectional DLMS smart meter certification.",
+    "file_url": "/uploads/policies/BESCOM_Interconnection_Standard.pdf",
+    "status": "Active"
+  }
+]

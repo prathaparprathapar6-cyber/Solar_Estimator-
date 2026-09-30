@@ -1,0 +1,44 @@
+[
+  {
+    "timestamp": "2026-09-27 12:12:54",
+    "actor": "site_engineer_1",
+    "action": "Requested promotion to senior_admin",
+    "target": "site_engineer_1",
+    "details": "Completed commissioning"
+  },
+  {
+    "timestamp": "2026-09-27 01:22:44",
+    "actor": "site_engineer_1",
+    "action": "Requested promotion to senior_admin",
+    "target": "site_engineer_1",
+    "details": "Completed commissioning"
+  },
+  {
+    "timestamp": "2026-09-27 01:22:20",
+    "actor": "site_engineer_1",
+    "action": "Requested promotion to senior_admin",
+    "target": "site_engineer_1",
+    "details": "Completed Q3 milestone"
+  },
+  {
+    "timestamp": "2026-09-27 01:21:25",
+    "actor": "site_engineer_1",
+    "action": "Requested promotion to senior_admin",
+    "target": "site_engineer_1",
+    "details": "Completed Q3 milestone"
+  },
+  {
+    "timestamp": "2026-09-25 16:20:00",
+    "actor": "admin",
+    "action": "Requested promotion to Senior Admin",
+    "target": "admin",
+    "details": "Submitted justification for KERC 2026 tariff management"
+  },
+  {
+    "timestamp": "2026-09-24 10:00:00",
+    "actor": "Adarsha KM (Super Admin)",
+    "action": "Role Assigned",
+    "target": "Priya Sharma",
+    "details": "Assigned Senior Admin role with policy & pricing privileges"
+  }
+]

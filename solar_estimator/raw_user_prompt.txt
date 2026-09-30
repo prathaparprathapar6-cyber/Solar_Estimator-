@@ -1,0 +1,97 @@
+<USER_REQUEST>
+1. Primary deliverable: VoltRoof_Combined.html
+2. Read AGENT_HANDOFF.md for architecture, liveUpdate / drawArray hooks, storage keys, and integration checklist
+3. Merge calculation code into existing update paths - do not remove ribbon, visualizer, or admin
+4. Optional: host with sw.js + logo.png
+below is the text of AGENT_HANDOFF.md
+# VoltRoof Combined UI — Agent Handoff Summary
+**Generated:** 2026-09-23  
+**Primary file:** `VoltRoof_Combined.html`  
+**Companion:** `sw.js` (optional service worker)
+
+---
+
+## 1. What this package is
+Single-file **VoltRoof Solar PV Estimator** UI (HTML/CSS/JS) with:
+- Full project design / BOM / financials dashboard
+- MS Word–style **pin/unpin ribbon** header
+- **Admin Control Center** (manual, pricing table, analytics, feedback, audit, settings, tickets)
+- Advanced **rooftop array layout & 3D visualizer**
+- Theme (light/dark), offline bar, command palette (Ctrl+K), snapshots, share link, etc.
+
+**Calculation model:** The file already contains client-side sizing, BOM, payback, and weather/location logic. Merge any external “calculation model code” by:
+1. Keeping pure math functions in a shared module or the same `<script>` block
+2. Calling them from `liveUpdate()` / `calculateSystem()` (names may vary)
+3. Writing results into DOM ids: `kpiCap`, `kpiGen`, `kpiCost`, `kpiPay`, `rtPlantCap`, chart datasets, etc.
+
+---
+
+## 2. Key files
+| File | Role |
+|------|------|
+| `VoltRoof_Combined.html` | Full app UI + embedded logic |
+| `sw.js` | Optional offline shell / CDN cache |
+| Place `logo.png` next to HTML if referenced | Brand asset |
+
+---
+
+## 3. Architecture (UI)
+- **Entry:** `#nameGate` login / admin gate
+- **Shell:** `.sidebar` + `.main` + **`.ribbon-wrap`** (replaces classic topbar)
+- **Views:** `switchView('dashboard'|'studio'|'bom'|'financials'|…)`
+- **Admin:** `openAdminManualModal()` → tabs via `switchAdminTab(...)`
+- **State:** `sites[]`, `activeSiteIndex`, `current`, `localStorage` keys prefixed `voltroof_`
+- **
+<truncated 1594 bytes>
+vs FD 6.5% | Chart / financial view |
+
+Polish: hover elevation on cards/tiles, taller `.chart-box` (260px), consistent section chrome.
+
+---
+
+## 7. Admin modules
+Manual · Pricing (editable table + unsaved + sticky save + history) · Visitors · Feedback (+ pie) · Admins · Audit (+ CSV) · Settings (+ eng helpers P50/P90, stringing, V-drop, shadow loss, engineer stamp) · Tickets (+ reply)
+
+---
+
+## 8. localStorage keys (selection)
+- `voltroof_user`, `voltroof_admin_session`, `voltroof_theme`, `voltroof_admin_theme`
+- `voltroof_pricing_config`, `voltroof_user_manual_data` / `_meta`
+- `voltroof_ribbon_pin`, `voltroof_density`, `voltroof_project_stage`
+- `voltroof_snapshots`, `voltroof_tour_done`, `voltroof_confetti_done`
+
+---
+
+## 9. Integration checklist for calculation agent
+1. Do **not** strip ribbon, visualizer, or admin modals when merging model code  
+2. Wire model outputs → existing KPI / BOM / chart update functions  
+3. Keep `liveUpdate` debounced (perf) and crash-wrapped  
+4. Parapet/obstacle from design must flow into `drawArray` for shadows  
+5. Production: minify HTML; host `sw.js` same origin; add real `logo.png`  
+6. Prefer `apiFetch` for any backend calls (offline-safe)
+
+---
+
+## 10. Known limitations
+- 3D is **isometric canvas**, not WebGL  
+- String overlay is indicative (max ~18 mod/string messaging)  
+- Share links are demo tokens in hash, not server-backed  
+- Some Admin metrics are demo placeholders until API is connected  
+
+---
+
+## 11. Quick test script
+1. Open HTML → enter name  
+2. Ribbon pin/unpin · Save · PDF  
+3. Project Design → dimensions, parapet, obstacle → Calculate  
+4. Dashboard visualizer: 3D, fullscreen, TOD slider, PNG export, panel click  
+5. Ctrl+K command palette · Admin login · Pricing publish  
+
+---
+
+**End of handoff.** Hand this file + `VoltRoof_Combined.html` + `sw.js` to the calculation-model agent.
+
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-09-23T03:08:58+05:30.
+</ADDITIONAL_METADATA>

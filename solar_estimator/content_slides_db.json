@@ -1,0 +1,58 @@
+[
+  {
+    "id": "slide-1",
+    "image": "verified_page1.png",
+    "title": "Karnataka Clean Energy Infrastructure",
+    "body": "State-of-the-art rooftop solar engineering for residential, commercial & institutional complexes.",
+    "order": 1,
+    "status": "active"
+  },
+  {
+    "id": "slide-2",
+    "image": "voltroof_3d_perfect.png",
+    "title": "Interactive 3D Rooftop Visualizer",
+    "body": "Millimeter-precision tilt angles, azimuth tracking, and shadow-optimized module layouts.",
+    "order": 2,
+    "status": "active"
+  },
+  {
+    "id": "slide-3",
+    "image": "voltroof_bom_schedule.png",
+    "title": "Procurement-Ready 12-Item BOM Engine",
+    "body": "Complete switchgear, DC/AC cabling, earthing electrodes, and utility net-metering schedules.",
+    "order": 3,
+    "status": "active"
+  },
+  {
+    "id": "slide-1790452212846",
+    "image": "/uploads/industrial.jpg",
+    "title": "Industrial Rooftop 500kW",
+    "body": "VoltRoof clean energy presentation",
+    "order": 4,
+    "status": "active"
+  },
+  {
+    "id": "slide-1790452267914",
+    "image": "/uploads/industrial.jpg",
+    "title": "Industrial Rooftop 500kW",
+    "body": "VoltRoof clean energy presentation",
+    "order": 5,
+    "status": "active"
+  },
+  {
+    "id": "slide-1790452364200",
+    "image": "/uploads/showcase/site1.jpg",
+    "title": "1MW Commercial Rooftop",
+    "body": "VoltRoof clean energy presentation",
+    "order": 6,
+    "status": "active"
+  },
+  {
+    "id": "slide-1790491374111",
+    "image": "/uploads/showcase/site1.jpg",
+    "title": "1MW Commercial Rooftop",
+    "body": "VoltRoof clean energy presentation",
+    "order": 7,
+    "status": "active"
+  }
+]

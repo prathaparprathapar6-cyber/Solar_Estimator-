@@ -1,0 +1,58 @@
+[
+  {
+    "username": "Adarsha KM",
+    "emails": [
+      "adarshakm@jnnce.ac.in",
+      "adarshakmsgr50@gmail.com"
+    ],
+    "mobile": "8073398259",
+    "password": "Adarsh@123321",
+    "role": "super_admin",
+    "status": "approved",
+    "created_at": "2026-09-22T00:00:00Z"
+  },
+  {
+    "username": "Prathapa R",
+    "emails": [
+      "prathaparprathapar6@gmail.com"
+    ],
+    "mobile": "",
+    "password": "Prathap@123",
+    "role": "admin",
+    "status": "approved",
+    "created_at": "2026-09-22T00:00:00Z"
+  },
+  {
+    "username": "D Nihar",
+    "emails": [
+      "nihar333k@gmail.com"
+    ],
+    "mobile": "",
+    "password": "Nihar@123",
+    "role": "admin",
+    "status": "approved",
+    "created_at": "2026-09-22T00:00:00Z"
+  },
+  {
+    "username": "Ajjanna NG",
+    "emails": [
+      "nga_ee@jnnce.ac.in"
+    ],
+    "mobile": "",
+    "password": "Admin@123",
+    "role": "admin",
+    "status": "approved",
+    "created_at": "2026-09-22T00:00:00Z"
+  },
+  {
+    "username": "Engr_5472",
+    "emails": [
+      "engr_5472@energy.org"
+    ],
+    "mobile": "9845012345",
+    "password": "SecurePassword123!",
+    "role": "admin",
+    "status": "approved",
+    "created_at": "2026-09-22 22:14:32"
+  }
+]

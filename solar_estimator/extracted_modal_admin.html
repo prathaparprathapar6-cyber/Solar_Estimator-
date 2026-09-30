@@ -1,0 +1,532 @@
+<div class="name-gate" id="modalAdminManual" style="display:none;z-index:99999">
+  <div class="gate-card" style="position:relative;max-width:1100px;width:96%;max-height:92vh;overflow-y:auto;text-align:left;box-shadow:0 24px 60px rgba(0,0,0,0.55)">
+    <button type="button" onclick="closeAdminManualModal()" title="Close" style="position:absolute;top:14px;right:16px;background:none;border:none;color:var(--muted);font-size:1.4rem;cursor:pointer;line-height:1">&times;</button>
+    
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--border)">
+      <div style="width:42px;height:42px;border-radius:12px;background:rgba(16,185,129,0.12);border:1px solid rgba(16,185,129,0.3);display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0">🛡️</div>
+      <div style="flex:1">
+        <span style="font-size:0.68rem;font-weight:800;letter-spacing:0.06em;color:var(--success);background:rgba(16,185,129,0.1);padding:2px 8px;border-radius:6px;border:1px solid rgba(16,185,129,0.25)">VOLTROOF ADMIN CONTROL CENTER</span>
+        <h3 style="margin:3px 0 0;font-size:1.15rem;color:var(--text);line-height:1.3">System Administration, Pricing &amp; Analytics Hub</h3>
+      </div>
+    </div>
+
+    <!-- If not logged in as Admin, prompt for login or access request -->
+    <div id="modalAdminLoginForm" style="display:none">
+      <div id="modalAdminLoginView">
+        <p style="font-size:0.84rem;color:var(--muted);margin-bottom:14px">
+          Admin authentication is required to access system parameters, live pricing configuration, document manager, and visitor analytics. Please enter your credentials:
+        </p>
+        <div style="margin-bottom:10px">
+          <label style="font-size:0.72rem;font-weight:700;color:var(--dim);text-transform:uppercase;display:block;margin-bottom:4px">Admin Username / Email / Mobile</label>
+          <input type="text" id="modalAdminUser" placeholder="e.g. adarshakm@jnnce.ac.in or 8073398259" style="margin-bottom:0">
+        </div>
+        <div style="margin-bottom:14px">
+          <label style="font-size:0.72rem;font-weight:700;color:var(--dim);text-transform:uppercase;display:block;margin-bottom:4px">Admin Password</label>
+          <input type="password" id="modalAdminPass" placeholder="Enter password" style="margin-bottom:0">
+        </div>
+        <div style="display:flex;gap:10px;justify-content:space-between;align-items:center;flex-wrap:wrap">
+          <button type="button" class="btn btn-sm" onclick="toggleModalAdminRequestForm(true)" style="font-size:0.76rem;color:var(--primary)">
+            ➕ Request New Admin Access
+          </button>
+          <div style="display:flex;gap:8px">
+            <button type="button" class="btn" onclick="closeAdminManualModal()">Cancel</button>
+            <button type="button" class="btn btn-p" onclick="loginAdminFromModal()">Authenticate &amp; Open Portal</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Access Request Form for New Admins -->
+      <div id="modalAdminRequestView" style="display:none;background:var(--bg-glass);border:1px solid var(--border);border-radius:12px;padding:16px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+          <h4 style="margin:0;font-size:0.95rem;color:var(--text)">Request Administrator Access</h4>
+          <button type="button" class="btn btn-sm" onclick="toggleModalAdminRequestForm(false)" style="padding:2px 8px;font-size:0.7rem">Back to Login</button>
+        </div>
+        <p style="font-size:0.78rem;color:var(--muted);margin-bottom:12px">
+          Submit your credentials to request an administrative account. Access is subject to approval by the Principal Administrator (<strong>Adarsha KM</strong>).
+        </p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
+          <div>
+            <label style="font-size:0.7rem;font-weight:700;color:var(--dim);text-transform:uppercase;display:block;margin-bottom:3px">Full Name / Username *</label>
+            <input type="text" id="reqAdminUser" placeholder="e.g. Rahul Sharma" style="margin-bottom:0;font-size:0.8rem">
+          </div>
+          <div>
+            <label style="font-size:0.7rem;font-weight:700;color:var(--dim);text-transform:uppercase;display:block;margin-bottom:3px">Email Address *</label>
+            <input type="email" id="reqAdminEmail" placeholder="e.g. rahul@domain.com" style="margin-bottom:0;font-size:0.8rem">
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
+          <div>
+            <label style="font-size:0.7rem;font-weight:700;color:var(--dim);text-transform:uppercase;display:block;margin-bottom:3px">Mobile Number</label>
+            <input type="tel" id="reqAdminMobile" placeholder="e.g. 9876543210" style="margin-bottom:0;font-size:0.8rem">
+          </div>
+          <div>
+            <label style="font-size:0.7rem;font-weight:700;color:var(--dim);text-transform:uppercase;display:block;margin-bottom:3px">Requested Password *</label>
+            <input type="password" id="reqAdminPass" placeholder="Enter secure password" style="margin-bottom:0;font-size:0.8rem">
+          </div>
+        </div>
+        <div style="display:flex;justify-content:flex-end;gap:8px">
+          <button type="button" class="btn" onclick="toggleModalAdminRequestForm(false)">Cancel</button>
+          <button type="button" class="btn btn-p" onclick="submitAdminAccessRequest()">Submit Access Request</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- If logged in as Admin, show full 5-tab manager panel -->
+    <div id="modalAdminDocPanel" style="display:none">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+        <div style="font-size:0.82rem;color:var(--muted)">
+          Authenticated as: <strong id="modalAdminNameDisplay" style="color:var(--success)">Administrator</strong>
+        </div>
+        <button type="button" class="btn" style="padding:4px 10px;font-size:0.74rem" onclick="logoutAdmin()">Sign Out Admin</button>
+      </div>
+
+      <!-- Navigation Tabs - Expanded Admin Control Center -->
+      <div style="display:flex;gap:5px;margin-bottom:16px;border-bottom:1px solid var(--border);padding-bottom:10px;overflow-x:auto;flex-wrap:wrap">
+        <button type="button" class="btn btn-sm admin-tab-btn active" id="tabBtnManual" onclick="switchAdminTab('manual')" style="font-size:0.76rem;padding:6px 11px">📄 User Manual</button>
+        <button type="button" class="btn btn-sm admin-tab-btn" id="tabBtnPricing" onclick="switchAdminTab('pricing')" style="font-size:0.76rem;padding:6px 11px">💰 Pricing</button>
+        <button type="button" class="btn btn-sm admin-tab-btn" id="tabBtnVisitors" onclick="switchAdminTab('visitors')" style="font-size:0.76rem;padding:6px 11px">📊 Analytics</button>
+        <button type="button" class="btn btn-sm admin-tab-btn" id="tabBtnFeedback" onclick="switchAdminTab('feedback')" style="font-size:0.76rem;padding:6px 11px">💬 Feedback</button>
+        <button type="button" class="btn btn-sm admin-tab-btn" id="tabBtnUsers" onclick="switchAdminTab('users')" style="font-size:0.76rem;padding:6px 11px">🛡️ Admins</button>
+        <button type="button" class="btn btn-sm admin-tab-btn" id="tabBtnAudit" onclick="switchAdminTab('audit')" style="font-size:0.76rem;padding:6px 11px">📋 Audit Log</button>
+        <button type="button" class="btn btn-sm admin-tab-btn" id="tabBtnSettings" onclick="switchAdminTab('settings')" style="font-size:0.76rem;padding:6px 11px">⚙️ Settings</button>
+        <button type="button" class="btn btn-sm admin-tab-btn" id="tabBtnTickets" onclick="switchAdminTab('tickets')" style="font-size:0.76rem;padding:6px 11px">🎫 Tickets <span id="ticketBadge" style="background:var(--rose);color:#fff;font-size:0.62rem;font-weight:800;padding:1px 6px;border-radius:99px;margin-left:3px">3</span></button>
+      </div>
+
+      <!-- Mini Dashboard Strip -->
+      <div id="adminMiniDash" style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px">
+        <div style="background:var(--bg-glass);border:1px solid var(--border);border-radius:10px;padding:10px;text-align:center">
+          <div style="font-size:0.62rem;font-weight:700;color:var(--dim);text-transform:uppercase">Users</div>
+          <div style="font-size:1.15rem;font-weight:800;color:var(--cyan)">128</div>
+        </div>
+        <div style="background:var(--bg-glass);border:1px solid var(--border);border-radius:10px;padding:10px;text-align:center">
+          <div style="font-size:0.62rem;font-weight:700;color:var(--dim);text-transform:uppercase">Calcs Today</div>
+          <div style="font-size:1.15rem;font-weight:800;color:var(--emerald)">47</div>
+        </div>
+        <div style="background:var(--bg-glass);border:1px solid var(--border);border-radius:10px;padding:10px;text-align:center">
+          <div style="font-size:0.62rem;font-weight:700;color:var(--dim);text-transform:uppercase">Open Tickets</div>
+          <div style="font-size:1.15rem;font-weight:800;color:var(--violet)">3</div>
+        </div>
+        <div style="background:var(--bg-glass);border:1px solid var(--border);border-radius:10px;padding:10px;text-align:center">
+          <div style="font-size:0.62rem;font-weight:700;color:var(--dim);text-transform:uppercase">Last Price Change</div>
+          <div style="font-size:0.85rem;font-weight:700;color:var(--amber)">Today 11:52 PM</div>
+        </div>
+      </div>
+
+      <!-- TAB 1: DOCUMENT MANAGER -->
+      <div id="adminPanelManual" class="admin-tab-content">
+        <div style="background:var(--bg-glass);border:1px solid var(--border);border-radius:12px;padding:14px 16px;margin-bottom:16px">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+            <span style="font-size:0.7rem;font-weight:800;color:var(--dim);text-transform:uppercase">Currently Active Document</span>
+            <span class="badge" style="background:rgba(16,185,129,0.15);color:var(--success);font-size:0.7rem">● Online &amp; Synchronized</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px">
+            <div style="font-size:2.2rem">📑</div>
+            <div style="flex:1;min-width:0">
+              <div style="font-weight:800;font-size:0.95rem;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap" id="modalDocName">VoltRoof_User_Manual.pdf</div>
+              <div style="font-size:0.75rem;color:var(--muted);margin-top:2px" id="modalDocMeta">Size: 454 KB · Active</div>
+            </div>
+        <div style="margin:14px 0;padding:12px;background:var(--bg-glass);border:1px solid var(--border);border-radius:10px">
+          <div style="font-size:0.7rem;font-weight:800;color:var(--dim);text-transform:uppercase;margin-bottom:8px">Version History</div>
+          <div style="font-size:0.76rem;line-height:1.7">
+            <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--border);padding:4px 0"><span><strong>v1.4</strong> · Official Release</span><span style="color:var(--muted)">VoltRoof Systems</span></div>
+            <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--border);padding:4px 0"><span><strong>v1.3</strong> · Minor updates</span><span style="color:var(--muted)">Adarsha KM</span></div>
+            <div style="display:flex;justify-content:space-between;padding:4px 0"><span><strong>v1.2</strong> · Initial public</span><span style="color:var(--muted)">VoltRoof Systems</span></div>
+          </div>
+        </div>
+
+            <button type="button" class="btn" onclick="openUserManual()" style="font-size:0.75rem;padding:6px 12px">
+              👁️ Preview / Download
+            </button>
+          </div>
+        </div>
+
+        <div style="margin-bottom:16px">
+          <label style="font-size:0.74rem;font-weight:800;color:var(--dim);text-transform:uppercase;display:block;margin-bottom:6px">
+            Upload New Document (Overwrites System Manual)
+          </label>
+          <input type="file" id="modalManualFileInput" accept=".pdf,application/pdf" style="display:none" onchange="handleManualFileSelected(this, 'modal')">
+          <div onclick="document.getElementById('modalManualFileInput').click()" class="doc-dropzone" id="modalDropZone" style="padding:20px">
+            <div style="font-size:2rem;margin-bottom:6px">📥</div>
+            <div style="font-size:0.9rem;font-weight:700;color:var(--text)" id="modalSelectedFileName">Click or drop new User Manual PDF here</div>
+            <div style="font-size:0.75rem;color:var(--muted);margin-top:4px">
+              Accepts PDF documents. Updates will take effect immediately for all users on login screen and in studio.
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:10px;justify-content:space-between;align-items:center;flex-wrap:wrap">
+          <button type="button" class="btn" onclick="resetDefaultManual()" style="font-size:0.78rem">
+            ↺ Restore Factory Default Manual
+          </button>
+          <div style="display:flex;gap:10px">
+            <button type="button" class="btn" onclick="closeAdminManualModal()" style="font-size:0.8rem">Close</button>
+            <button type="button" class="btn btn-p" id="btnModalPublishManual" onclick="submitAdminManualUpload('modal')" style="font-size:0.82rem;padding:8px 18px" disabled>
+              🚀 Publish &amp; Update User Manual
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 2: EQUIPMENT & PRICING ENGINE -->
+            <div id="adminPanelPricing" class="admin-tab-content" style="display:none">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+          <p style="font-size:0.8rem;color:var(--muted);margin:0;max-width:520px">
+            Rate Card · Changes create a <strong>BOM Snapshot</strong> and affect future calculations only.
+          </p>
+          <span id="pricingUnsaved" style="display:none;font-size:0.74rem;font-weight:700;color:var(--amber)">● Unsaved changes</span>
+        </div>
+        <div class="sticky-save-bar" id="pricingStickyBar">
+          <span style="font-size:0.8rem;font-weight:700;color:var(--amber)">● Unsaved rate changes</span>
+          <div style="display:flex;gap:8px">
+            <button type="button" class="btn btn-sm" onclick="resetPricingConfig();document.getElementById('pricingUnsaved').style.display='none';document.getElementById('pricingStickyBar').classList.remove('show')">↺ Reset</button>
+            <button type="button" class="btn btn-sm btn-p" onclick="confirmPublishPricing()">💾 Save & Publish</button>
+          </div>
+        </div>
+        <div style="overflow-x:auto;margin-bottom:14px;border:1px solid var(--border);border-radius:10px">
+          <table style="width:100%;font-size:0.78rem;border-collapse:collapse">
+            <thead>
+              <tr style="background:var(--bg-glass);border-bottom:1px solid var(--border)">
+                <th style="padding:9px 12px;text-align:left;font-size:0.66rem;font-weight:700;color:var(--dim);text-transform:uppercase">Component</th>
+                <th style="padding:9px 12px;text-align:left;font-size:0.66rem;font-weight:700;color:var(--dim);text-transform:uppercase">Unit</th>
+                <th style="padding:9px 12px;text-align:right;font-size:0.66rem;font-weight:700;color:var(--dim);text-transform:uppercase">Current Rate (₹)</th>
+                <th style="padding:9px 12px;text-align:right;font-size:0.66rem;font-weight:700;color:var(--dim);text-transform:uppercase;width:120px">Edit</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom:1px solid var(--border)"><td style="padding:9px 12px;font-weight:600">☀ Solar Module</td><td style="padding:9px 12px"><span style="font-size:0.68rem;background:var(--bg-glass);padding:2px 7px;border-radius:5px">₹ / Wp</span></td><td style="padding:9px 12px;text-align:right;font-weight:700;color:var(--emerald)" id="disp_module">18.18</td><td style="padding:9px 12px;text-align:right"><input type="number" step="0.1" id="rate_module_per_wp" value="18.18" oninput="markPricingDirty()" style="width:90px;padding:6px 8px;border-radius:7px;border:1px solid var(--border);background:var(--bg-glass);color:var(--emerald);font-weight:700;text-align:right;font-size:0.84rem"></td></tr>
+              <tr style="border-bottom:1px solid var(--border)"><td style="padding:9px 12px;font-weight:600">🔌 Inverter</td><td style="padding:9px 12px"><span style="font-size:0.68rem;background:var(--bg-glass);padding:2px 7px;border-radius:5px">₹ / kW</span></td><td style="padding:9px 12px;text-align:right;font-weight:700;color:var(--emerald)" id="disp_inverter">10,500</td><td style="padding:9px 12px;text-align:right"><input type="number" step="50" id="rate_inverter_per_kw" value="10500" oninput="markPricingDirty()" style="width:90px;padding:6px 8px;border-radius:7px;border:1px solid var(--border);background:var(--bg-glass);color:var(--emerald);font-weight:700;text-align:right;font-size:0.84rem"></td></tr>
+              <tr style="border-bottom:1px solid var(--border)"><td style="padding:9px 12px;font-weight:600">🏗 Mounting Structure</td><td style="padding:9px 12px"><span style="font-size:0.68rem;background:var(--bg-glass);padding:2px 7px;border-radius:5px">₹ / kW</span></td><td style="padding:9px 12px;text-align:right;font-weight:700;color:var(--emerald)" id="disp_structure">4,800</td><td style="padding:9px 12px;text-align:right"><input type="number" step="50" id="rate_structure_per_kw" value="4800" oninput="markPricingDirty()" style="width:90px;padding:6px 8px;border-radius:7px;border:1px solid var(--border);background:var(--bg-glass);color:var(--emerald);font-weight:700;text-align:right;font-size:0.84rem"></td></tr>
+              <tr style="border-bottom:1px solid var(--border)"><td style="padding:9px 12px;font-weight:600">🔗 DC Solar Cable</td><td style="padding:9px 12px"><span style="font-size:0.68rem;background:var(--bg-glass);padding:2px 7px;border-radius:5px">₹ / m</span></td><td style="padding:9px 12px;text-align:right;font-weight:700;color:var(--emerald)" id="disp_dc">85</td><td style="padding:9px 12px;text-align:right"><input type="number" step="1" id="rate_dc_cable_per_m" value="85" oninput="markPricingDirty()" style="width:90px;padding:6px 8px;border-radius:7px;border:1px solid var(--border);background:var(--bg-glass);color:var(--emerald);font-weight:700;text-align:right;font-size:0.84rem"></td></tr>
+              <tr style="border-bottom:1px solid var(--border)"><td style="padding:9px 12px;font-weight:600">⚡ AC Armoured Cable</td><td style="padding:9px 12px"><span style="font-size:0.68rem;background:var(--bg-glass);padding:2px 7px;border-radius:5px">₹ / m</span></td><td style="padding:9px 12px;text-align:right;font-weight:700;color:var(--emerald)" id="disp_ac">180</td><td style="padding:9px 12px;text-align:right"><input type="number" step="5" id="rate_ac_cable_per_m" value="180" oninput="markPricingDirty()" style="width:90px;padding:6px 8px;border-radius:7px;border:1px solid var(--border);background:var(--bg-glass);color:var(--emerald);font-weight:700;text-align:right;font-size:0.84rem"></td></tr>
+              <tr style="border-bottom:1px solid var(--border)"><td style="padding:9px 12px;font-weight:600">🔌 MC4 Connector</td><td style="padding:9px 12px"><span style="font-size:0.68rem;background:var(--bg-glass);padding:2px 7px;border-radius:5px">₹ / Pair</span></td><td style="padding:9px 12px;text-align:right;font-weight:700;color:var(--emerald)" id="disp_mc4">300</td><td style="padding:9px 12px;text-align:right"><input type="number" step="10" id="rate_mc4_per_pair" value="300" oninput="markPricingDirty()" style="width:90px;padding:6px 8px;border-radius:7px;border:1px solid var(--border);background:var(--bg-glass);color:var(--emerald);font-weight:700;text-align:right;font-size:0.84rem"></td></tr>
+              <tr style="border-bottom:1px solid var(--border)"><td style="padding:9px 12px;font-weight:600">📦 DCDB Base</td><td style="padding:9px 12px"><span style="font-size:0.68rem;background:var(--bg-glass);padding:2px 7px;border-radius:5px">₹</span></td><td style="padding:9px 12px;text-align:right;font-weight:700;color:var(--emerald)" id="disp_dcdb">7,000</td><td style="padding:9px 12px;text-align:right"><input type="number" step="100" id="rate_dcdb_base" value="7000" oninput="markPricingDirty()" style="width:90px;padding:6px 8px;border-radius:7px;border:1px solid var(--border);background:var(--bg-glass);color:var(--emerald);font-weight:700;text-align:right;font-size:0.84rem"></td></tr>
+              <tr style="border-bottom:1px solid var(--border)"><td style="padding:9px 12px;font-weight:600">📦 ACDB Base</td><td style="padding:9px 12px"><span style="font-size:0.68rem;background:var(--bg-glass);padding:2px 7px;border-radius:5px">₹</span></td><td style="padding:9px 12px;text-align:right;font-weight:700;color:var(--emerald)" id="disp_acdb">7,000</td><td style="padding:9px 12px;text-align:right"><input type="number" step="100" id="rate_acdb_base" value="7000" oninput="markPricingDirty()" style="width:90px;padding:6px 8px;border-radius:7px;border:1px solid var(--border);background:var(--bg-glass);color:var(--emerald);font-weight:700;text-align:right;font-size:0.84rem"></td></tr>
+              <tr style="border-bottom:1px solid var(--border)"><td style="padding:9px 12px;font-weight:600">🌍 Earthing Kit 3-Pit</td><td style="padding:9px 12px"><span style="font-size:0.68rem;background:var(--bg-glass);padding:2px 7px;border-radius:5px">₹</span></td><td style="padding:9px 12px;text-align:right;font-weight:700;color:var(--emerald)" id="disp_earth">7,500</td><td style="padding:9px 12px;text-align:right"><input type="number" step="100" id="rate_earthing_kit_base" value="7500" oninput="markPricingDirty()" style="width:90px;padding:6px 8px;border-radius:7px;border:1px solid var(--border);background:var(--bg-glass);color:var(--emerald);font-weight:700;text-align:right;font-size:0.84rem"></td></tr>
+              <tr style="border-bottom:1px solid var(--border)"><td style="padding:9px 12px;font-weight:600">⚡ Lightning Arrester</td><td style="padding:9px 12px"><span style="font-size:0.68rem;background:var(--bg-glass);padding:2px 7px;border-radius:5px">₹</span></td><td style="padding:9px 12px;text-align:right;font-weight:700;color:var(--emerald)" id="disp_la">4,000</td><td style="padding:9px 12px;text-align:right"><input type="number" step="100" id="rate_lightning_arrester_base" value="4000" oninput="markPricingDirty()" style="width:90px;padding:6px 8px;border-radius:7px;border:1px solid var(--border);background:var(--bg-glass);color:var(--emerald);font-weight:700;text-align:right;font-size:0.84rem"></td></tr>
+              <tr style="border-bottom:1px solid var(--border)"><td style="padding:9px 12px;font-weight:600">🧰 BOS Accessories</td><td style="padding:9px 12px"><span style="font-size:0.68rem;background:var(--bg-glass);padding:2px 7px;border-radius:5px">₹ / kW</span></td><td style="padding:9px 12px;text-align:right;font-weight:700;color:var(--emerald)" id="disp_bos">1,200</td><td style="padding:9px 12px;text-align:right"><input type="number" step="20" id="rate_accessories_per_kw" value="1200" oninput="markPricingDirty()" style="width:90px;padding:6px 8px;border-radius:7px;border:1px solid var(--border);background:var(--bg-glass);color:var(--emerald);font-weight:700;text-align:right;font-size:0.84rem"></td></tr>
+              <tr><td style="padding:9px 12px;font-weight:600">👷 Installation & Labor</td><td style="padding:9px 12px"><span style="font-size:0.68rem;background:var(--bg-glass);padding:2px 7px;border-radius:5px">₹ / kW</span></td><td style="padding:9px 12px;text-align:right;font-weight:700;color:var(--emerald)" id="disp_install">4,000</td><td style="padding:9px 12px;text-align:right"><input type="number" step="50" id="rate_installation_per_kw" value="4000" oninput="markPricingDirty()" style="width:90px;padding:6px 8px;border-radius:7px;border:1px solid var(--border);background:var(--bg-glass);color:var(--emerald);font-weight:700;text-align:right;font-size:0.84rem"></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="margin-top:16px;padding-top:12px;border-top:1px solid var(--border)">
+          <div style="font-size:0.7rem;font-weight:800;color:var(--dim);text-transform:uppercase;margin-bottom:8px">Rate Card History</div>
+          <div id="rateHistoryList" style="max-height:140px;overflow-y:auto;font-size:0.76rem">
+            <div class="rate-history-item"><span><strong>Today 11:52 PM</strong> · Solar Module → ₹19.50</span><button class="btn btn-sm" style="padding:2px 8px;font-size:0.68rem" onclick="toast('Restored previous rate')">Restore</button></div>
+            <div class="rate-history-item"><span><strong>22 Sep</strong> · Inverter → ₹10,800</span><button class="btn btn-sm" style="padding:2px 8px;font-size:0.68rem" onclick="toast('Restored previous rate')">Restore</button></div>
+            <div class="rate-history-item"><span><strong>20 Sep</strong> · Full rate card published</span><button class="btn btn-sm" style="padding:2px 8px;font-size:0.68rem" onclick="toast('Restored previous rate')">Restore</button></div>
+          </div>
+        </div>
+
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-top:12px">
+          <button type="button" class="btn" onclick="resetPricingConfig();document.getElementById('pricingUnsaved').style.display='none'" style="font-size:0.78rem">↺ Reset Defaults</button>
+          <div style="display:flex;gap:8px">
+            <button type="button" class="btn" onclick="closeAdminManualModal()">Close</button>
+            <button type="button" class="btn btn-p" onclick="confirmPublishPricing()" style="font-size:0.82rem;padding:8px 18px">
+              💾 Save & Publish Pricing
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 3: VISITOR ANALYTICS -->
+<!-- TAB 3: VISITOR ANALYTICS -->
+      <div id="adminPanelVisitors" class="admin-tab-content" style="display:none">
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px">
+          <div class="kpi" style="padding:12px;background:var(--bg-glass)">
+            <div class="kpi-l">Total Impressions</div>
+            <div class="kpi-v" id="visTotalVisits" style="font-size:1.25rem;color:var(--primary)">0</div>
+            <div class="kpi-s">Lifetime page hits</div>
+          </div>
+          <div class="kpi" style="padding:12px;background:var(--bg-glass)">
+            <div class="kpi-l">Unique Sessions</div>
+            <div class="kpi-v" id="visUniqueSessions" style="font-size:1.25rem;color:var(--emerald)">0</div>
+            <div class="kpi-s">Distinct devices</div>
+          </div>
+          <div class="kpi" style="padding:12px;background:var(--bg-glass)">
+            <div class="kpi-l">Today's Visits</div>
+            <div class="kpi-v" id="visTodayVisits" style="font-size:1.25rem;color:var(--amber)">0</div>
+            <div class="kpi-s">Current calendar day</div>
+          </div>
+        </div>
+
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+          <span style="font-size:0.72rem;font-weight:700;color:var(--dim);text-transform:uppercase">Recent Visitor Access Log (Last 30)</span>
+          <button type="button" class="btn btn-sm" onclick="refreshVisitorStats()" style="padding:3px 8px;font-size:0.7rem">🔄 Refresh</button>
+        </div>
+        <div style="max-height:220px;overflow-y:auto;background:var(--bg-glass);border:1px solid var(--border);border-radius:10px;padding:8px;margin-bottom:14px">
+          <table style="width:100%;font-size:0.74rem;border-collapse:collapse;text-align:left">
+            <thead>
+              <tr style="border-bottom:1px solid var(--border);color:var(--dim)">
+                <th style="padding:4px 6px">Time</th>
+                <th style="padding:4px 6px">Session ID</th>
+                <th style="padding:4px 6px">Path</th>
+                <th style="padding:4px 6px">Browser / Device</th>
+              </tr>
+            </thead>
+            <tbody id="visTableBody">
+              <tr><td colspan="4" style="padding:8px;text-align:center;color:var(--muted)">Loading visitor logs...</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="display:flex;justify-content:flex-end">
+          <button type="button" class="btn" onclick="closeAdminManualModal()">Close</button>
+        </div>
+      </div>
+
+      <!-- TAB 4: USER FEEDBACK -->
+            <div id="adminPanelFeedback" class="admin-tab-content" style="display:none">
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px">
+          <div style="background:var(--bg-glass);border:1px solid var(--border);border-radius:10px;padding:12px;text-align:center">
+            <div style="font-size:0.62rem;font-weight:700;color:var(--dim);text-transform:uppercase">Total Feedbacks</div>
+            <div style="font-size:1.25rem;font-weight:800;color:var(--cyan)" id="fbTotalCount">0</div>
+          </div>
+          <div style="background:var(--bg-glass);border:1px solid var(--border);border-radius:10px;padding:12px;text-align:center">
+            <div style="font-size:0.62rem;font-weight:700;color:var(--dim);text-transform:uppercase">Avg Rating</div>
+            <div style="font-size:1.25rem;font-weight:800;color:var(--amber)" id="fbAvgRating">5.0 ★</div>
+          </div>
+          <div style="background:var(--bg-glass);border:1px solid var(--border);border-radius:10px;padding:12px;text-align:center">
+            <div style="font-size:0.62rem;font-weight:700;color:var(--dim);text-transform:uppercase">Recommend</div>
+            <div style="font-size:1.25rem;font-weight:800;color:var(--emerald)" id="fbTopRec">100%</div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 280px;gap:12px">
+          <div style="background:var(--bg-glass);border:1px solid var(--border);border-radius:12px;padding:12px;min-height:200px" id="fbListContainer">
+            <div class="skeleton-row"><div class="skeleton"></div></div>
+            <div class="skeleton-row"><div class="skeleton"></div></div>
+            <div class="skeleton-row"><div class="skeleton"></div></div>
+            <div style="text-align:center;padding:20px;color:var(--muted);font-size:0.8rem;margin-top:8px">No feedback yet — users can submit via the 💬 button</div>
+          </div>
+          <div style="background:var(--bg-glass);border:1px solid var(--border);border-radius:12px;padding:12px">
+            <div style="font-size:0.78rem;font-weight:800;margin-bottom:8px">Rating Distribution</div>
+            <div style="position:relative;height:180px"><canvas id="adminFeedbackPie"></canvas></div>
+            <div id="adminPieLegend" style="display:flex;flex-wrap:wrap;gap:6px 10px;justify-content:center;margin-top:8px;font-size:0.68rem;color:var(--muted)"></div>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:flex-end;margin-top:12px">
+          <button type="button" class="btn" onclick="closeAdminManualModal()">Close</button>
+        </div>
+      </div>
+
+<div id="adminPanelUsers" class="admin-tab-content" style="display:none">
+        <div style="background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.25);border-radius:10px;padding:10px 14px;margin-bottom:14px;font-size:0.78rem;color:var(--text)">
+          🛡️ <strong>Principal Super Admin:</strong> Adarsha KM (<code>adarshakm@jnnce.ac.in</code>) — Authorized to approve or revoke system administrators.
+        </div>
+        <div style="margin-bottom:12px;padding:12px;background:var(--bg-glass);border:1px solid var(--border);border-radius:10px">
+          <div style="font-size:0.72rem;font-weight:800;color:var(--dim);text-transform:uppercase;margin-bottom:6px">Bulk Invite (CSV emails)</div>
+          <textarea id="bulkInviteEmails" rows="2" placeholder="email1@example.com, email2@example.com" style="width:100%;padding:8px;border-radius:8px;border:1px solid var(--border);background:var(--bg-elev);color:var(--text);font-size:0.8rem;font-family:inherit;margin-bottom:8px"></textarea>
+          <button type="button" class="btn btn-sm btn-p" onclick="sendBulkInvite()">Send Invites</button>
+        </div>
+
+
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+          <span style="font-size:0.72rem;font-weight:700;color:var(--dim);text-transform:uppercase">Registered Administrators</span>
+          <button type="button" class="btn btn-sm" onclick="refreshAdminList()" style="padding:3px 8px;font-size:0.7rem">🔄 Refresh</button>
+        </div>
+        <div style="max-height:220px;overflow-y:auto;background:var(--bg-glass);border:1px solid var(--border);border-radius:10px;padding:8px;margin-bottom:14px">
+          <table style="width:100%;font-size:0.76rem;border-collapse:collapse;text-align:left">
+            <thead>
+              <tr style="border-bottom:1px solid var(--border);color:var(--dim)">
+                <th style="padding:4px 6px">Admin</th>
+                <th style="padding:4px 6px">Role</th>
+                <th style="padding:4px 6px">Status</th>
+                <th style="padding:4px 6px">Date</th>
+                <th style="padding:4px 6px">Action</th>
+              </tr>
+            </thead>
+            <tbody id="adminUsersTableBody">
+              <tr><td colspan="5" style="padding:8px;text-align:center;color:var(--muted)">Loading administrators...</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="display:flex;justify-content:flex-end">
+          <button type="button" class="btn" onclick="closeAdminManualModal()">Close</button>
+        </div>
+      </div>
+
+      <!-- TAB 6: AUDIT LOG -->
+      <div id="adminPanelAudit" class="admin-tab-content" style="display:none">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+          <div style="font-size:0.78rem;color:var(--muted)">
+            Immutable <strong>Audit Trail</strong> · Retention: 1 year
+          </div>
+          <button type="button" class="btn btn-sm" onclick="exportAuditCSV()">↓ Export CSV</button>
+        </div>
+        <div style="margin-bottom:10px">
+          <input type="text" id="auditSearch" placeholder="Search audit trail…" oninput="filterAuditTable()" style="width:100%;padding:8px 12px;border-radius:9px;border:1px solid var(--border);background:var(--bg-glass);color:var(--text);font-size:0.82rem">
+        </div>
+        <div style="max-height:320px;overflow-y:auto;background:var(--bg-glass);border:1px solid var(--border);border-radius:10px;padding:8px">
+          <table style="width:100%;font-size:0.75rem;border-collapse:collapse;text-align:left">
+            <thead>
+              <tr style="border-bottom:1px solid var(--border);color:var(--dim)">
+                <th style="padding:6px">Timestamp</th>
+                <th style="padding:6px">Actor</th>
+                <th style="padding:6px">Action</th>
+                <th style="padding:6px">Resource</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom:1px solid var(--border)"><td style="padding:6px">23 Sep 2026, 11:52 PM</td><td style="padding:6px">Adarsha KM</td><td style="padding:6px"><span style="color:var(--amber);font-weight:700">Price Update</span></td><td style="padding:6px">Rate Card · Solar Module</td></tr>
+              <tr style="border-bottom:1px solid var(--border)"><td style="padding:6px">23 Sep 2026, 09:41 PM</td><td style="padding:6px">Adarsha KM</td><td style="padding:6px"><span style="color:var(--primary);font-weight:700">Publish</span></td><td style="padding:6px">User Manual v1.4</td></tr>
+              <tr style="border-bottom:1px solid var(--border)"><td style="padding:6px">22 Sep 2026, 04:12 PM</td><td style="padding:6px">Adarsha KM</td><td style="padding:6px"><span style="color:var(--emerald);font-weight:700">Login</span></td><td style="padding:6px">Admin Console</td></tr>
+              <tr style="border-bottom:1px solid var(--border)"><td style="padding:6px">21 Sep 2026, 11:05 AM</td><td style="padding:6px">System</td><td style="padding:6px"><span style="color:var(--primary);font-weight:700">Snapshot</span></td><td style="padding:6px">BOM Snapshot #4821</td></tr>
+              <tr><td style="padding:6px">20 Sep 2026, 08:33 AM</td><td style="padding:6px">Adarsha KM</td><td style="padding:6px"><span style="color:var(--rose);font-weight:700">Revoke</span></td><td style="padding:6px">Admin Access · Demo</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="display:flex;justify-content:flex-end;margin-top:12px">
+          <button type="button" class="btn" onclick="closeAdminManualModal()">Close</button>
+        </div>
+      </div>
+
+      <!-- TAB 7: SYSTEM SETTINGS -->
+      <div id="adminPanelSettings" class="admin-tab-content" style="display:none">
+        <div style="font-size:0.78rem;color:var(--muted);margin-bottom:14px">
+          Global system defaults used as fallbacks across all calculations (Rate Card, GHI, tariff, etc.)
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px">
+          <div>
+            <label style="font-size:0.7rem;font-weight:700;color:var(--dim);display:block;margin-bottom:4px">Default Tariff (₹/kWh)</label>
+            <input type="number" value="8.0" step="0.1" style="width:100%;padding:8px;border-radius:8px;border:1px solid var(--border);background:var(--bg-glass);color:var(--text)">
+          </div>
+          <div>
+            <label style="font-size:0.7rem;font-weight:700;color:var(--dim);display:block;margin-bottom:4px" class="tour-tooltip" data-tip="Yearly panel performance loss (typically 0.5–0.8%)">Annual Degradation (%)</label>
+            <input type="number" value="0.7" step="0.1" style="width:100%;padding:8px;border-radius:8px;border:1px solid var(--border);background:var(--bg-glass);color:var(--text)">
+          </div>
+          <div>
+            <label style="font-size:0.7rem;font-weight:700;color:var(--dim);display:block;margin-bottom:4px" class="tour-tooltip" data-tip="Annual Maintenance Contract as % of system cost">AMC Rate (% of CAPEX)</label>
+            <input type="number" value="1.5" step="0.1" style="width:100%;padding:8px;border-radius:8px;border:1px solid var(--border);background:var(--bg-glass);color:var(--text)">
+          </div>
+          <div>
+            <label style="font-size:0.7rem;font-weight:700;color:var(--dim);display:block;margin-bottom:4px" class="tour-tooltip" data-tip="Global Horizontal Irradiance — average daily sun energy">Default GHI (kWh/m²/day)</label>
+            <input type="number" value="5.3" step="0.1" style="width:100%;padding:8px;border-radius:8px;border:1px solid var(--border);background:var(--bg-glass);color:var(--text)">
+          </div>
+          <div>
+            <label style="font-size:0.7rem;font-weight:700;color:var(--dim);display:block;margin-bottom:4px">Default Panel Rating (Wp)</label>
+            <input type="number" value="550" style="width:100%;padding:8px;border-radius:8px;border:1px solid var(--border);background:var(--bg-glass);color:var(--text)">
+          </div>
+          <div>
+            <label style="font-size:0.7rem;font-weight:700;color:var(--dim);display:block;margin-bottom:4px">Visitor Log Retention (days)</label>
+            <input type="number" value="90" style="width:100%;padding:8px;border-radius:8px;border:1px solid var(--border);background:var(--bg-glass);color:var(--text)">
+          </div>
+        </div>
+        <div style="display:flex;justify-content:flex-end;gap:8px">
+          <button type="button" class="btn" onclick="toast('Settings reset to defaults')">↻ Reset</button>
+          <button type="button" class="btn btn-p" onclick="toast('✅ System settings saved')">
+      <!-- Advanced Engineering Helpers (shown in Settings extra) -->
+      <div id="engToolsBlock" style="margin-top:16px;padding-top:14px;border-top:1px solid var(--border)">
+        <div style="font-size:0.7rem;font-weight:800;color:var(--dim);text-transform:uppercase;margin-bottom:10px">Engineering helpers</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
+          <div class="field">
+            <label>Yield uncertainty</label>
+            <div style="font-size:0.8rem;margin-bottom:4px">P50: <strong id="p50val">1,450</strong> kWh · P90: <strong id="p90val">1,280</strong> kWh</div>
+            <div class="uncertainty-bar"><span style="width:70%;background:var(--emerald)"></span><span style="width:30%;background:var(--amber)"></span></div>
+            <div style="font-size:0.68rem;color:var(--dim);margin-top:4px">P50 / P90 band from irradiance variance</div>
+          </div>
+          <div class="field">
+            <label>Shadow loss %</label>
+            <input type="range" id="shadowLoss" min="0" max="30" value="5" oninput="updateShadowImpact(this.value)" style="width:100%">
+            <div style="font-size:0.78rem">Loss: <strong id="shadowPct">5%</strong> · Impact: <strong id="shadowImpact">−72 kWh/yr</strong></div>
+          </div>
+          <div class="field">
+            <label>Stringing (Voc check)</label>
+            <div style="font-size:0.78rem">Max modules/string: <strong id="maxString">18</strong></div>
+            <div style="font-size:0.68rem;color:var(--dim)">Based on cold Voc & inverter MPPT limit</div>
+          </div>
+          <div class="field">
+            <label>Cable voltage drop</label>
+            <div style="font-size:0.78rem">DC: <span class="pass-badge" id="vdDc">0.8% PASS</span> · AC: <span class="warn-badge" id="vdAc">2.1% WARN</span></div>
+          </div>
+        </div>
+        <div class="eng-stamp">
+          <div style="font-weight:700;margin-bottom:6px">Engineer stamp (print)</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+            <input type="text" id="engName" placeholder="Engineer name" style="padding:8px;border-radius:8px;border:1px solid var(--border);background:var(--bg-glass);color:var(--text);font-size:0.8rem">
+            <input type="text" id="engLicense" placeholder="License No." style="padding:8px;border-radius:8px;border:1px solid var(--border);background:var(--bg-glass);color:var(--text);font-size:0.8rem">
+          </div>
+        </div>
+        <div style="margin-top:12px">
+          <div style="font-size:0.7rem;font-weight:800;color:var(--dim);text-transform:uppercase;margin-bottom:6px">Assumption log</div>
+          <div style="font-size:0.74rem;color:var(--muted);line-height:1.6;background:var(--bg-glass);padding:10px;border-radius:8px;border:1px solid var(--border)">
+            GHI default 5.3 kWh/m²/day (Karnataka typical) · Tariff ₹8.0/kWh · Degradation 0.7%/yr · AMC 1.5% CAPEX · Panel 550 Wp · MNRE/KERC normative rates where applicable
+          </div>
+        </div>
+      </div>
+Save Settings</button>
+          <button type="button" class="btn" onclick="closeAdminManualModal()">Close</button>
+        </div>
+      </div>
+
+      <!-- TAB 8: SUPPORT TICKETS -->
+      <div id="adminPanelTickets" class="admin-tab-content" style="display:none">
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px">
+          <div style="background:var(--bg-glass);border:1px solid var(--border);border-radius:10px;padding:12px;text-align:center">
+            <div style="font-size:0.62rem;font-weight:700;color:var(--dim);text-transform:uppercase">Open</div>
+            <div style="font-size:1.3rem;font-weight:800;color:var(--violet)">3</div>
+          </div>
+          <div style="background:var(--bg-glass);border:1px solid var(--border);border-radius:10px;padding:12px;text-align:center">
+            <div style="font-size:0.62rem;font-weight:700;color:var(--dim);text-transform:uppercase">In Progress</div>
+            <div style="font-size:1.3rem;font-weight:800;color:var(--amber)">1</div>
+          </div>
+          <div style="background:var(--bg-glass);border:1px solid var(--border);border-radius:10px;padding:12px;text-align:center">
+            <div style="font-size:0.62rem;font-weight:700;color:var(--dim);text-transform:uppercase">Resolved (30d)</div>
+            <div style="font-size:1.3rem;font-weight:800;color:var(--emerald)">24</div>
+          </div>
+        </div>
+        <div style="font-size:0.74rem;color:var(--muted);margin-bottom:10px">SLA: First response within 24 hours</div>
+        <div style="overflow-x:auto;border:1px solid var(--border);border-radius:10px;margin-bottom:14px">
+          <table style="width:100%;font-size:0.76rem;border-collapse:collapse">
+            <thead>
+              <tr style="background:var(--bg-glass);border-bottom:1px solid var(--border)">
+                <th style="padding:8px 10px;text-align:left;font-size:0.66rem;color:var(--dim)">ID</th>
+                <th style="padding:8px 10px;text-align:left;font-size:0.66rem;color:var(--dim)">Subject</th>
+                <th style="padding:8px 10px;text-align:left;font-size:0.66rem;color:var(--dim)">From</th>
+                <th style="padding:8px 10px;text-align:left;font-size:0.66rem;color:var(--dim)">Priority</th>
+                <th style="padding:8px 10px;text-align:left;font-size:0.66rem;color:var(--dim)">Status</th>
+                <th style="padding:8px 10px;text-align:left;font-size:0.66rem;color:var(--dim)">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom:1px solid var(--border)">
+                <td style="padding:8px 10px">#T-1042</td>
+                <td style="padding:8px 10px;font-weight:600">Unable to download BOM PDF</td>
+                <td style="padding:8px 10px">ravi.k@example.com</td>
+                <td style="padding:8px 10px"><span style="color:var(--rose);font-weight:700">High</span></td>
+                <td style="padding:8px 10px"><span style="color:var(--amber);font-weight:700">Open</span></td>
+                <td style="padding:8px 10px"><button class="btn btn-sm" onclick="openTicketReply('T-1042','Unable to download BOM PDF')" style="padding:3px 8px;font-size:0.7rem">Reply</button></td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--border)">
+                <td style="padding:8px 10px">#T-1039</td>
+                <td style="padding:8px 10px;font-weight:600">Pricing mismatch on inverter</td>
+                <td style="padding:8px 10px">priya.s@example.com</td>
+                <td style="padding:8px 10px"><span style="color:var(--amber);font-weight:700">Medium</span></td>
+                <td style="padding:8px 10px"><span style="color:var(--amber);font-weight:700">Open</span></td>
+                <td style="padding:8px 10px"><button class="btn btn-sm" onclick="openTicketReply('T-1039','Pricing mismatch on inverter')" style="padding:3px 8px;font-size:0.7rem">Reply</button></td>
+              </tr>
+              <tr>
+                <td style="padding:8px 10px">#T-1031</td>
+                <td style="padding:8px 10px;font-weight:600">Request for commercial preset</td>
+                <td style="padding:8px 10px">anand.m@example.com</td>
+                <td style="padding:8px 10px"><span style="color:var(--primary);font-weight:700">Low</span></td>
+                <td style="padding:8px 10px"><span style="color:var(--emerald);font-weight:700">In Progress</span></td>
+                <td style="padding:8px 10px"><button class="btn btn-sm" onclick="openTicketReply('T-1031','Request for commercial preset')" style="padding:3px 8px;font-size:0.7rem">Reply</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- Simple Reply Box -->
+        <div id="ticketReplyBox" style="display:none;background:var(--bg-glass);border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:12px">
+          <div style="font-size:0.82rem;font-weight:700;margin-bottom:8px">Reply to <span id="ticketReplyId" style="color:var(--primary)"></span></div>
+          <div style="font-size:0.74rem;color:var(--muted);margin-bottom:8px" id="ticketReplySubject"></div>
+          <textarea id="ticketReplyText" rows="3" placeholder="Type your reply..." style="width:100%;padding:10px;border-radius:8px;border:1px solid var(--border);background:var(--bg-elev);color:var(--text);font-family:inherit;font-size:0.82rem;resize:vertical;margin-bottom:10px"></textarea>
+          <div style="display:flex;gap:8px;justify-content:flex-end">
+            <button class="btn btn-sm" onclick="document.getElementById('ticketReplyBox').style.display='none'">Cancel</button>
+            <button class="btn btn-sm btn-p" onclick="sendTicketReply()">Send Reply</button>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:flex-end">
+          <button type="button" class="btn" onclick="closeAdminManualModal()">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

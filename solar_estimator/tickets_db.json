@@ -1,0 +1,229 @@
+[
+  {
+    "id": "TK-9374",
+    "client_name": "Industrial Client",
+    "email": "audit@industry.com",
+    "phone": "9876543210",
+    "subject": "Transformer capacity query",
+    "category": "General",
+    "priority": "High",
+    "status": "Open",
+    "assignee": "Unassigned",
+    "created_at": "2026-09-27 12:12:54",
+    "timeline": [
+      {
+        "time": "2026-09-27 12:12:54",
+        "actor": "Industrial Client",
+        "action": "Ticket opened"
+      }
+    ],
+    "messages": [
+      {
+        "sender": "Industrial Client",
+        "role": "client",
+        "time": "2026-09-27 12:12:54",
+        "text": "Verify LT transformer compatibility."
+      }
+    ]
+  },
+  {
+    "id": "TK-10364",
+    "client_name": "Industrial Client",
+    "email": "audit@industry.com",
+    "phone": "9876543210",
+    "subject": "Transformer capacity query",
+    "category": "General",
+    "priority": "High",
+    "status": "Open",
+    "assignee": "Unassigned",
+    "created_at": "2026-09-27 01:22:44",
+    "timeline": [
+      {
+        "time": "2026-09-27 01:22:44",
+        "actor": "Industrial Client",
+        "action": "Ticket opened"
+      }
+    ],
+    "messages": [
+      {
+        "sender": "Industrial Client",
+        "role": "client",
+        "time": "2026-09-27 01:22:44",
+        "text": "Verify LT transformer compatibility."
+      }
+    ]
+  },
+  {
+    "id": "TK-10267",
+    "client_name": "Test Client",
+    "email": "client@example.com",
+    "phone": "9876543210",
+    "subject": "System Verification Ticket",
+    "category": "General",
+    "priority": "High",
+    "status": "Open",
+    "assignee": "Unassigned",
+    "created_at": "2026-09-27 01:21:07",
+    "timeline": [
+      {
+        "time": "2026-09-27 01:21:07",
+        "actor": "Test Client",
+        "action": "Ticket opened"
+      }
+    ],
+    "messages": [
+      {
+        "sender": "Test Client",
+        "role": "client",
+        "time": "2026-09-27 01:21:07",
+        "text": "Automated verification test ticket"
+      }
+    ]
+  },
+  {
+    "id": "TK-10212",
+    "client_name": "Test Client",
+    "email": "client@example.com",
+    "phone": "9876543210",
+    "subject": "System Verification Ticket",
+    "category": "General",
+    "priority": "High",
+    "status": "Open",
+    "assignee": "Unassigned",
+    "created_at": "2026-09-27 01:20:12",
+    "timeline": [
+      {
+        "time": "2026-09-27 01:20:12",
+        "actor": "Test Client",
+        "action": "Ticket opened"
+      }
+    ],
+    "messages": [
+      {
+        "sender": "Test Client",
+        "role": "client",
+        "time": "2026-09-27 01:20:12",
+        "text": "Automated verification test ticket"
+      }
+    ]
+  },
+  {
+    "id": "TK-8041",
+    "client_name": "Rajesh Kumar",
+    "email": "rajesh.k@karnatakasolar.in",
+    "phone": "+91 98450 12345",
+    "subject": "Query on KERC LT-4 Sanctioned Load vs Sanctioned Contract Demand",
+    "category": "Regulatory / Tariff",
+    "priority": "Medium",
+    "status": "In Progress",
+    "assignee": "Senior Admin (Priya)",
+    "created_at": "2026-09-24 14:30:00",
+    "timeline": [
+      {
+        "time": "2026-09-24 14:30:00",
+        "actor": "Rajesh Kumar",
+        "action": "Ticket created"
+      },
+      {
+        "time": "2026-09-24 15:10:00",
+        "actor": "System",
+        "action": "Assigned to Senior Admin (Priya)"
+      },
+      {
+        "time": "2026-09-26 21:38:22",
+        "actor": "Adarsha KM (VoltRoof Support)",
+        "action": "Replied: No problem with 15kW. go ahead..."
+      }
+    ],
+    "messages": [
+      {
+        "sender": "Rajesh Kumar",
+        "role": "client",
+        "time": "2026-09-24 14:30:00",
+        "text": "Hello VoltRoof team, under BESCOM LT-4 commercial tariff, is the rooftop solar capacity capped at 100% of sanctioned load or 150%? We have a 15 kW sanctioned connection."
+      },
+      {
+        "sender": "Adarsha KM (VoltRoof Support)",
+        "role": "admin",
+        "time": "2026-09-26 21:38:22",
+        "text": "No problem with 15kW. go ahead"
+      }
+    ]
+  },
+  {
+    "id": "TK-8040",
+    "client_name": "Divya N.",
+    "email": "divya.n@ecopower.org",
+    "phone": "+91 94481 67890",
+    "subject": "Request for 3-Phase Inverter Catalog addition",
+    "category": "Equipment",
+    "priority": "Low",
+    "status": "In Progress",
+    "assignee": "Adarsha KM (Super Admin)",
+    "created_at": "2026-09-24 11:15:00",
+    "timeline": [
+      {
+        "time": "2026-09-24 11:15:00",
+        "actor": "Divya N.",
+        "action": "Ticket created"
+      },
+      {
+        "time": "2026-09-24 12:00:00",
+        "actor": "Adarsha KM",
+        "action": "Status changed to In Progress"
+      }
+    ],
+    "messages": [
+      {
+        "sender": "Divya N.",
+        "role": "client",
+        "time": "2026-09-24 11:15:00",
+        "text": "Could you add Sungrow SG15RT and Growatt 10KTL3-X models to the 3-phase inverter drop-down library? Many Karnataka customers are requesting these."
+      },
+      {
+        "sender": "Adarsha KM",
+        "role": "admin",
+        "time": "2026-09-24 12:00:00",
+        "text": "Thank you Divya. We are adding both 10 kW and 15 kW 3-phase models to the normative rate card in the next catalog release today."
+      }
+    ]
+  },
+  {
+    "id": "TK-8039",
+    "client_name": "Prof. Manjunath",
+    "email": "manjunath@jnnce.ac.in",
+    "phone": "+91 97312 34567",
+    "subject": "Institutional Multi-Building campus sizing assistance",
+    "category": "Engineering Sizing",
+    "priority": "High",
+    "status": "Resolved",
+    "assignee": "Adarsha KM (Super Admin)",
+    "created_at": "2026-09-22 09:20:00",
+    "timeline": [
+      {
+        "time": "2026-09-22 09:20:00",
+        "actor": "Prof. Manjunath",
+        "action": "Ticket created"
+      },
+      {
+        "time": "2026-09-22 16:45:00",
+        "actor": "Adarsha KM",
+        "action": "Resolved"
+      }
+    ],
+    "messages": [
+      {
+        "sender": "Prof. Manjunath",
+        "role": "client",
+        "time": "2026-09-22 09:20:00",
+        "text": "We need to size a 4-building college campus with 20 kW per building under single net meter. Is that supported?"
+      },
+      {
+        "sender": "Adarsha KM",
+        "role": "admin",
+        "time": "2026-09-22 16:45:00",
+        "text": "Yes, please use the Multi-Building Site Switcher tabs (Building 1 to Building 4). The aggregate generation will calculate across all 4 roofs with separate DCDBs feeding into a common AC collector."
+      }
+    ]
+  }
+]

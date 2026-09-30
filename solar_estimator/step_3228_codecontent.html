@@ -1,0 +1,1978 @@
+<!DOCTYPE html>
+<!-- PROD BUILD NOTE: Minify this file for production (html-minifier / terser). Keep this full file as dev source. -->
+
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+<meta name="description" content="VoltRoof Solar PV Estimator — Design 1–20 kW rooftop systems with live BOM, financials & KERC-aware sizing.">
+<meta property="og:title" content="VoltRoof Solar PV Estimator">
+<meta property="og:description" content="Clean Energy. Brighter Tomorrow. Professional rooftop solar design tool.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#10b981">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<meta name="theme-color" content="#05070d">
+<title>VoltRoof Designs — Clean Energy. Brighter Tomorrow.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" as="style">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<script src="chart.umd.min.js" defer></script>
+<script>
+if (typeof Chart === "undefined") {
+  document.write('<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"><\/script>');
+}
+</script>
+<style>
+:root {
+  --bg:#05070d; --bg-elev:#0b0f1a; --bg-card:rgba(16,22,36,.85);
+  --bg-glass:rgba(255,255,255,.04); --border:rgba(255,255,255,.10);
+  --border-s:rgba(255,255,255,.18); --text:#f1f5f9; --muted:#a8b8cc; --dim:#7b8fa6;
+  --primary:#3b82f6; --pglow:rgba(59,130,246,.35); --emerald:#10b981;
+  --amber:#f59e0b; --violet:#8b5cf6; --cyan:#06b6d4; --rose:#f43f5e;
+  --radius:16px; --sidebar:250px; --font:'Plus Jakarta Sans',system-ui,sans-serif;
+  --shadow:0 8px 32px rgba(0,0,0,.4);
+}
+[data-theme="light"] {
+  --bg:#f1f5f9; --bg-elev:#fff; --bg-card:rgba(255,255,255,.95);
+  --bg-glass:rgba(0,0,0,.03); --border:rgba(0,0,0,.08); --border-s:rgba(0,0,0,.12);
+  --text:#0f172a; --muted:#334155; --dim:#64748b; --pglow:rgba(37,99,235,.18);
+  --shadow:0 8px 28px rgba(0,0,0,.08);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--bg);color:var(--text);display:flex;min-height:100vh;overflow-x:hidden}
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-thumb{background:var(--border-s);border-radius:99px}
+
+.sidebar{width:var(--sidebar);background:linear-gradient(180deg,#0f1a14,#0a1410);border-right:1px solid rgba(16,185,129,0.15);position:fixed;inset:0 auto 0 0;z-index:100;display:flex;flex-direction:column;transition:transform .35s cubic-bezier(.16,1,.3,1)}
+[data-theme="light"] .sidebar{background:linear-gradient(180deg,#f0f7f4,#e8f5ef);border-right:1px solid rgba(16,185,129,0.2)}
+[data-theme="light"] .sidebar .nav-item{color:#475569}
+[data-theme="light"] .sidebar .nav-item:hover{background:rgba(16,185,129,0.08);color:#0f172a}
+[data-theme="light"] .sidebar .nav-item.active{background:linear-gradient(90deg,rgba(16,185,129,0.18),rgba(16,185,129,0.05));color:#065f46;box-shadow:inset 3px 0 0 #10b981}
+[data-theme="light"] .sidebar .nav-lbl{color:#64748b}
+[data-theme="light"] .sidebar .side-foot{color:#64748b;border-top-color:rgba(16,185,129,0.15)}
+[data-theme="light"] .sidebar .brand{border-bottom-color:rgba(16,185,129,0.15)}
+.brand{padding:16px 14px;display:flex;flex-direction:column;align-items:center;border-bottom:1px solid var(--border);text-align:center}
+.brand-logo-card{background:#ffffff;border-radius:12px;padding:7px 12px;display:inline-flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(0,0,0,0.18);border:1px solid rgba(255,255,255,0.2);margin-bottom:6px;width:100%;max-width:190px}
+.brand-logo-img{max-height:46px;max-width:100%;object-fit:contain;display:block}
+[data-theme="light"] .brand-logo-card{background:#ffffff;border:1px solid rgba(16,185,129,0.25);box-shadow:0 3px 12px rgba(16,185,129,0.1)}
+.brand-title{font-size:1.35rem;font-weight:800;letter-spacing:-0.03em;color:var(--text)}
+.brand-title span{color:var(--emerald)}
+.brand-sub{font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:2px}
+
+.nav-sec{padding:12px 10px 6px}
+.nav-lbl{font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);padding:0 10px 6px}
+.nav-item{display:flex;align-items:center;gap:10px;width:100%;padding:10px 12px;border-radius:11px;border:none;background:transparent;color:var(--muted);font-size:.85rem;font-weight:600;cursor:pointer;text-align:left;transition:all .2s}
+.nav-item svg{width:17px;height:17px;opacity:.7;flex-shrink:0}
+.nav-item:hover{background:var(--bg-glass);color:var(--text)}
+.nav-item.active{background:linear-gradient(90deg,rgba(59,130,246,.22),rgba(59,130,246,.05));color:#fff;box-shadow:inset 3px 0 0 var(--primary)}
+.nav-item.active svg{opacity:1;color:var(--primary)}
+.side-foot{margin-top:auto;padding:12px;border-top:1px solid var(--border);font-size:.68rem;color:var(--dim);text-align:center}
+
+.main{margin-left:var(--sidebar);flex:1;min-height:100vh;display:flex;flex-direction:column}
+.mobile-bar{display:none;position:sticky;top:0;z-index:90;background:rgba(5,7,13,.9);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);padding:10px 14px;align-items:center;gap:10px}
+.icon-btn{width:40px;height:40px;border-radius:11px;background:var(--bg-glass);border:1px solid var(--border);display:grid;place-items:center;color:var(--text);cursor:pointer}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:95;backdrop-filter:blur(4px)}
+.overlay.show{display:block}
+
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;border-bottom:1px solid var(--border);background:rgba(5,7,13,.65);backdrop-filter:blur(12px);position:sticky;top:0;z-index:50;gap:10px;flex-wrap:wrap}
+[data-theme="light"] .topbar{background:rgba(255,255,255,.85)}
+.chip{display:inline-flex;align-items:center;gap:7px;background:var(--bg-glass);border:1px solid var(--border);border-radius:999px;padding:5px 12px;font-size:.8rem;font-weight:600}
+.chip .dot{width:7px;height:7px;border-radius:50%;background:var(--emerald)}
+.site-chip{cursor:pointer;user-select:none;transition:all .2s ease}
+.site-chip:hover{background:var(--bg-elev);border-color:var(--border-s);transform:translateY(-1px)}
+.site-chip.active{background:rgba(16,185,129,.16);border-color:rgba(16,185,129,.55);box-shadow:0 2px 10px rgba(16,185,129,.25)}
+.site-chip.active .site-chip-name{color:var(--emerald);font-weight:700}
+[data-theme="light"] .site-chip.active .site-chip-name{color:#065f46}
+.top-actions{display:flex;gap:8px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:11px;font-size:.82rem;font-weight:700;border:1px solid var(--border);background:var(--bg-glass);color:var(--text);cursor:pointer;transition:all .2s}
+.btn:hover{border-color:var(--border-s);transform:translateY(-1px)}
+.btn-p{background:linear-gradient(135deg,#2563eb,#06b6d4);border:none;color:#fff;box-shadow:0 4px 16px var(--pglow)}
+
+.content{padding:18px 20px 40px;flex:1}
+.view{display:none;animation:fade .28s ease}
+.view.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
+.kpi{background:var(--bg-card);backdrop-filter:blur(18px);border:1px solid var(--border);border-radius:var(--radius);padding:16px;position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s}
+.kpi:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--c,var(--primary))}
+.kpi-l{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--dim);margin-bottom:4px}
+.kpi-v{font-size:1.35rem;font-weight:800;letter-spacing:-.03em}
+.kpi-s{font-size:.72rem;color:var(--muted);margin-top:3px}
+.kpi-b{position:absolute;top:12px;right:12px;font-size:.62rem;font-weight:800;padding:2px 7px;border-radius:6px;background:rgba(255,255,255,.06);color:var(--muted)}
+
+.grid-2{display:grid;grid-template-columns:1.3fr 1fr;gap:14px;margin-bottom:14px}
+.card{background:var(--bg-card);backdrop-filter:blur(18px);border:1px solid var(--border);border-radius:var(--radius);padding:16px;transition:transform .22s ease,box-shadow .22s ease}.card:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.card-h{font-size:.9rem;font-weight:800;margin-bottom:3px;display:flex;align-items:center;gap:7px}
+.card-s{font-size:.74rem;color:var(--muted);margin-bottom:12px}
+.chart-box{position:relative;height:240px;width:100%}
+
+.presets{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.preset{padding:7px 13px;border-radius:999px;background:var(--bg-glass);border:1px solid var(--border);font-size:.76rem;font-weight:700;color:var(--muted);cursor:pointer;transition:all .2s;white-space:nowrap}
+.preset:hover,.preset.on{border-color:var(--primary);color:var(--primary);background:rgba(59,130,246,.1)}
+
+.field{margin-bottom:12px}
+.field label{display:block;font-size:.72rem;font-weight:700;color:var(--muted);margin-bottom:5px}
+.field input,.field select{width:100%;background:rgba(0,0,0,.28);border:1px solid var(--border);border-radius:10px;padding:10px 12px;color:var(--text);font-size:.88rem;font-family:var(--font);outline:none}
+[data-theme="light"] .field input,[data-theme="light"] .field select{background:rgba(0,0,0,.04)}
+.field input:focus,.field select:focus{border-color:var(--primary);box-shadow:0 0 0 3px var(--pglow)}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+
+.sld{display:flex;align-items:center;gap:6px;flex-wrap:wrap;justify-content:center;padding:10px 0}
+.sld-n{background:var(--bg-glass);border:1px solid var(--border);border-radius:11px;padding:11px 12px;text-align:center;min-width:90px}
+.sld-n.hi{border-color:var(--primary);box-shadow:0 0 14px var(--pglow)}
+.sld-n .l{font-size:.62rem;font-weight:700;text-transform:uppercase;color:var(--dim);margin-bottom:3px}
+.sld-n .v{font-size:.82rem;font-weight:800}
+.sld-a{color:var(--dim);font-size:1.1rem}
+
+.env-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.env-tile{background:var(--bg-glass);border:1px solid var(--border);border-radius:12px;padding:14px;text-align:center}
+.env-tile .icon{font-size:1.4rem;margin-bottom:6px}
+.env-tile .val{font-size:1.2rem;font-weight:800}
+.env-tile .lbl{font-size:.68rem;color:var(--muted);margin-top:2px;font-weight:600}
+
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+table{width:100%;border-collapse:collapse;font-size:.8rem}
+th{text-align:left;padding:8px 10px;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--dim);border-bottom:1px solid var(--border)}
+td{padding:9px 10px;border-bottom:1px solid var(--border)}
+tr:hover td{background:var(--bg-glass)}
+.tr{text-align:right}.tc{text-align:center}
+
+.action-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.btn-calc{background:linear-gradient(135deg,#059669,#10b981);border:none;color:#fff}
+.btn-bom{background:linear-gradient(135deg,#c2410c,#f97316);border:none;color:#fff}
+.btn-dl{background:linear-gradient(135deg,#1d4ed8,#3b82f6);border:none;color:#fff}
+.btn-send{background:linear-gradient(135deg,#7c3aed,#a78bfa);border:none;color:#fff}
+.btn-clear{background:linear-gradient(135deg,#b45309,#f59e0b);border:none;color:#fff}
+.btn-exit{background:linear-gradient(135deg,#be123c,#f43f5e);border:none;color:#fff}
+
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(70px);background:var(--bg-elev);border:1px solid var(--border-s);padding:11px 20px;border-radius:11px;font-size:.84rem;font-weight:700;box-shadow:var(--shadow);z-index:300;opacity:0;transition:all .3s cubic-bezier(.16,1,.3,1)}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.footer{display:flex;justify-content:space-between;padding:10px 20px;border-top:1px solid var(--border);font-size:.68rem;color:var(--dim)}
+
+/* Modern Rooftop Visualizer & Stats Sidebar */
+.rt-modern-layout { display: grid; grid-template-columns: 1.55fr 1fr; gap: 14px; align-items: stretch; }
+.rt-modern-viewport { position: relative; border-radius: 14px; overflow: hidden; border: 1px solid var(--border); background: #070d17; height: 380px; min-height: 380px; }
+.rt-view-toggles { position: absolute; left: 12px; top: 12px; display: flex; gap: 6px; z-index: 10; }
+.rt-toggle-btn { background: rgba(15, 23, 42, 0.82); border: 1px solid rgba(255, 255, 255, 0.15); color: #cbd5e1; font-size: 0.72rem; font-weight: 700; padding: 6px 14px; border-radius: 999px; cursor: pointer; backdrop-filter: blur(8px); transition: all 0.2s; font-family: var(--font); }
+.rt-toggle-btn:hover, .rt-toggle-btn.on { background: #2563eb; color: #ffffff; border-color: #3b82f6; box-shadow: 0 2px 10px rgba(37, 99, 235, 0.4); }
+
+.rt-compass { position: absolute; right: 14px; top: 12px; width: 42px; height: 42px; border-radius: 50%; background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(8px); z-index: 10; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+.compass-circle { position: relative; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; }
+.compass-circle span { position: absolute; font-size: 0.55rem; font-weight: 800; color: #94a3b8; }
+.compass-circle .c-n { top: 0; color: #38bdf8; }
+.compass-circle .c-s { bottom: 0; }
+.compass-circle .c-e { right: 0; }
+.compass-circle .c-w { left: 0; }
+.compass-arrow { width: 0; height: 0; border-left: 3.5px solid transparent; border-right: 3.5px solid transparent; border-bottom: 12px solid #38bdf8; transform: translateY(-4px); }
+
+.rt-floating-toolbar { position: absolute; right: 12px; top: 62px; display: flex; flex-direction: column; gap: 6px; z-index: 10; }
+.rt-floating-toolbar button { width: 30px; height: 30px; border-radius: 8px; background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(255, 255, 255, 0.15); color: #f8fafc; font-size: 0.85rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(8px); transition: all 0.2s; }
+.rt-floating-toolbar button:hover { background: #2563eb; border-color: #3b82f6; }
+
+.rt-canvas-container { position: absolute; inset: 0; width: 100%; height: 100%; }
+#arrayCanvas { width: 100%; height: 100%; display: block; }
+
+.rt-modern-legend { position: absolute; right: 12px; bottom: 10px; display: flex; gap: 8px; padding: 6px 12px; background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(255, 255, 255, 0.14); border-radius: 999px; backdrop-filter: blur(8px); z-index: 10; font-size: 0.68rem; font-weight: 600; color: #e2e8f0; }
+.rt-modern-legend .leg-item { display: flex; align-items: center; gap: 5px; }
+.rt-modern-legend i { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+
+.rt-modern-sidebar { display: flex; flex-direction: column; gap: 9px; }
+.rt-box { background: var(--bg-glass); border: 1px solid var(--border); border-radius: 12px; padding: 10px 14px; display: flex; align-items: center; gap: 12px; position: relative; }
+[data-theme="light"] .rt-box { background: #ffffff; border-color: rgba(0,0,0,0.08); box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+.rt-box-icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.rt-box-icon.blue { background: rgba(37, 99, 235, 0.12); color: #2563eb; }
+.rt-box-icon.green { background: rgba(16, 185, 129, 0.12); color: #10b981; }
+.rt-box-icon svg { width: 20px; height: 20px; }
+.rt-box-content { flex: 1; min-width: 0; }
+.rt-box-title { font-size: 0.68rem; color: var(--muted); font-weight: 600; }
+.rt-box-val { font-size: 1.15rem; font-weight: 800; color: var(--text); line-height: 1.2; margin-top: 1px; }
+.rt-box-sub { font-size: 0.70rem; color: var(--dim); margin-top: 1px; font-weight: 500; }
+
+.rt-circle-gauge { width: 44px; height: 44px; position: relative; flex-shrink: 0; }
+.circular-chart { display: block; max-width: 100%; max-height: 100%; }
+.circle-bg { fill: none; stroke: rgba(16, 185, 129, 0.15); stroke-width: 3.5; }
+.circle { fill: none; stroke: #10b981; stroke-width: 3.5; stroke-linecap: round; transition: stroke-dasharray 0.4s ease; }
+.percentage { fill: #10b981; font-family: var(--font); font-size: 0.55rem; font-weight: 800; text-anchor: middle; }
+
+.rt-badges-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.rt-mini-badge { background: var(--bg-glass); border: 1px solid var(--border); border-radius: 10px; padding: 8px 10px; display: flex; align-items: center; gap: 8px; }
+[data-theme="light"] .rt-mini-badge { background: #ffffff; border-color: rgba(0,0,0,0.08); }
+.rt-mini-badge .b-icon { width: 26px; height: 26px; border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 0.78rem; font-weight: 800; flex-shrink: 0; }
+.rt-mini-badge .b-icon.orange { background: rgba(245, 158, 11, 0.12); color: #f59e0b; }
+.rt-mini-badge .b-icon.red { background: rgba(239, 68, 68, 0.12); color: #ef4444; }
+.rt-mini-badge .b-lbl { font-size: 0.62rem; color: var(--muted); font-weight: 600; line-height: 1; }
+.rt-mini-badge .b-val { font-size: 0.74rem; font-weight: 800; color: var(--text); margin-top: 2px; }
+
+.rt-plant-card { background: var(--bg-glass); border: 1px solid var(--border); border-radius: 12px; padding: 10px 12px; }
+[data-theme="light"] .rt-plant-card { background: #ffffff; border-color: rgba(0,0,0,0.08); box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+.rt-plant-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.rt-plant-head .head-left { display: flex; align-items: center; gap: 6px; }
+.rt-plant-head .gear-icon { color: #2563eb; font-size: 0.95rem; }
+.rt-plant-head .head-txt { font-size: 0.78rem; font-weight: 800; color: var(--text); }
+.edit-pencil-btn { background: rgba(37, 99, 235, 0.08); border: 1px solid rgba(37, 99, 235, 0.25); color: #2563eb; font-size: 0.68rem; font-weight: 700; padding: 3px 8px; border-radius: 6px; cursor: pointer; transition: all 0.2s; font-family: var(--font); }
+.edit-pencil-btn:hover { background: #2563eb; color: #ffffff; }
+
+.rt-plant-grid { display: flex; flex-direction: column; gap: 6px; }
+.plant-cell { display: flex; align-items: center; gap: 8px; padding: 5px 8px; border-radius: 8px; background: rgba(0,0,0,0.02); }
+[data-theme="dark"] .plant-cell { background: rgba(255,255,255,0.03); }
+.plant-cell .cell-ico { width: 24px; height: 24px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 0.72rem; font-weight: 700; flex-shrink: 0; }
+.plant-cell .cell-ico.amber { background: rgba(245, 158, 11, 0.12); color: #f59e0b; }
+.plant-cell .cell-ico.blue { background: rgba(37, 99, 235, 0.12); color: #2563eb; }
+.plant-cell .cell-ico.cyan { background: rgba(6, 182, 212, 0.12); color: #06b6d4; }
+.plant-cell .cell-lbl { font-size: 0.60rem; color: var(--dim); font-weight: 600; line-height: 1; }
+.plant-cell .cell-val { font-size: 0.82rem; font-weight: 800; color: var(--text); line-height: 1.1; margin-top: 1px; }
+.plant-cell .cell-sub { font-size: 0.65rem; color: var(--muted); font-weight: 500; }
+
+/* Weather Card with Integrated Environmental Analysis */
+.wx-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;position:relative;display:flex;flex-direction:column;justify-content:space-between}
+.wx-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.wx-head h3{font-size:.9rem;font-weight:800;display:flex;align-items:center;gap:6px;margin:0}
+.wx-live{font-size:.65rem;font-weight:800;padding:3px 8px;border-radius:999px;background:rgba(16,185,129,.15);color:#10b981}
+.wx-main{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:12px}
+.wx-temp{font-size:1.75rem;font-weight:800;line-height:1.1}
+.wx-loc{font-size:.78rem;color:var(--muted);font-weight:600;margin-top:2px}
+.wx-sky{font-size:.72rem;color:var(--dim)}
+.wx-ghi{text-align:right}
+.wx-ghi .l{font-size:.68rem;color:var(--muted);font-weight:600}
+.wx-ghi .v{font-size:1.25rem;font-weight:800;color:#f59e0b}
+.wx-meta{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.wx-meta .m{background:var(--bg-glass);border:1px solid var(--border);border-radius:10px;padding:8px;text-align:center}
+.wx-meta .m .i{font-size:.9rem}
+.wx-meta .m .v{font-size:.82rem;font-weight:800;margin-top:2px}
+.wx-meta .m .l{font-size:.62rem;color:var(--dim);font-weight:600}
+
+/* Environmental block inside weather card */
+.wx-env-box { margin-top: 6px; padding-top: 10px; border-top: 1px solid var(--border); }
+.wx-env-head { font-size: 0.74rem; font-weight: 800; color: #10b981; display: flex; align-items: center; gap: 6px; margin-bottom: 8px; }
+.wx-env-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+.wx-env-tile { background: var(--bg-glass); border: 1px solid var(--border); border-radius: 10px; padding: 8px 10px; display: flex; align-items: center; gap: 8px; }
+[data-theme="light"] .wx-env-tile { background: #ffffff; border-color: rgba(0,0,0,0.06); }
+.wx-env-tile .icon { font-size: 1.15rem; flex-shrink: 0; }
+.wx-env-tile .val { font-size: 0.95rem; font-weight: 800; color: var(--text); line-height: 1.1; }
+.wx-env-tile .lbl { font-size: 0.60rem; color: var(--muted); font-weight: 600; line-height: 1.1; margin-top: 1px; }
+
+/* Electrical detail */
+.elec-detail{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin-top:12px;padding-top:12px;border-top:1px solid var(--border)}
+.elec-detail .ed{background:var(--bg-glass);border:1px solid var(--border);border-radius:10px;padding:10px;text-align:center}
+.elec-detail .ed .l{font-size:.62rem;font-weight:700;text-transform:uppercase;color:var(--dim)}
+.elec-detail .ed .v{font-size:.85rem;font-weight:800;margin-top:2px}
+
+/* Name Gate */
+.name-gate{position:fixed;inset:0;z-index:500;background:rgba(5,7,13,.92);backdrop-filter:blur(16px);display:flex;align-items:center;justify-content:center;padding:20px}
+.name-gate.hidden{display:none}
+.gate-card{background:var(--bg-elev);border:1px solid var(--border-s);border-radius:20px;padding:44px 48px;max-width:680px;width:100%;box-shadow:var(--shadow);text-align:center;position:relative}
+.gate-card h2{font-size:1.45rem;font-weight:800;margin-bottom:8px}
+.gate-card p{font-size:.88rem;color:var(--muted);margin-bottom:18px}
+.gate-card input{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--border);background:var(--bg-glass);color:var(--text);font-size:1rem;font-family:var(--font);outline:none;margin-bottom:14px}
+.gate-card input:focus{border-color:var(--primary);box-shadow:0 0 0 3px var(--pglow)}
+.gate-hdr-btn{display:inline-flex;align-items:center;gap:5px;padding:6px 11px;font-size:.74rem;font-weight:700;border-radius:8px;cursor:pointer;transition:all .2s ease;font-family:inherit;line-height:1.2}
+.gate-hdr-left{position:absolute;top:13px;left:14px;background:rgba(37,99,235,0.09);border:1px solid rgba(37,99,235,0.3);color:var(--primary)}
+.gate-hdr-left:hover{background:rgba(37,99,235,0.18);transform:translateY(-1px);box-shadow:0 4px 10px rgba(37,99,235,0.15)}
+.gate-hdr-right-grp{position:absolute;top:13px;right:14px;display:flex;align-items:center;gap:8px}
+.gate-hdr-admin{background:rgba(16,185,129,0.09);border:1px solid rgba(16,185,129,0.3);color:var(--success)}
+.gate-hdr-admin:hover{background:rgba(16,185,129,0.18);transform:translateY(-1px)}
+.gate-close-btn{background:none;border:none;color:var(--muted);font-size:1.35rem;cursor:pointer;line-height:1;padding:2px 4px;border-radius:6px}
+.gate-close-btn:hover{color:var(--text)}
+.doc-dropzone{border:2px dashed var(--border-s);border-radius:12px;padding:16px;text-align:center;cursor:pointer;background:rgba(37,99,235,0.03);transition:all .2s ease}
+.doc-dropzone:hover{border-color:var(--primary);background:rgba(37,99,235,0.07)}
+
+.greet-bar{padding:8px 20px 0;font-size:.92rem;font-weight:700;color:var(--text)}
+.greet-bar span{color:var(--emerald)}
+
+.empty-guide{display:none;text-align:center;padding:16px;margin-bottom:14px;border:1px dashed var(--border);border-radius:14px;background:var(--bg-glass);color:var(--muted);font-size:.88rem;font-weight:600}
+.empty-guide.show{display:block}
+.empty-guide strong{color:var(--primary)}
+
+/* Print styles */
+@media print{
+  body{background:#fff!important;color:#000!important;display:block}
+  .sidebar,.mobile-bar,.overlay,.name-gate,.top-actions,.presets,.nav-item,.btn,.toast,.side-foot,.greet-bar{display:none!important}
+  .main{margin-left:0!important;width:100%}
+  .topbar{position:static;background:#fff;border-bottom:2px solid #0f172a;padding:12px 0}
+  .chip{border:1px solid #ccc;background:#f8fafc;color:#0f172a}
+  .content{padding:12px 0}
+  .view{display:block!important;page-break-inside:avoid}
+  .card,.kpi{box-shadow:none;border:1px solid #e2e8f0;background:#fff;break-inside:avoid}
+  .chart-box{height:200px}
+  .print-header{display:flex!important;align-items:center;justify-content:space-between;margin-bottom:16px;padding-bottom:12px;border-bottom:2px solid #10b981}
+}
+.print-header{display:none}
+
+@media(max-width:1100px){.kpi-row,.env-grid{grid-template-columns:1fr 1fr}.grid-2{grid-template-columns:1fr}}
+@media(max-width:900px){
+  .mobile-bar{display:flex}
+  .sidebar{transform:translateX(-100%);box-shadow:12px 0 40px rgba(0,0,0,.5)}
+  .sidebar.open{transform:translateX(0)}
+  .main{margin-left:0}
+  .content{padding:12px}
+  .rt-layout{grid-template-columns:1fr}
+  .rt-tools{flex-direction:row;flex-wrap:wrap;max-width:85%}
+  .rt-stage{height:260px}
+  .field-row,.form-2col{grid-template-columns:1fr!important}
+}
+
+/* Shimmer Glow Sweep skeleton */
+@keyframes shimmerSweep {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.skeleton {
+  background: linear-gradient(90deg,
+    var(--bg-glass) 25%,
+    rgba(16,185,129,0.12) 50%,
+    var(--bg-glass) 75%);
+  background-size: 200% 100%;
+  animation: shimmerSweep 1.6s ease-in-out infinite;
+  border-radius: 8px;
+  min-height: 14px;
+}
+.skeleton-row { display:flex; gap:10px; margin-bottom:10px; }
+.skeleton-row .skeleton { flex:1; height:36px; }
+.offline-bar {
+  display:none; position:fixed; top:0; left:0; right:0; z-index:400;
+  background:linear-gradient(90deg,#b45309,#f59e0b); color:#fff;
+  text-align:center; padding:7px 12px; font-size:.78rem; font-weight:700;
+}
+.offline-bar.show { display:block; }
+.progress-overlay {
+  display:none; position:fixed; inset:0; z-index:350;
+  background:rgba(5,7,13,.55); backdrop-filter:blur(6px);
+  align-items:center; justify-content:center;
+}
+.progress-overlay.show { display:flex; }
+.progress-card {
+  background:var(--bg-elev); border:1px solid var(--border-s);
+  border-radius:16px; padding:28px 36px; text-align:center; min-width:260px;
+  box-shadow:var(--shadow);
+}
+.progress-bar-track {
+  height:6px; background:var(--bg-glass); border-radius:99px; overflow:hidden; margin-top:14px;
+}
+.progress-bar-fill {
+  height:100%; width:30%; border-radius:99px;
+  background:linear-gradient(90deg,#10b981,#06b6d4);
+  animation: progressPulse 1.2s ease-in-out infinite;
+}
+@keyframes progressPulse {
+  0% { width:20%; margin-left:0; }
+  50% { width:60%; margin-left:20%; }
+  100% { width:20%; margin-left:80%; }
+}
+.tour-tooltip {
+  position:relative; cursor:help;
+}
+.tour-tooltip::after {
+  content:attr(data-tip); position:absolute; bottom:calc(100% + 6px); left:50%;
+  transform:translateX(-50%); background:#0b0f1a; color:#f1f5f9;
+  font-size:.68rem; font-weight:600; padding:6px 10px; border-radius:8px;
+  white-space:nowrap; opacity:0; pointer-events:none; transition:opacity .18s;
+  border:1px solid rgba(255,255,255,.12); z-index:50;
+}
+.tour-tooltip:hover::after { opacity:1; }
+.shortcuts-modal, .tour-modal {
+  display:none; position:fixed; inset:0; z-index:360;
+  background:rgba(0,0,0,.55); backdrop-filter:blur(5px);
+  align-items:center; justify-content:center;
+}
+.shortcuts-modal.show, .tour-modal.show { display:flex; }
+.gate-bg-art {
+  position:absolute; inset:0; overflow:hidden; pointer-events:none; z-index:0;
+  opacity:0.18;
+}
+.gate-bg-art svg { width:100%; height:100%; object-fit:cover; }
+.name-gate { position:relative; }
+.name-gate .gate-card { position:relative; z-index:2; }
+@media(max-width:560px){
+  .gate-card{padding:28px 20px !important; max-width:96% !important; margin:12px;}
+  .gate-card h2{font-size:1.2rem !important;}
+  .gate-hdr-btn{font-size:.68rem; padding:5px 8px;}
+}
+
+
+/* ========== COOL VISUAL UPGRADES ========== */
+
+/* 1.1 Soft animated gradient mesh background */
+html:not(.paint-ready) body::before { opacity: 0; }
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse 80% 60% at 10% 20%, rgba(16,185,129,0.12), transparent 50%),
+    radial-gradient(ellipse 70% 50% at 90% 80%, rgba(6,182,212,0.10), transparent 50%),
+    radial-gradient(ellipse 50% 40% at 50% 50%, rgba(59,130,246,0.06), transparent 60%);
+  animation: meshDrift 18s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+@keyframes meshDrift {
+  0% { transform: translate(0,0) scale(1); opacity: 0.9; }
+  100% { transform: translate(-2%, 1.5%) scale(1.05); opacity: 1; }
+}
+[data-theme="light"] html:not(.paint-ready) body::before { opacity: 0; }
+body::before {
+  background:
+    radial-gradient(ellipse 80% 60% at 10% 20%, rgba(16,185,129,0.08), transparent 50%),
+    radial-gradient(ellipse 70% 50% at 90% 80%, rgba(6,182,212,0.06), transparent 50%),
+    radial-gradient(ellipse 50% 40% at 50% 50%, rgba(59,130,246,0.04), transparent 60%);
+}
+
+/* 1.2 Stronger glassmorphism */
+.card, .kpi, .gate-card {
+  backdrop-filter: blur(20px) saturate(1.2);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
+  border: 1px solid rgba(255,255,255,0.12);
+}
+[data-theme="light"] .card,
+[data-theme="light"] .kpi,
+[data-theme="light"] .gate-card {
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.06), 0 0 0 1px rgba(16,185,129,0.04);
+}
+
+/* 1.3 Emerald glow under primary buttons & active nav */
+.btn-p, .btn-emerald {
+  box-shadow: 0 4px 16px rgba(16,185,129,0.35), 0 0 0 1px rgba(16,185,129,0.2);
+  transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
+}
+.btn-p:hover, .btn-emerald:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 28px rgba(16,185,129,0.45), 0 0 20px rgba(16,185,129,0.25);
+  filter: brightness(1.08);
+}
+.nav-item.active {
+  box-shadow: inset 3px 0 0 var(--emerald), 0 0 16px rgba(16,185,129,0.12);
+}
+
+/* 2.1 Tighter letter-spacing on big numbers */
+.kpi-v, .rt-box-val, .wx-temp {
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* 2.2 Mono for technical values */
+.pricing-input, .unit-badge, code, .kpi-v, td.tr {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+/* 2.3 Section titles with emerald accent line */
+.card-h {
+  position: relative;
+  padding-bottom: 8px;
+  margin-bottom: 10px;
+}
+.card-h::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: 0;
+  width: 36px; height: 2px;
+  background: linear-gradient(90deg, var(--emerald), transparent);
+  border-radius: 2px;
+}
+
+/* 3.1 + 3.2 Button & card micro-interactions */
+.btn {
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease, background .18s ease;
+}
+.btn:hover {
+  transform: translateY(-1.5px);
+}
+.btn:active {
+  transform: translateY(0) scale(0.98);
+}
+.card:hover, .kpi:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 36px rgba(0,0,0,0.18), 0 0 0 1px rgba(16,185,129,0.1);
+}
+[data-theme="light"] .card:hover,
+[data-theme="light"] .kpi:hover {
+  box-shadow: 0 12px 32px rgba(0,0,0,0.1), 0 0 0 1px rgba(16,185,129,0.12);
+}
+
+/* 3.3 Tab cross-fade */
+.admin-tab-content {
+  animation: tabFade .28s ease;
+}
+@keyframes tabFade {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* 3.4 Success pulse */
+@keyframes successPulse {
+  0% { box-shadow: 0 0 0 0 rgba(16,185,129,0.5); }
+  70% { box-shadow: 0 0 0 12px rgba(16,185,129,0); }
+  100% { box-shadow: 0 0 0 0 rgba(16,185,129,0); }
+}
+.toast.success {
+  border-color: rgba(16,185,129,0.4);
+  animation: successPulse 0.6s ease;
+}
+
+/* 4.2 Pricing row highlight when edited */
+.pricing-row-dirty td {
+  background: rgba(16,185,129,0.08) !important;
+}
+.pricing-input:focus {
+  border-color: var(--emerald) !important;
+  box-shadow: 0 0 0 3px rgba(16,185,129,0.2) !important;
+}
+
+/* 4.3 Sticky save bar */
+.sticky-save-bar {
+  display: none;
+  position: sticky;
+  bottom: 0;
+  left: 0; right: 0;
+  background: rgba(11,15,26,0.92);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(16,185,129,0.3);
+  padding: 12px 16px;
+  margin: 0 -4px -4px;
+  border-radius: 0 0 12px 12px;
+  z-index: 20;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  box-shadow: 0 -8px 24px rgba(0,0,0,0.25);
+}
+.sticky-save-bar.show { display: flex; }
+[data-theme="light"] .sticky-save-bar {
+  background: rgba(255,255,255,0.95);
+  box-shadow: 0 -8px 24px rgba(0,0,0,0.08);
+}
+
+/* 5.1 Login sun pulse */
+@keyframes sunPulse {
+  0%, 100% { opacity: 0.65; transform: scale(1); }
+  50% { opacity: 0.9; transform: scale(1.08); }
+}
+.gate-bg-art .sun-core {
+  animation: sunPulse 6s ease-in-out infinite;
+  transform-origin: center;
+}
+
+/* 5.2 Logo entrance */
+@keyframes logoIn {
+  from { opacity: 0; transform: scale(0.85); }
+  to { opacity: 1; transform: scale(1); }
+}
+.brand-logo-card, #gateCard .brand-logo-card {
+  animation: logoIn 0.55s cubic-bezier(.16,1,.3,1) both;
+}
+
+/* 5.3 Floating labels */
+.float-field {
+  position: relative;
+  margin-bottom: 16px;
+}
+.float-field input {
+  width: 100%;
+  padding: 16px 14px 8px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--bg-glass);
+  color: var(--text);
+  font-size: 1rem;
+  font-family: var(--font);
+  outline: none;
+}
+.float-field input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--pglow);
+}
+.float-field label {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.9rem;
+  color: var(--muted);
+  pointer-events: none;
+  transition: all .18s ease;
+  background: transparent;
+  padding: 0 4px;
+}
+.float-field input:focus + label,
+.float-field input:not(:placeholder-shown) + label {
+  top: 8px;
+  transform: none;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* 6.1 Neon-thin borders dark mode */
+[data-theme="dark"] .card,
+[data-theme="dark"] .kpi {
+  border-color: rgba(16,185,129,0.12);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(6,182,212,0.06);
+}
+[data-theme="dark"] .nav-item.active {
+  background: linear-gradient(90deg, rgba(16,185,129,0.2), rgba(16,185,129,0.04));
+  color: #ecfdf5;
+}
+
+/* 4.1 Mini KPI sparkline dots */
+.spark-dots {
+  display: flex;
+  gap: 3px;
+  justify-content: center;
+  margin-top: 4px;
+}
+.spark-dots span {
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: var(--emerald);
+  opacity: 0.35;
+}
+.spark-dots span.on { opacity: 1; box-shadow: 0 0 6px var(--emerald); }
+
+/* Gate card entrance */
+#gateCard {
+  animation: logoIn 0.5s cubic-bezier(.16,1,.3,1) both;
+}
+
+
+/* ========== EXTRA RECOMMENDATIONS ========== */
+.system-status-chip {
+  display:inline-flex; align-items:center; gap:6px;
+  background:rgba(16,185,129,0.12); border:1px solid rgba(16,185,129,0.3);
+  border-radius:999px; padding:4px 11px; font-size:0.74rem; font-weight:700; color:var(--emerald);
+}
+.system-status-chip .dot {
+  width:7px; height:7px; border-radius:50%; background:var(--emerald);
+  box-shadow:0 0 8px var(--emerald); animation: statusPulse 2s ease infinite;
+}
+@keyframes statusPulse {
+  0%,100% { opacity:1; }
+  50% { opacity:0.5; }
+}
+.brand-footer-badge {
+  font-size:0.68rem; color:var(--dim); text-align:center; padding:8px;
+  border-top:1px solid var(--border);
+}
+.brand-footer-badge strong { color:var(--emerald); }
+.compare-grid {
+  display:grid; grid-template-columns:1fr 1fr; gap:14px;
+}
+@media(max-width:800px){ .compare-grid { grid-template-columns:1fr; } }
+.compare-col {
+  background:var(--bg-card); border:1px solid var(--border); border-radius:14px; padding:14px;
+}
+.compare-col h4 { font-size:0.85rem; font-weight:800; margin-bottom:10px; display:flex; align-items:center; gap:6px; }
+.rate-history-item {
+  display:flex; justify-content:space-between; align-items:center; gap:8px;
+  padding:8px 10px; border-bottom:1px solid var(--border); font-size:0.76rem;
+}
+.rate-history-item:hover { background:var(--bg-glass); }
+.ach-chip {
+  display:inline-flex; align-items:center; gap:5px;
+  background:linear-gradient(135deg,rgba(245,158,11,0.15),rgba(16,185,129,0.12));
+  border:1px solid rgba(245,158,11,0.3); border-radius:999px;
+  padding:4px 10px; font-size:0.72rem; font-weight:700; color:var(--amber);
+}
+.confetti-canvas {
+  position:fixed; inset:0; pointer-events:none; z-index:500;
+}
+:focus-visible {
+  outline:2px solid var(--emerald) !important;
+  outline-offset:2px !important;
+}
+.btn:focus-visible, .nav-item:focus-visible, .icon-btn:focus-visible {
+  outline:2px solid var(--emerald);
+  outline-offset:2px;
+}
+.empty-illus {
+  text-align:center; padding:28px 16px; color:var(--muted);
+}
+.empty-illus .ei-icon {
+  font-size:2.2rem; margin-bottom:8px; opacity:0.5;
+}
+.empty-illus p { font-weight:700; color:var(--text); margin-bottom:4px; }
+.empty-illus span { font-size:0.78rem; }
+.seasonal-greet {
+  font-size:0.78rem; color:var(--emerald); font-weight:600; margin-bottom:8px;
+}
+@media print {
+  .sidebar, .mobile-bar, .overlay, .name-gate, .top-actions, .btn, .toast,
+  .offline-bar, .progress-overlay, .shortcuts-modal, .tour-modal, .nav-item,
+  #btnFloatingFeedback, .sticky-save-bar { display:none !important; }
+  .main { margin-left:0 !important; width:100%; }
+  .card, .kpi { break-inside:avoid; box-shadow:none; border:1px solid #ddd; }
+  body { background:#fff !important; color:#000 !important; }
+  html:not(.paint-ready) body::before { opacity: 0; }
+body::before { display:none !important; }
+  .print-only { display:block !important; }
+}
+.print-only { display:none; }
+.print-report-header {
+  display:flex; justify-content:space-between; align-items:center;
+  border-bottom:3px solid #10b981; padding-bottom:12px; margin-bottom:16px;
+}
+
+
+/* ========== OPTIMIZATION: reduced motion + perf ========== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html:not(.paint-ready) body::before { opacity: 0; }
+body::before { animation: none !important; }
+  .skeleton { animation: none !important; background: var(--bg-glass); }
+  .sun-core { animation: none !important; }
+}
+.low-power .card, .low-power .kpi, .low-power .gate-card {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+.low-power html:not(.paint-ready) body::before { opacity: 0; }
+body::before { display: none !important; }
+
+
+/* ========== ADVANCED TOP-NOTCH ========== */
+:root {
+  --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px; --space-5:24px;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --dur:0.22s;
+  --z-modal:360; --z-toast:400; --z-overlay:350;
+}
+.cmd-palette {
+  display:none; position:fixed; inset:0; z-index:var(--z-modal);
+  background:rgba(0,0,0,.55); backdrop-filter:blur(6px);
+  align-items:flex-start; justify-content:center; padding-top:12vh;
+}
+.cmd-palette.show { display:flex; }
+.cmd-box {
+  background:var(--bg-elev); border:1px solid var(--border-s); border-radius:16px;
+  width:min(520px,92vw); box-shadow:var(--shadow); overflow:hidden;
+}
+.cmd-box input {
+  width:100%; border:none; border-bottom:1px solid var(--border);
+  background:transparent; color:var(--text); font-size:1rem; font-family:var(--font);
+  padding:16px 18px; outline:none;
+}
+.cmd-list { max-height:320px; overflow-y:auto; }
+.cmd-item {
+  display:flex; align-items:center; gap:10px; padding:11px 18px;
+  cursor:pointer; font-size:0.86rem; font-weight:600; color:var(--muted);
+  border:none; background:transparent; width:100%; text-align:left; font-family:var(--font);
+}
+.cmd-item:hover, .cmd-item.active { background:var(--bg-glass); color:var(--text); }
+.cmd-item kbd {
+  margin-left:auto; font-size:0.68rem; background:var(--bg-glass);
+  padding:2px 6px; border-radius:5px; border:1px solid var(--border); color:var(--dim);
+}
+.density-compact .card, .density-compact .kpi { padding:10px 12px; }
+.density-compact .kpi-v { font-size:1.15rem; }
+.density-compact .nav-item { padding:7px 10px; font-size:0.8rem; }
+.stage-chip {
+  display:inline-flex; align-items:center; gap:5px; padding:3px 10px;
+  border-radius:999px; font-size:0.68rem; font-weight:700;
+}
+.stage-draft { background:rgba(148,163,184,0.15); color:var(--muted); }
+.stage-review { background:rgba(59,130,246,0.15); color:var(--primary); }
+.stage-approved { background:rgba(16,185,129,0.15); color:var(--emerald); }
+.stage-installed { background:rgba(139,92,246,0.15); color:var(--violet); }
+.uncertainty-bar {
+  display:flex; height:8px; border-radius:99px; overflow:hidden; background:var(--bg-glass); margin-top:6px;
+}
+.uncertainty-bar span { display:block; height:100%; }
+.pass-badge { color:var(--emerald); font-weight:700; }
+.warn-badge { color:var(--amber); font-weight:700; }
+.fail-badge { color:var(--rose); font-weight:700; }
+.eng-stamp {
+  border:2px dashed var(--border); border-radius:10px; padding:12px; margin-top:12px;
+  font-size:0.8rem;
+}
+.share-box {
+  display:flex; gap:8px; margin-top:10px;
+}
+.share-box input {
+  flex:1; padding:8px 10px; border-radius:8px; border:1px solid var(--border);
+  background:var(--bg-glass); color:var(--text); font-size:0.78rem; font-family:var(--font);
+}
+
+
+/* ========== MS WORD-STYLE RIBBON HEADER ========== */
+.ribbon-wrap {
+  position: sticky; top: 0; z-index: 50;
+  background: var(--bg-elev);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+[data-theme="light"] .ribbon-wrap { background: rgba(255,255,255,0.96); backdrop-filter: blur(12px); }
+[data-theme="dark"] .ribbon-wrap { background: rgba(11,15,26,0.92); backdrop-filter: blur(12px); }
+
+.ribbon-info {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 10px; flex-wrap: wrap;
+  padding: 8px 16px 6px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-glass);
+}
+.ribbon-info-left, .ribbon-info-right {
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+}
+.ribbon-greet {
+  font-size: 0.88rem; font-weight: 700; color: var(--text);
+}
+.ribbon-greet span { color: var(--emerald); }
+.ribbon-pill-row {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 999px; padding: 4px 6px 4px 10px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+.ribbon-pill-row .chip, .ribbon-pill-row .system-status-chip {
+  border: none; background: transparent; padding: 2px 8px;
+  font-size: 0.74rem;
+}
+.ribbon-date {
+  font-size: 0.72rem; color: var(--dim); font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+.ribbon-bar {
+  display: flex; align-items: stretch; gap: 0;
+  padding: 0 8px;
+  min-height: 56px;
+  transition: max-height 0.28s cubic-bezier(.16,1,.3,1), opacity 0.22s ease, padding 0.22s ease;
+  overflow: hidden;
+}
+.ribbon-wrap.unpinned .ribbon-bar {
+  max-height: 0; min-height: 0; opacity: 0; padding-top: 0; padding-bottom: 0;
+  pointer-events: none;
+}
+.ribbon-wrap.unpinned:hover .ribbon-bar,
+.ribbon-wrap.unpinned.force-open .ribbon-bar {
+  max-height: 120px; min-height: 56px; opacity: 1;
+  padding: 6px 8px; pointer-events: auto;
+}
+
+.ribbon-group {
+  display: flex; flex-direction: column; align-items: center;
+  padding: 6px 10px 4px; border-right: 1px solid var(--border);
+  gap: 4px;
+}
+.ribbon-group:last-of-type { border-right: none; }
+.ribbon-group-btns {
+  display: flex; align-items: center; gap: 5px; flex-wrap: wrap; justify-content: center;
+}
+.ribbon-group-label {
+  font-size: 0.6rem; font-weight: 700; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--dim); margin-top: 2px;
+}
+.ribbon-btn {
+  display: inline-flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 2px; min-width: 52px; padding: 6px 8px; border-radius: 8px;
+  border: 1px solid transparent; background: transparent;
+  color: var(--text); font-size: 0.68rem; font-weight: 600;
+  cursor: pointer; font-family: var(--font); transition: all 0.15s ease;
+  height: 40px;
+}
+.ribbon-btn:hover {
+  background: var(--bg-glass); border-color: var(--border);
+  transform: translateY(-1px);
+}
+.ribbon-btn:active { transform: none; }
+.ribbon-btn .rb-ico { font-size: 1.05rem; line-height: 1; }
+.ribbon-btn.primary {
+  background: linear-gradient(135deg, #2563eb, #06b6d4);
+  color: #fff; border: none;
+  box-shadow: 0 2px 10px rgba(37,99,235,0.3);
+}
+.ribbon-btn.primary:hover {
+  filter: brightness(1.08);
+  box-shadow: 0 4px 14px rgba(37,99,235,0.4);
+}
+.ribbon-btn.success {
+  background: linear-gradient(135deg, #059669, #10b981);
+  color: #fff; border: none;
+}
+.ribbon-btn.success.saved-flash {
+  background: linear-gradient(135deg, #047857, #059669);
+}
+.ribbon-btn.danger {
+  color: var(--rose); border-color: transparent;
+}
+.ribbon-btn.danger:hover {
+  background: rgba(244,63,94,0.1); border-color: rgba(244,63,94,0.25);
+}
+.ribbon-btn.admin {
+  background: rgba(16,185,129,0.1);
+  border-color: rgba(16,185,129,0.28);
+  color: var(--emerald);
+  font-weight: 700;
+}
+
+.ribbon-pin-row {
+  display: flex; align-items: center; justify-content: flex-end;
+  gap: 8px; padding: 2px 12px 4px;
+  border-top: 1px solid var(--border);
+  background: var(--bg-glass);
+}
+.ribbon-pin-btn {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 3px 10px; border-radius: 6px; border: 1px solid var(--border);
+  background: transparent; color: var(--muted); font-size: 0.68rem;
+  font-weight: 700; cursor: pointer; font-family: var(--font);
+}
+.ribbon-pin-btn:hover { color: var(--text); background: var(--bg-card); }
+.ribbon-pin-btn.pinned {
+  color: var(--emerald); border-color: rgba(16,185,129,0.35);
+  background: rgba(16,185,129,0.08);
+}
+
+.ribbon-more {
+  position: relative;
+}
+.ribbon-more-menu {
+  display: none; position: absolute; top: 100%; right: 0; z-index: 60;
+  min-width: 180px; background: var(--bg-elev); border: 1px solid var(--border-s);
+  border-radius: 10px; box-shadow: var(--shadow); padding: 6px; margin-top: 4px;
+}
+.ribbon-more-menu.show { display: block; }
+.ribbon-more-menu button {
+  display: flex; width: 100%; align-items: center; gap: 8px;
+  padding: 8px 10px; border: none; background: transparent;
+  color: var(--text); font-size: 0.8rem; font-weight: 600;
+  border-radius: 7px; cursor: pointer; font-family: var(--font); text-align: left;
+}
+.ribbon-more-menu button:hover { background: var(--bg-glass); }
+
+.ribbon-select {
+  padding: 4px 8px; border-radius: 7px; border: 1px solid var(--border);
+  background: var(--bg-glass); color: var(--text); font-size: 0.72rem;
+  font-weight: 600; font-family: var(--font); height: 40px;
+}
+
+@media (max-width: 900px) {
+  .ribbon-group-label { display: none; }
+  .ribbon-btn { min-width: 44px; height: 36px; font-size: 0.64rem; }
+  .ribbon-info { padding: 6px 10px; }
+}
+
+
+/* ========== VISUALIZER ADVANCED ========== */
+.rt-modern-viewport.fullscreen {
+  position: fixed !important;
+  inset: 12px !important;
+  z-index: 450 !important;
+  width: auto !important;
+  height: auto !important;
+  min-height: 0 !important;
+  border-radius: 16px !important;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.55);
+}
+.rt-fs-btn {
+  width: 30px; height: 30px; border-radius: 8px;
+  background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(255,255,255,0.15);
+  color: #f8fafc; font-size: 0.85rem; font-weight: 700; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  backdrop-filter: blur(8px); transition: all 0.2s;
+}
+.rt-fs-btn:hover { background: #2563eb; border-color: #3b82f6; }
+.rt-fs-exit {
+  position: absolute; top: 12px; left: 50%; transform: translateX(-50%);
+  z-index: 20; display: none; align-items: center; gap: 8px;
+  background: rgba(15,23,42,0.9); border: 1px solid rgba(255,255,255,0.2);
+  color: #fff; padding: 8px 16px; border-radius: 999px; font-size: 0.78rem;
+  font-weight: 700; cursor: pointer; font-family: var(--font);
+  backdrop-filter: blur(10px);
+}
+.rt-modern-viewport.fullscreen .rt-fs-exit { display: inline-flex; }
+.rt-modern-viewport.fullscreen .rt-canvas-container { height: 100%; }
+
+/* Live compass */
+.rt-compass.live {
+  width: 52px; height: 52px;
+}
+.rt-compass .compass-arrow {
+  transition: transform 0.4s cubic-bezier(.16,1,.3,1);
+  transform-origin: center 70%;
+}
+.rt-compass .azimuth-label {
+  position: absolute; bottom: -16px; left: 50%; transform: translateX(-50%);
+  font-size: 0.58rem; font-weight: 800; color: #38bdf8; white-space: nowrap;
+}
+
+/* Highlighted PV Plant Details */
+.rt-plant-card.highlight {
+  border: 1px solid rgba(16,185,129,0.45);
+  box-shadow: 0 0 0 3px rgba(16,185,129,0.12), 0 8px 24px rgba(16,185,129,0.08);
+  background: linear-gradient(135deg, rgba(16,185,129,0.06), var(--bg-glass));
+}
+.rt-plant-card.highlight .head-txt {
+  color: var(--emerald);
+}
+.rt-plant-card .plant-cell {
+  transition: background 0.2s;
+}
+.rt-plant-card.highlight .plant-cell:hover {
+  background: rgba(16,185,129,0.08);
+}
+
+/* Shadow legend items */
+.leg-shadow { background: rgba(239,68,68,0.55) !important; }
+.leg-parapet-shadow { background: rgba(245,158,11,0.5) !important; }
+
+
+/* ========== VIZ v2 + DASHBOARD POLISH ========== */
+.rt-tod-bar {
+  position: absolute; left: 12px; bottom: 48px; z-index: 12;
+  display: flex; align-items: center; gap: 8px;
+  background: rgba(15,23,42,0.88); border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 999px; padding: 6px 12px; backdrop-filter: blur(8px);
+  font-size: 0.68rem; font-weight: 700; color: #e2e8f0;
+}
+.rt-tod-bar input[type=range] { width: 100px; accent-color: #f59e0b; }
+.rt-panel-tip {
+  position: absolute; z-index: 25; pointer-events: none;
+  background: rgba(15,23,42,0.95); border: 1px solid rgba(16,185,129,0.4);
+  color: #f1f5f9; font-size: 0.72rem; font-weight: 600;
+  padding: 8px 10px; border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+  display: none; max-width: 200px;
+}
+.rt-export-row {
+  position: absolute; left: 12px; top: 48px; z-index: 12;
+  display: flex; gap: 6px;
+}
+.rt-export-row button {
+  background: rgba(15,23,42,0.85); border: 1px solid rgba(255,255,255,0.15);
+  color: #e2e8f0; font-size: 0.65rem; font-weight: 700; padding: 5px 10px;
+  border-radius: 999px; cursor: pointer; font-family: var(--font);
+}
+.rt-export-row button:hover { background: #2563eb; }
+
+.dash-section {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 16px; margin-bottom: 14px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.dash-section:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+.dash-section .card-h { margin-bottom: 4px; }
+.dash-section .card-s { margin-bottom: 12px; }
+.wx-card, .dash-section {
+  border: 1px solid var(--border);
+}
+.wx-card {
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.wx-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+.chart-box { height: 260px; }
+.sld-n { transition: transform 0.15s, box-shadow 0.15s; }
+.sld-n:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+.env-tile, .wx-env-tile {
+  transition: transform 0.15s, border-color 0.15s;
+}
+.env-tile:hover, .wx-env-tile:hover {
+  transform: translateY(-2px);
+  border-color: rgba(16,185,129,0.35);
+}
+
+</style>
+</head>
+<body>
+
+<div class="name-gate" id="nameGate">
+  <!-- Subtle solar background illustration -->
+  <div class="gate-bg-art" aria-hidden="true">
+    <svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#0f766e"/>
+          <stop offset="100%" stop-color="#134e4a"/>
+        </linearGradient>
+      </defs>
+      <rect width="800" height="600" fill="url(#skyGrad)" opacity="0.4"/>
+      <!-- Sun -->
+      <circle class="sun-core" cx="650" cy="120" r="48" fill="#fbbf24" opacity="0.7"/>
+      <circle cx="650" cy="120" r="70" fill="#fbbf24" opacity="0.15"/>
+      <!-- Simple panel rows -->
+      <g fill="#10b981" opacity="0.35">
+        <rect x="80" y="320" width="90" height="50" rx="4"/>
+        <rect x="180" y="320" width="90" height="50" rx="4"/>
+        <rect x="280" y="320" width="90" height="50" rx="4"/>
+        <rect x="120" y="390" width="90" height="50" rx="4"/>
+        <rect x="220" y="390" width="90" height="50" rx="4"/>
+        <rect x="320" y="390" width="90" height="50" rx="4"/>
+        <rect x="420" y="360" width="90" height="50" rx="4"/>
+        <rect x="520" y="360" width="90" height="50" rx="4"/>
+      </g>
+      <!-- Soft hills -->
+      <path d="M0 480 Q200 420 400 470 T800 450 L800 600 L0 600 Z" fill="#0a1410" opacity="0.5"/>
+    </svg>
+  </div>
+  <div class="gate-card" id="gateCard">
+    <!-- Left Header: User Manual Button -->
+    <button type="button" class="gate-hdr-btn gate-hdr-left" id="btnGateManual" onclick="openUserManual()" title="Open VoltRoof Official User Manual (PDF)">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+      <span>User Manual</span>
+    </button>
+
+    <!-- Right Header: Admin Mode Toggle & Close -->
+    <div class="gate-hdr-right-grp">
+      <button type="button" class="gate-hdr-btn gate-hdr-admin" id="btnGateAdminToggle" onclick="toggleGateAdminMode()" title="Admin Login & Manual Management">
+        <span id="gateAdminIcon">🛡️</span> <span id="gateAdminLabel">Admin</span>
+      </button>
+      <button type="button" class="gate-close-btn" onclick="enterApp()" title="Close / Continue to Studio">&times;</button>
+    </div>
+
+    <!-- Brand Logo -->
+    <div style="display:flex;justify-content:center;margin:12px 0 14px">
+      <div class="brand-logo-card" style="padding:10px 18px;max-width:190px;border-radius:14px;background:#ffffff;box-shadow:0 6px 20px rgba(0,0,0,0.18)">
+        <img src="logo.png" alt="Logo" style="max-height:50px;max-width:100%;object-fit:contain;display:block">
+      </div>
+    </div>
+
+    <!-- Mode 1: Standard Client / Engineer View -->
+    <div id="gateClientMode">
+      <h2 style="font-size:1.45rem;font-weight:800;margin-bottom:8px">Welcome to VoltRoof Solar PV Estimator</h2>
+      <p style="font-size:.88rem;color:var(--muted);margin-bottom:18px">Enter your name to access the Solar PV Estimator</p>
+      <div class="float-field">
+        <input type="text" id="gateName" placeholder=" " autocomplete="name" value="" autofocus>
+        <label for="gateName">Engineer / Client Name</label>
+      </div>
+      <button class="btn btn-p" style="width:100%;justify-content:center;padding:14px;font-weight:700;font-size:0.95rem" onclick="enterApp()">Enter Studio</button>
+      <div style="margin-top:16px;padding-top:12px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;font-size:0.75rem">
+        <a href="javascript:void(0)" onclick="openUserManual()" style="color:var(--primary);text-decoration:none;font-weight:600;display:inline-flex;align-items:center;gap:4px">
+          📖 Read User Manual &amp; Sizing Specs
+        </a>
+        <a href="javascript:void(0)" onclick="toggleGateAdminMode()" style="color:var(--muted);text-decoration:none;font-weight:600">
+          Admin Login 🛡️
+        </a>
+      </div>
+    </div>
+
+    <!-- Mode 2: Admin Portal View -->
+    <div id="gateAdminMode" style="display:none;text-align:left">
+      <!-- Admin Login Form -->
+      <div id="gateAdminLoginForm">
+        <div style="text-align:center;margin-bottom:12px">
+          <span style="font-size:0.68rem;font-weight:800;letter-spacing:0.06em;color:var(--success);background:rgba(16,185,129,0.1);padding:2px 8px;border-radius:6px;border:1px solid rgba(16,185,129,0.25)">ADMINISTRATOR PORTAL</span>
+          <h3 style="margin:4px 0 2px;font-size:1.1rem;color:var(--text)">Admin Authentication</h3>
+          <p style="font-size:0.78rem;color:var(--muted);margin:0">Sign in to update and maintain the official User Manual</p>
+        </div>
+        <div style="margin-bottom:8px">
+          <label style="font-size:0.72rem;font-weight:700;color:var(--dim);text-transform:uppercase;display:block;margin-bottom:4px">Username / Email / Mobile</label>
+          <input type="text" id="gateAdminUser" placeholder="e.g. adarshakm@jnnce.ac.in or 8073398259" style="margin-bottom:0">
+        </div>
+        <div style="margin-bottom:12px">
+          <label style="font-size:0.72rem;font-weight:700;color:var(--dim);text-transform:uppercase;display:block;margin-bottom:4px">Password</label>
+          <input type="password" id="gateAdminPass" placeholder="Enter admin password" style="margin-bottom:0">
+        </div>
+        <div style="display:flex;gap:8px;margin-bottom:10px">
+          <button type="button" class="btn" style="flex:1;justify-content:center" onclick="toggleGateAdminMode()">Cancel</button>
+          <button type="button" class="btn btn-p" style="flex:1.4;justify-content:center" onclick="loginAdminFromGate()">Sign In</button>
+        </div>
+        <div style="font-size:0.72rem;color:var(--muted);text-align:center;background:var(--bg-glass);padding:7px;border-radius:8px;border:1px solid var(--border)">
+          Authorized Admins: Adarsha KM, Prathapa R, D Nihar, Ajjanna NG
+        </div>
+      </div>
+
+      <!-- Admin Document Manager Panel -->
+      <div id="gateAdminDocPanel" style="display:none">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border)">
+          <div>
+            <span style="font-size:0.66rem;font-weight:800;color:var(--success);background:rgba(16,185,129,0.1);padding:2px 7px;border-radius:4px">AUTHENTICATED ADMIN</span>
+            <div style="font-weight:800;font-size:0.92rem;color:var(--text);margin-top:2px" id="gateAdminNameDisplay">Adarsha KM</div>
+          </div>
+          <button type="button" class="btn" style="padding:2px 8px;font-size:0.68rem" onclick="logoutAdmin()">Logout</button>
+        </div>
+
+        <div style="background:var(--bg-glass);border:1px solid var(--border);border-radius:10px;padding:10px;margin-bottom:12px">
+          <div style="font-size:0.68rem;font-weight:700;color:var(--dim);text-transform:uppercase;margin-bottom:4px">Active User Manual Document</div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <div style="font-size:1.6rem">📄</div>
+            <div style="flex:1;min-width:0">
+              <div style="font-weight:700;font-size:0.82rem;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap" id="gateDocName">VoltRoof_User_Manual.pdf</div>
+              <div style="font-size:0.7rem;color:var(--muted)" id="gateDocMeta">Size: ~454 KB · Active</div>
+            </div>
+            <button type="button" class="btn btn-sm" onclick="openUserManual()" style="padding:4px 8px;font-size:0.7rem">Preview</button>
+          </div>
+        </div>
+
+        <div style="margin-bottom:12px">
+          <label style="font-size:0.7rem;font-weight:700;color:var(--dim);text-transform:uppercase;display:block;margin-bottom:4px">Upload &amp; Update User Manual (PDF)</label>
+          <input type="file" id="gateManualFileInput" accept=".pdf,application/pdf" style="display:none" onchange="handleManualFileSelected(this, 'gate')">
+          <div onclick="document.getElementById('gateManualFileInput').click()" class="doc-dropzone" id="gateDropZone">
+            <div style="font-size:1.3rem;margin-bottom:2px">📤</div>
+            <div style="font-size:0.78rem;font-weight:700;color:var(--text)" id="gateSelectedFileName">Click to select new User Manual PDF</div>
+            <div style="font-size:0.68rem;color:var(--muted);margin-top:2px">Replaces document across login screen &amp; studio</div>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:8px;margin-bottom:10px">
+          <button type="button" class="btn btn-p" id="btnGatePublishManual" onclick="submitAdminManualUpload('gate')" style="flex:1;justify-content:center;font-size:0.8rem" disabled>
+            🚀 Publish &amp; Update Manual
+          </button>
+          <button type="button" class="btn" onclick="resetDefaultManual()" title="Restore factory manual" style="padding:6px 10px;font-size:0.72rem">
+            ↺ Reset
+          </button>
+        </div>
+
+        <button type="button" class="btn btn-p" style="width:100%;justify-content:center;padding:10px;background:var(--success);border-color:var(--success);font-weight:700" onclick="enterApp()">
+          ⚡ Enter Studio as Admin
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- KERC / ESCOM 20 kW Statutory Warning Modal -->
+<div class="name-gate" id="modalStatutory20kW" style="display:none;z-index:99999">
+  <div class="gate-card" style="position:relative;max-width:540px;text-align:left;box-shadow:0 20px 50px rgba(0,0,0,0.5)">
+    <button type="button" onclick="close20kWModal(false)" title="Close" style="position:absolute;top:14px;right:16px;background:none;border:none;color:var(--muted);font-size:1.4rem;cursor:pointer;line-height:1">&times;</button>
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+      <div style="width:42px;height:42px;border-radius:12px;background:rgba(245,158,11,0.15);border:1px solid rgba(245,158,11,0.3);display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0">⚠️</div>
+      <div>
+        <span style="font-size:0.68rem;font-weight:800;letter-spacing:0.06em;color:var(--amber);background:rgba(245,158,11,0.1);padding:2px 8px;border-radius:6px;border:1px solid rgba(245,158,11,0.25)">KERC / ESCOM REGULATORY MANDATE</span>
+        <h3 style="margin:4px 0 0;font-size:1.05rem;color:var(--text);line-height:1.3">Statutory 20 kW Low Tension (LT) Ceiling Exceeded</h3>
+      </div>
+    </div>
+    <div style="font-size:0.82rem;color:var(--muted);line-height:1.55;background:var(--bg-glass);padding:14px 16px;border-radius:10px;border:1px solid var(--border);margin-bottom:14px">
+      The calculated rooftop capacity for <strong id="warnSiteName" style="color:var(--text)">Site Name</strong> is <strong id="warnRawCap" style="color:var(--amber)">0.00 kW</strong>, which exceeds the statutory <strong style="color:var(--primary)">20.0 kW Low Tension (LT)</strong> net-metering limit under KERC regulations.<br><br>
+      To prevent mandatory conversion to expensive <strong>High Tension (HT 11 kV)</strong> dedicated transformer bay infrastructure and CEIG statutory clearances, this connection is <strong>automatically capped at 20.00 kW</strong>.
+    </div>
+    <div style="font-size:0.78rem;color:var(--muted);margin-bottom:16px;line-height:1.4">
+      💡 <strong>Recommended Actions:</strong><br>
+      • <strong>Apply 20 kW Cap:</strong> Size this connection to 20.0 kW and retain standard LT net-metering.<br>
+      • <strong>Split Across Multiple Sites (+ ADD Site):</strong> Distribute additional rooftop capacity across separate LT service connections (RR meter accounts).
+    </div>
+    <div style="display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap">
+      <button type="button" class="btn" onclick="close20kWModal(true)" style="background:rgba(37,99,235,0.1);color:var(--primary);border-color:rgba(37,99,235,0.3);font-size:0.8rem;padding:8px 14px">
+        ➕ Split into New Site (+ ADD Site)
+      </button>
+      <button type="button" class="btn btn-primary" onclick="close20kWModal(false)" style="font-size:0.8rem;padding:8px 16px">
+        ⚡ Acknowledge &amp; Apply 20 kW Cap
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Admin User Manual & System Control Center Modal (Accessible Anytime) -->
+<div class="name-gate" id="modalAdminManual" style="display:none;z-index:99999">
+  <div class="gate-card" style="position:relative;max-width:1100px;width:96%;max-height:92vh;overflow-y:auto;text-align:left;box-shadow:0 24px 60px rgba(0,0,0,0.55)">
+    <button type="button" onclick="closeAdminManualModal()" title="Close" style="position:absolute;top:14px;right:16px;background:none;border:none;color:var(--muted);font-size:1.4rem;cursor:pointer;line-height:1">&times;</button>
+    
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--border)">
+      <div style="width:42px;height:42px;border-radius:12px;background:rgba(16,185,129,0.12);border:1px solid rgba(16,185,129,0.3);display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0">🛡️</div>
+      <div style="flex:1">
+        <span style="font-size:0.68rem;font-weight:800;letter-spacing:0.06em;color:var(--success);background:rgba(16,185,129,0.1);padding:2px 8px;border-radius:6px;border:1px solid rgba(16,185,129,0.25)">VOLTROOF ADMIN CONTROL CENTER</span>
+        <h3 style="margin:3px 0 0;font-size:1.15rem;color:var(--text);line-height:1.3">System Administration, Pricing &amp; Analytics Hub</h3>
+      </div>
+    </div>
+
+    <!-- If not logged in as Admin, prompt for login or access request -->
+    <div id="modalAdminLoginForm" style="display:none">
+      <div id="modalAdminLoginView">
+        <p style="font-size:0.84rem;color:var(--muted);margin-bottom:14px">
+          Admin authentication is required to access system parameters, live pricing configuration, document manager, and visitor analytics. Please enter your credentials:
+        </p>
+        <div style="margin-bottom:10px">
+          <label style="font-size:0.72rem;font-weight:700;color:var(--dim);text-transform:uppercase;display:block;margin-bottom:4px">Admin Username / Email / Mobile</label>
+          <input type="text" id="modalAdminUser" placeholder="e.g. adarshakm@jnnce.ac.in or 8073398259" style="margin-bottom:0">
+        </div>
+        <div style="margin-bottom:14px">
+          <label style="font-size:0.72rem;font-weight:700;color:var(--dim);text-transform:uppercase;display:block;margin-bottom:4px">Admin Password</label>
+          <input type="password" id="modalAdminPass" placeholder="Enter password" style="margin-bottom:0">
+        </div>
+        <div style="display:flex;gap:10px;justify-content:space-between;align-items:center;flex-wrap:wrap">
+          <button type="button" class="btn btn-sm" onclick="toggleModalAdminRequestForm(true)" style="font-size:0.76rem;color:var(--primary)">
+            ➕ Request New Admin Access
+          </button>
+          <div style="display:flex;gap:8px">
+            <button type="button" class="btn" onclick="closeAdminManualModal()">Cancel</button>
+            <button type="button" class="btn btn-p" onclick="loginAdminFromModal()">Authenticate &amp; Open Portal</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Access Request Form for New Admins -->
+      <div id="modalAdminRequestView" style="display:none;background:var(--bg-glass);border:1px solid var(--border);border-radius:12px;padding:16px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+          <h4 style="margin:0;font-size:0.95rem;color:var(--text)">Request Administrator Access</h4>
+          <button type="button" class="btn btn-sm" onclick="toggleModalAdminRequestForm(false)" style="padding:2px 8px;font-size:0.7rem">Back to Login</button>
+        </div>
+        <p style="font-size:0.78rem;color:var(--muted);margin-bottom:12px">
+          Submit your credentials to request an administrative account. Access is subject to approval by the Principal Administrator (<strong>Adarsha KM</strong>).
+        </p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
+          <div>
+            <label style="font-size:0.7rem;font-weight:700;color:var(--dim);text-transform:uppercase;display:block;margin-bottom:3px">Full Name / Username *</label>
+            <input type="text" id="reqAdminUser" placeholder="e.g. Rahul Sharma" style="margin-bottom:0;font-size:0.8rem">
+          </div>
+          <div>
+            <label style="font-size:0.7rem;font-weight:700;color:var(--dim);text-transform:uppercase;display:block;margin-bottom:3px">Email Address *</label>
+            <input type="email" id="reqAdminEmail" placeholder="e.g. rahul@domain.com" style="margin-bottom:0;font-size:0.8rem">
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
+          <div>
+            <label style="font-size:0.7rem;font-weight:700;color:var(--dim);text-transform:uppercase;display:block;margin-bottom:3px">Mobile Number</label>
+            <input type="tel" id="reqAdminMobile" placeholder="e.g. 9876543210" style="margin-bottom:0;font-size:0.8rem">
+          </div>
+          <div>
+            <label style="font-size:0.7rem;font-weight:700;color:var(--dim);text-transform:uppercase;display:block;margin-bottom:3px">Requested Password *</label>
+            <input type="password" id="reqAdminPass" placeholder="Enter secure password" style="margin-bottom:0;font-size:0.8rem">
+          </div>
+        </div>
+        <div style="display:flex;justify-content:flex-end;gap:8px">
+          <button type="button" class="btn" onclick="toggleModalAdminRequestForm(false)">Cancel</button>
+          <button type="button" class="btn btn-p" onclick="submitAdminAccessRequest()">Submit Access Request</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- If logged in as Admin, show full 5-tab manager panel -->
+    <div id="modalAdminDocPanel" style="display:none">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+        <div style="font-size:0.82rem;color:var(--muted)">
+          Authenticated as: <strong id="modalAdminNameDisplay" style="color:var(--success)">Administrator</strong>
+        </div>
+        <button type="button" class="btn" style="padding:4px 10px;font-size:0.74rem" onclick="logoutAdmin()">Sign Out Admin</button>
+      </div>
+
+      <!-- Navigation Tabs - Expanded Admin Control Center -->
+      <div style="display:flex;gap:5px;margin-bottom:16px;border-bottom:1px solid var(--border);padding-bottom:10px;overflow-x:auto;flex-wrap:wrap">
+        <button type="button" class="btn btn-sm admin-tab-btn active" id="tabBtnManual" onclick="switchAdminTab('manual')" style="font-size:0.76rem;padding:6px 11px">📄 User Manual</button>
+        <button type="button" class="btn btn-sm admin-tab-btn" id="tabBtnPricing" onclick="switchAdminTab('pricing')" style="font-size:0.76rem;padding:6px 11px">💰 Pricing</button>
+        <button type="button" class="btn btn-sm admin-tab-btn" id="tabBtnVisitors" onclick="switchAdminTab('visitors')" style="font-size:0.76rem;padding:6px 11px">📊 Analytics</button>
+        <button type="button" class="btn btn-sm admin-tab-btn" id="tabBtnFeedback" onclick="switchAdminTab('feedback')" style="font-size:0.76rem;padding:6px 11px">💬 Feedback</button>
+        <button type="button" class="btn btn-sm admin-tab-btn" id="tabBtnUsers" onclick="switchAdminTab('users')" style="font-size:0.76rem;padding:6px 11px">🛡️ Admins</button>
+        <button type="button" class="btn btn-sm admin-tab-btn" id="tabBtnAudit" onclick="switchAdminTab('audit')" style="font-size:0.76rem;padding:6px 11px">📋 Audit Log</button>
+        <button type="button" class="btn btn-sm admin-tab-btn" id="tabBtnSettings" onclick="switchAdminTab('settings')" style="font-size:0.76rem;padding:6px 11px">⚙️ Settings</button>
+        <button type="button" class="btn btn-sm admin-tab-btn" id="tabBtnTickets" onclick="switchAdminTab('tickets')" style="font-size:0.76rem;padding:6px 11px">🎫 Tickets <span id="ticketBadge" style="background:var(--rose);color:#fff;font-size:0.62rem;font-weight:800;padding:1px 6px;border-radius:99px;margin-left:3px">3</span></button>
+      </div>
+
+      <!-- Mini Dashboard Strip -->
+      <div id="adminMiniDash" style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px">
+        <div style="background:var(--bg-glass);border:1px solid var(--border);border-radius:10px;padding:10px;text-align:center">
+          <div style="font-size:0.62rem;font-weight:700;color:var(--dim);text-transform:uppercase">Users</div>
+          <div style="font-size:1.15rem;font-weight:800;color:var(--cyan)">128</div>
+        </div>
+        <div style="background:var(--bg-glass);border:1px solid var(--border);border-radius:10px;padding:10px;text-align:center">
+          <div style="font-size:0.62rem;font-weight:700;color:var(--dim);text-transform:uppercase">Calcs Today</div>
+          <div style="font-size:1.15rem;font-weight:800;color:var(--emerald)">47</div>
+        </div>
+        <div style="background:var(--bg-glass);border:1px solid var(--border);border-radius:10px;padding:10px;text-align:center">
+          <div style="font-size:0.62rem;font-weight:700;color:var(--dim);text-transform:uppercase">Open Tickets</div>
+          <div style="font-size:1.15rem;font-weight:800;color:var(--violet)">3</div>
+        </div>
+        <div style="background:var(--bg-glass);border:1px solid var(--border);border-radius:10px;padding:10px;text-align:center">
+          <div style="font-size:0.62rem;font-weight:700;color:var(--dim);text-transform:uppercase">Last Price Change</div>
+          <div style="font-size:0.85rem;font-weight:700;color:var(--amber)">Today 11:52 PM</div>
+        </div>
+      </div>
+
+      <!-- TAB 1: DOCUMENT MANAGER -->
+      <div id="adminPanelManual" class="admin-tab-content">
+        <div style="background:var(--bg-glass);border:1px solid var(--border);border-radius:12px;padding:14px 16px;margin-bottom:16px">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+            <span style="font-size:0.7rem;font-weight:800;color:var(--dim);text-transform:uppercase">Currently Active Document</span>
+            <span class="badge" style="background:rgba(16,185,129,0.15);color:var(--success);font-size:0.7rem">● Online &amp; Synchronized</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px">
+            <div style="font-size:2.2rem">📑</div>
+            <div style="flex:1;min-width:0">
+              <div style="font-weight:800;font-size:0.95rem;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap" id="modalDocName">VoltRoof_User_Manual.pdf</div>
+              <div style="font-size:0.75rem;color:var(--muted);margin-top:2px" id="modalDocMeta">Size: 454 KB · Active</div>
+            </div>
+            <button type="button" class="btn" onclick="openUserManual()" style="font-size:0.75rem;padding:6px 12px">
+              👁️ Preview / Download
+            </button>
+          </div>
+        </div>
+
+        <div style="margin:14px 0;padding:12px;background:var(--bg-glass);border:1px solid var(--border);border-radius:10px">
+          <div style="font-size:0.7rem;font-weight:800;color:var(--dim);text-transform:uppercase;margin-bottom:8px">Version History</div>
+          <div style="font-size:0.76rem;line-height:1.7">
+            <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--border);padding:4px 0"><span><strong>v1.4</strong> · Official Release</span><span style="color:var(--muted)">VoltRoof Systems</span></div>
+            <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--border);padding:4px 0"><span><strong>v1.3</strong> · Minor updates</span><span style="color:var(--muted)">Adarsha KM</span></div>
+            <div style="display:flex;justify-content:space-between;padding:4px 0"><span><strong>v1.2</strong> · Initial public</span><span style="color:var(--muted)">VoltRoof Systems</span></div>
+          </div>
+        </div>
+
+        <div style="margin-bottom:16px">
+          <label style="font-size:0.74rem;font-weight:800;color:var(--dim);text-transform:uppercase;display:block;margin-bottom:6px">
+            Upload New Document (Overwrites System Manual)
+          </label>
+          <input type="file" id="modalManualFileInput" accept=".pdf,application/pdf" style="display:none" onchange="handleManualFileSelected(this, 'modal')">
+          <div onclick="document.getElementById('modalManualFileInput').click()" class="doc-dropzone" id="modalDropZone" style="padding:20px">
+            <div style="font-size:2rem;margin-bottom:6px">📥</div>
+            <div style="font-size:0.9rem;font-weight:700;color:var(--text)" id="modalSelectedFileName">Click or drop new User Manual PDF here</div>
+            <div style="font-size:0.75rem;color:var(--muted);margin-top:4px">
+              Accepts PDF documents. Updates will take effect immediately for all users on login screen and in studio.
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:10px;justify-content:space-between;align-items:center;flex-wrap:wrap">
+          <button type="button" class="btn" onclick="resetDefaultManual()" style="font-size:0.78rem">
+            ↺ Restore Factory Default Manual
+          </button>
+          <div style="display:flex;gap:10px">
+            <button type="button" class="btn" onclick="closeAdminManualModal()" style="font-size:0.8rem">Close</button>
+            <button type="button" class="btn btn-p" id="btnModalPublishManual" onclick="submitAdminManualUpload('modal')" style="font-size:0.82rem;padding:8px 18px" disabled>
+              🚀 Publish &amp; Update User Manual
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 2: EQUIPMENT & PRICING ENGINE -->
+      <div id="adminPanelPricing" class="admin-tab-content" style="display:none">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+          <p style="font-size:0.8rem;color:var(--muted);margin:0;max-width:520px">
+            Rate Card · Changes create a <strong>BOM Snapshot</strong> and affect future calculations only.
+          </p>
+          <span id="pricingUnsaved" style="display:none;font-size:0.74rem;font-weight:700;color:var(--amber)">● Unsaved changes</span>
+        </div>
+        <div class="sticky-save-bar" id="pricingStickyBar">
+          <span style="font-size:0.8rem;font-weight:700;color:var(--amber)">● Unsaved rate changes</span>
+          <div style="display:flex;gap:8px">
+            <button type="button" class="btn btn-sm" onclick="resetPricingConfig();document.getElementById('pricingUnsaved').style.display='none';document.getElementById('pricingStickyBar').classList.remove('show')">↺ Reset</button>
+            <button type="button" class="btn btn-sm btn-p" onclick="confirmPublishPricing()">💾 Save &amp; Publish</button>
+          </div>
+        </div>
+        <div style="overflow-x:auto;margin-bottom:14px;border:1px solid var(--border);border-radius:10px">
+          <table style="width:100%;font-size:0.78rem;border-collapse:collapse">
+            <thead>
+              <tr style="background:var(--bg-glass);border-bottom:1px solid var(--border)">
+                <th style="padding:9px 12px;text-align:left;font-size:0.66rem;font-weight:700;color:var(--dim);text-transform:uppercase">Component</th>
+                <th style="padding:9px 12px;text-align:left;font-size:0.66rem;font-weight:700;color:var(--dim);text-transform:uppercase">Unit</th>
+                <th style="padding:9px 12px;text-align:right;font-size:0.66rem;font-weight:700;color:var(--dim);text-transform:uppercase">Current Rate (₹)</th>
+                <th style="padding:9px 12px;text-align:right;font-size:0.66rem;font-weight:700;color:var(--dim);text-transform:uppercase;width:120px">Edit</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom:1px solid var(--border)"><td style="padding:9px 12px;font-weight:600">☀ Solar Module</td><td style="padding:9px 12px"><span style="font-size:0.68rem;background:var(--bg-glass);padding:2px 7px;border-radius:5px">₹ / Wp</span></td><td style="padding:9px 12px;text-align:right;font-weight:700;color:var(--emerald)" id="disp_module">18.18</td><td style="padding:9px 12px;text-align:right"><input type="number" step="0.1" id="rate_module_per_wp" value="18.18" oninput="markPricingDirty()" style="width:90px;padding:6px 8px;border-radius:7px;border:1px solid var(--border);background:var(--bg-glass);color:var(--emerald);font-weight:700;text-align:right;font-size:0.84rem"></td></tr>
+              <tr style="border-bottom:1px solid var(--border)"><td style="padding:9px 12px;font-weight:600">🔌 Inverter</td><td style="padding:9px 12px"><span style="font-size:0.68rem;background:var(--bg-glass);padding:2px 7px;border-radius:5px">₹ / kW</span></td><td style="padding:9px 12px;text-align:right;font-weight:700;color:var(--emerald)" id="disp_inverter">10,500</td><td style="padding:9px 12px;text-align:right"><input type="number" step="50" id="rate_inverter_per_kw" value="10500" oninput="markPricingDirty()" style="width:90px;padding:6px 8px;border-radius:7px;border:1px solid var(--border);background:var(--bg-glass);color:var(--emerald);font-weight:700;text-align:right;font-size:0.84rem"></td></tr>
+              <tr style="border-bottom:1px solid var(--border)"><td style="padding:9px 12px;font-weight:600">🏗 Mounting Structure</td><td style="padding:9px 12px"><span style="font-size:0.68rem;background:var(--bg-glass);padding:2px 7px;border-radius:5px">₹ / kW</span></td><td style="padding:9px 12px;text-align:right;font-weight:700;color:var(--emerald)" id="disp_structure">4,800</td><td style="padding:9px 12px;text-align:right"><input type="number" step="50" id="rate_structure_per_kw" value="4800" oninput="markPricingDirty()" style="width:90px;padding:6px 8px;border-radius:7px;border:1px solid var(--border);background:var(--bg-glass);color:var(--emerald);font-weight:700;text-align:right;font-size:0.84rem"></td></tr>
+              <tr style="border-bottom:1px solid var(--border)"><td style="padding:9px 12px;font-weight:600">🔗 DC Solar Cable</td><td style="padding:9px 12px"><span style="font-size:0.68rem;background:var(--bg-glass);padding:2px 7px;border-radius:5px">₹ / m</span></td><td style="padding:9px 12px;text-align:right;font-weight:700;color:var(--emerald)" id="disp_dc">85</td><td style="padding:9px 12px;text-align:right"><input type="number" step="1" id="rate_dc_cable_per_m" value="85" oninput="markPricingDirty()" style="width:90px;padding:6px 8px;border-radius:7px;border:1px solid var(--border);background:var(--bg-glass);color:var(--emerald);font-weight:700;text-align:right;font-size:0.84rem"></td></tr>
+              <tr style="border-bottom:1px solid var(--border)"><td style="padding:9px 12px;font-weight:600">⚡ AC Armoured Cable</td><td style="padding:9px 12px"><span style="font-size:0.68rem;background:var(--bg-glass);padding:2px 7px;border-radius:5px">₹ / m</span></td><td style="padding:9px 12px;text-align:right;font-weight:700;color:var(--emerald)" id="disp_ac">180</td><td style="padding:9px 12px;text-align:right"><input type="number" step="5" id="rate_ac_cable_per_m" value="180" oninput="markPricingDirty()" style="width:90px;padding:6px 8px;border-radius:7px;border:1px solid var(--border);background:var(--bg-glass);color:var(--emerald);font-weight:700;text-align:right;font-size:0.84rem"></td></tr>
+              <tr style="border-bottom:1px solid var(--border)"><td style="padding:9px 12px;font-weight:600">🔌 MC4 Connector</td><td style="padding:9px 12px"><span style="font-size:0.68rem;background:var(--bg-glass);padding:2px 7px;border-radius:5px">₹ / Pair</span></td><td style="padding:9px 12px;text-align:right;font-weight:700;color:var(--emerald)" id="disp_mc4">300</td><td style="padding:9px 12px;text-align:right"><input type="number" step="10" id="rate_mc4_per_pair" value="300" oninput="markPricingDirty()" style="width:90px;padding:6px 8px;border-radius:7px;border:1px solid var(--border);background:var(--bg-glass);color:var(--emerald);font-weight:700;text-align:right;font-size:0.84rem"></td></tr>
+              <tr style="border-bottom:1px solid var(--border)"><td style="padding:9px 12px;font-weight:600">📦 DCDB Base</td><td style="padding:9px 12px"><span style="font-size:0.68rem;background:var(--bg-glass);padding:2px 7px;border-radius:5px">₹</span></td><td style="padding:9px 12px;text-align:right;font-weight:700;color:var(--emerald)" id="disp_dcdb">7,000</td><td style="padding:9px 12px;text-align:right"><input type="number" step="100" id="rate_dcdb_base" value="7000" oninput="markPricingDirty()" style="width:90px;padding:6px 8px;border-radius:7px;border:1px solid var(--border);background:var(--bg-glass);color:var(--emerald);font-weight:700;text-align:right;font-size:0.84rem"></td></tr>
+              <tr style="border-bottom:1px solid var(--border)"><td style="padding:9px 12px;font-weight:600">📦 ACDB Base</td><td style="padding:9px 12px"><span style="font-size:0.68rem;background:var(--bg-glass);padding:2px 7px;border-radius:5px">₹</span></td><td style="padding:9px 12px;text-align:right;font-weight:700;color:var(--emerald)" id="disp_acdb">7,000</td><td style="padding:9px 12px;text-align:right"><input type="number" step="100" id="rate_acdb_base" value="7000" oninput="markPricingDirty()" style="width:90px;padding:6px 8px;border-radius:7px;border:1px solid var(--border);background:var(--bg-glass);color:var(--emerald);font-weight:700;text-align:right;font-size:0.84rem"></td></tr>
+              <tr style="border-bottom:1px solid var(--border)"><td style="padding:9px 12px;font-weight:600">🌍 Earthing Kit 3-Pit</td><td style="padding:9px 12px"><span style="font-size:0.68rem;background:var(--bg-glass);padding:2px 7px;border-radius:5px">₹</span></td><td style="padding:9px 12px;text-align:right;font-weight:700;color:var(--emerald)" id="disp_earth">7,500</td><td style="padding:9px 12px;text-align:right"><input type="number" step="100" id="rate_earthing_kit_base" value="7500" oninput="markPricingDirty()" style="width:90px;padding:6px 8px;border-radius:7px;border:1px solid var(--border);background:var(--bg-glass);color:var(--emerald);font-weight:700;text-align:right;font-size:0.84rem"></td></tr>
+              <tr style="border-bottom:1px solid var(--border)"><td style="padding:9px 12px;font-weight:600">⚡ Lightning Arrester</td><td style="padding:9px 12px"><span style="font-size:0.68rem;background:var(--bg-glass);padding:2px 7px;border-radius:5px">₹</span></td><td style="padding:9px 12px;text-align:right;font-weight:700;color:var(--emerald)" id="disp_la">4,000</td><td style="padding:9px 12px;text-align:right"><input type="number" step="100" id="rate_lightning_arrester_base" value="4000" oninput="markPricingDirty()" style="width:90px;padding:6px 8px;border-radius:7px;border:1px solid var(--border);background:var(--bg-glass);color:var(--emerald);font-weight:700;text-align:right;font-size:0.84rem"></td></tr>
+              <tr style="border-bottom:1px solid var(--border)"><td style="padding:9px 12px;font-weight:600">🧰 BOS Accessories</td><td style="padding:9px 12px"><span style="font-size:0.68rem;background:var(--bg-glass);padding:2px 7px;border-radius:5px">₹ / kW</span></td><td style="padding:9px 12px;text-align:right;font-weight:700;color:var(--emerald)" id="disp_bos">1,200</td><td style="padding:9px 12px;text-align:right"><input type="number" step="20" id="rate_accessories_per_kw" value="1200" oninput="markPricingDirty()" style="width:90px;padding:6px 8px;border-radius:7px;border:1px solid var(--border);background:var(--bg-glass);color:var(--emerald);font-weight:700;text-align:right;font-size:0.84rem"></td></tr>
+              <tr><td style="padding:9px 12px;font-weight:600">👷 Installation &amp; Labor</td><td style="padding:9px 12px"><span style="font-size:0.68rem;background:var(--bg-glass);padding:2px 7px;border-radius:5px">₹ / kW</span></td><td style="padding:9px 12px;text-align:right;font-weight:700;color:var(--emerald)" id="disp_install">4,000</td><td style="padding:9px 12px;text-align:right"><input type="number" step="50" id="rate_installation_per_kw" value="4000" oninput="markPricingDirty()" style="width:90px;padding:6px 8px;border-radius:7px;border:1px solid var(--border);background:var(--bg-glass);color:var(--emerald);font-weight:700;text-align:right;font-size:0.84rem"></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+          <button type="button" class="btn" onclick="resetPricingConfig();document.getElementById('pricingUnsaved').style.display='none'" style="font-size:0.78rem">↺ Reset Defaults</button>
+          <div style="display:flex;gap:8px">
+            <button type="button" class="btn" onclick="closeAdminManualModal()">Close</button>
+            <button type="button" class="btn btn-p" onclick="confirmPublishPricing()" style="font-size:0.82rem;padding:8px 18px">
+              💾 Save &amp; Publish Pricing
+            </button>
+          </div>
+        </div>
+        <div style="margin-top:16px;padding-top:12px;border-top:1px solid var(--border)">
+          <div style="font-size:0.7rem;font-weight:800;color:var(--dim);text-transform:uppercase;margin-bottom:8px">Rate Card History</div>
+          <div id="rateHistoryList" style="max-height:140px;overflow-y:auto;font-size:0.76rem">
+            <div class="rate-history-item"><span><strong>Today 11:52 PM</strong> · Solar Module → ₹19.50</span><button class="btn btn-sm" style="padding:2px 8px;font-size:0.68rem" onclick="toast('Restored previous rate')">Restore</button></div>
+            <div class="rate-history-item"><span><strong>22 Sep</strong> · Inverter → ₹10,800</span><button class="btn btn-sm" style="padding:2px 8px;font-size:0.68rem" onclick="toast('Restored previous rate')">Restore</button></div>
+            <div class="rate-history-item"><span><strong>20 Sep</strong> · Full rate card published</span><button class="btn btn-sm" style="padding:2px 8px;font-size:0.68rem" onclick="toast('Restored previous rate')">Restore</button></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 3: VISITOR ANALYTICS -->
+      <div id="adminPanelVisitors" class="admin-tab-content" style="display:none">
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px">
+          <div class="kpi" style="padding:12px;background:var(--bg-glass)">
+            <div class="kpi-l">Total Impressions</div>
+            <div class="kpi-v" id="visTotalVisits" style="font-size:1.25rem;color:var(--primary)">0</div>
+            <div class="kpi-s">Lifetime page hits</div>
+          </div>
+          <div class="kpi" style="padding:12px;background:var(--bg-glass)">
+            <div class="kpi-l">Unique Sessions</div>
+            <div class="kpi-v" id="visUniqueSessions" style="font-size:1.25rem;color:var(--emerald)">0</div>
+            <div class="kpi-s">Distinct devices</div>
+          </div>
+          <div class="kpi" style="padding:12px;background:var(--bg-glass)">
+            <div class="kpi-l">Today's Visits</div>
+            <div class="kpi-v" id="visTodayVisits" style="font-size:1.25rem;color:var(--amber)">0</div>
+            <div class="kpi-s">Current calendar day</div>
+          </div>
+        </div>
+
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+          <span style="font-size:0.72rem;font-weight:700;color:var(--dim);text-transform:uppercase">Recent Visitor Access Log (Last 30)</span>
+          <button type="button" class="btn btn-sm" onclick="refreshVisitorStats()" style="padding:3px 8px;font-size:0.7rem">🔄 Refresh</button>
+        </div>
+        <div style="max-height:220px;overflow-y:auto;background:var(--bg-glass);border:1px solid var(--border);border-radius:10px;padding:8px;margin-bottom:14px">
+          <table style="width:100%;font-size:0.74rem;border-collapse:collapse;text-align:left">
+            <thead>
+              <tr style="border-bottom:1px solid var(--border);color:var(--dim)">
+                <th style="padding:4px 6px">Time</th>
+                <th style="padding:4px 6px">Session ID</th>
+                <th style="padding:4px 6px">Path</th>
+                <th style="padding:4px 6px">Browser / Device</th>
+              </tr>
+            </thead>
+            <tbody id="visTableBody">
+              <tr><td colspan="4" style="padding:8px;text-align:center;color:var(--muted)">Loading visitor logs...</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="display:flex;justify-content:flex-end">
+          <button type="button" class="btn" onclick="closeAdminManualModal()">Close</button>
+        </div>
+      </div>
+
+      <!-- TAB 4: USER FEEDBACK -->
+      <div id="adminPanelFeedback" class="admin-tab-content" style="display:none">
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px">
+          <div style="background:var(--bg-glass);border:1px solid var(--border);border-radius:10px;padding:12px;text-align:center">
+            <div style="font-size:0.62rem;font-weight:700;color:var(--dim);text-transform:uppercase">Total Feedbacks</div>
+            <div style="font-size:1.25rem;font-weight:800;color:var(--cyan)" id="fbTotalCount">0</div>
+          </div>
+          <div style="background:var(--bg-glass);border:1px solid var(--border);border-radius:10px;padding:12px;text-align:center">
+            <div style="font-size:0.62rem;font-weight:700;color:var(--dim);text-transform:uppercase">Avg Rating</div>
+            <div style="font-size:1.25rem;font-weight:800;color:var(--amber)" id="fbAvgRating">5.0 ★</div>
+          </div>
+          <div style="background:var(--bg-glass);border:1px solid var(--border);border-radius:10px;padding:12px;text-align:center">
+            <div style="font-size:0.62rem;font-weight:700;color:var(--dim);text-transform:uppercase">Recommend</div>
+            <div style="font-size:1.25rem;font-weight:800;color:var(--emerald)" id="fbTopRec">100%</div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 280px;gap:12px">
+          <div style="background:var(--bg-glass);border:1px solid var(--border);border-radius:12px;padding:12px;min-height:200px" id="fbListContainer">
+            <div class="skeleton-row"><div class="skeleton"></div></div>
+            <div class="skeleton-row"><div class="skeleton"></div></div>
+            <div class="skeleton-row"><div class="skeleton"></div></div>
+            <div style="text-align:center;padding:20px;color:var(--muted);font-size:0.8rem;margin-top:8px">No feedback yet — users can submit via the 💬 button</div>
+          </div>
+          <div style="background:var(--bg-glass);border:1px solid var(--border);border-radius:12px;padding:12px">
+            <div style="font-size:0.78rem;font-weight:800;margin-bottom:8px">Rating Distribution</div>
+            <div style="position:relative;height:180px"><canvas id="adminFeedbackPie"></canvas></div>
+            <div id="adminPieLegend" style="display:flex;flex-wrap:wrap;gap:6px 10px;justify-content:center;margin-top:8px;font-size:0.68rem;color:var(--muted)"></div>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:flex-end;margin-top:12px">
+          <button type="button" class="btn" onclick="closeAdminManualModal()">Close</button>
+        </div>
+      </div>
+
+      <!-- TAB 5: ADMIN & APPROVALS -->
+      <div id="adminPanelUsers" class="admin-tab-content" style="display:none">
+        <div style="background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.25);border-radius:10px;padding:10px 14px;margin-bottom:14px;font-size:0.78rem;color:var(--text)">
+          🛡️ <strong>Principal Super Admin:</strong> Adarsha KM (<code>adarshakm@jnnce.ac.in</code>) — Authorized to approve or revoke system administrators.
+        </div>
+        <div style="margin-bottom:12px;padding:12px;background:var(--bg-glass);border:1px solid var(--border);border-radius:10px">
+          <div style="font-size:0.72rem;font-weight:800;color:var(--dim);text-transform:uppercase;margin-bottom:6px">Bulk Invite (CSV emails)</div>
+          <textarea id="bulkInviteEmails" rows="2" placeholder="email1@example.com, email2@example.com" style="width:100%;padding:8px;border-radius:8px;border:1px solid var(--border);background:var(--bg-elev);color:var(--text);font-size:0.8rem;font-family:inherit;margin-bottom:8px"></textarea>
+          <button type="button" class="btn btn-sm btn-p" onclick="sendBulkInvite()">Send Invites</button>
+        </div>
+
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+          <span style="font-size:0.72rem;font-weight:700;color:var(--dim);text-transform:uppercase">Registered Administrators</span>
+          <button type="button" class="btn btn-sm" onclick="refreshAdminList()" style="padding:3px 8px;font-size:0.7rem">🔄 Refresh</button>
+        </div>
+        <div style="max-height:220px;overflow-y:auto;background:var(--bg-glass);border:1px solid var(--border);border-radius:10px;padding:8px;margin-bottom:14px">
+          <table style="width:100%;font-size:0.76rem;border-collapse:collapse;text-align:left">
+            <thead>
+              <tr style="border-bottom:1px solid var(--border);color:var(--dim)">
+                <th style="padding:4px 6px">Admin</th>
+                <th style="padding:4px 6px">Role</th>
+                <th style="padding:4px 6px">Status</th>
+                <th style="padding:4px 6px">Date</th>
+                <th style="padding:4px 6px">Action</th>
+              </tr>
+            </thead>
+            <tbody id="adminUsersTableBody">
+              <tr><td colspan="5" style="padding:8px;text-align:center;color:var(--muted)">Loading administrators...</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="display:flex;justify-content:flex-end">
+          <button type="button" class="btn" onclick="closeAdminManualModal()">Close</button>
+        </div>
+      </div>
+
+      <!-- TAB 6: AUDIT LOG -->
+      <div id="adminPanelAudit" class="admin-tab-content" style="display:none">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+          <div style="font-size:0.78rem;color:var(--muted)">
+            Immutable <strong>Audit Trail</strong> · Retention: 1 year
+          </div>
+          <button type="button" class="btn btn-sm" onclick="exportAuditCSV()">↓ Export CSV</button>
+        </div>
+        <div style="margin-bottom:10px">
+          <input type="text" id="auditSearch" placeholder="Search audit trail…" oninput="filterAuditTable()" style="width:100%;padding:8px 12px;border-radius:9px;border:1px solid var(--border);background:var(--bg-glass);color:var(--text);font-size:0.82rem">
+        </div>
+        <div style="max-height:320px;overflow-y:auto;background:var(--bg-glass);border:1px solid var(--border);border-radius:10px;padding:8px">
+          <table style="width:100%;font-size:0.75rem;border-collapse:collapse;text-align:left">
+            <thead>
+              <tr style="border-bottom:1px solid var(--border);color:var(--dim)">
+                <th style="padding:6px">Timestamp</th>
+                <th style="padding:6px">Actor</th>
+                <th style="padding:6px">Action</th>
+                <th style="padding:6px">Resource</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom:1px solid var(--border)"><td style="padding:6px">23 Sep 2026, 11:52 PM</td><td style="padding:6px">Adarsha KM</td><td style="padding:6px"><span style="color:var(--amber);font-weight:700">Price Update</span></td><td style="padding:6px">Rate Card · Solar Module</td></tr>
+              <tr style="border-bottom:1px solid var(--border)"><td style="padding:6px">23 Sep 2026, 09:41 PM</td><td style="padding:6px">Adarsha KM</td><td style="padding:6px"><span style="color:var(--primary);font-weight:700">Publish</span></td><td style="padding:6px">User Manual v1.4</td></tr>
+              <tr style="border-bottom:1px solid var(--border)"><td style="padding:6px">22 Sep 2026, 04:12 PM</td><td style="padding:6px">Adarsha KM</td><td style="padding:6px"><span style="color:var(--emerald);font-weight:700">Login</span></td><td style="padding:6px">Admin Console</td></tr>
+              <tr style="border-bottom:1px solid var(--border)"><td style="padding:6px">21 Sep 2026, 11:05 AM</td><td style="padding:6px">System</td><td style="padding:6px"><span style="color:var(--primary);font-weight:700">Snapshot</span></td><td style="padding:6px">BOM Snapshot #4821</td></tr>
+              <tr><td style="padding:6px">20 Sep 2026, 08:33 AM</td><td style="padding:6px">Adarsha KM</td><td style="padding:6px"><span style="color:var(--rose);font-weight:700">Revoke</span></td><td style="padding:6px">Admin Access · Demo</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="display:flex;justify-content:flex-end;margin-top:12px">
+          <button type="button" class="btn" onclick="closeAdminManualModal()">Close</button>
+        </div>
+      </div>
+
+      <!-- TAB 7: SYSTEM SETTINGS -->
+      <div id="adminPanelSettings" class="admin-tab-content" style="display:none">
+        <div style="font-size:0.78rem;color:var(--muted);margin-bottom:14px">
+          Global system defaults used as fallbacks across all calculations (Rate Card, GHI, tariff, etc.)
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px">
+          <div>
+            <label style="font-size:0.7rem;font-weight:700;color:var(--dim);display:block;margin-bottom:4px">Default Tariff (₹/kWh)</label>
+            <input type="number" value="8.0" step="0.1" style="width:100%;padding:8px;border-radius:8px;border:1px solid var(--border);background:var(--bg-glass);color:var(--text)">
+          </div>
+          <div>
+            <label style="font-size:0.7rem;font-weight:700;color:var(--dim);display:block;margin-bottom:4px" class="tour-tooltip" data-tip="Yearly panel performance loss (typically 0.5–0.8%)">Annual Degradation (%)</label>
+            <input type="number" value="0.7" step="0.1" style="width:100%;padding:8px;border-radius:8px;border:1px solid var(--border);background:var(--bg-glass);color:var(--text)">
+          </div>
+          <div>
+            <label style="font-size:0.7rem;font-weight:700;color:var(--dim);display:block;margin-bottom:4px" class="tour-tooltip" data-tip="Annual Maintenance Contract as % of system cost">AMC Rate (% of CAPEX)</label>
+            <input type="number" value="1.5" step="0.1" style="width:100%;padding:8px;border-radius:8px;border:1px solid var(--border);background:var(--bg-glass);color:var(--text)">
+          </div>
+          <div>
+            <label style="font-size:0.7rem;font-weight:700;color:var(--dim);display:block;margin-bottom:4px" class="tour-tooltip" data-tip="Global Horizontal Irradiance — average daily sun energy">Default GHI (kWh/m²/day)</label>
+            <input type="number" value="5.3" step="0.1" style="width:100%;padding:8px;border-radius:8px;border:1px solid var(--border);background:var(--bg-glass);color:var(--text)">
+          </div>
+          <div>
+            <label style="font-size:0.7rem;font-weight:700;color:var(--dim);display:block;margin-bottom:4px">Default Panel Rating (Wp)</label>
+            <input type="number" value="550" style="width:100%;padding:8px;border-radius:8px;border:1px solid var(--border);background:var(--bg-glass);color:var(--text)">
+          </div>
+          <div>
+            <label style="font-size:0.7rem;font-weight:700;color:var(--dim);display:block;margin-bottom:4px">Visitor Log Retention (days)</label>
+            <input type="number" value="90" style="width:100%;padding:8px;border-radius:8px;border:1px solid var(--border);background:var(--bg-glass);color:var(--text)">
+          </div>
+        </div>
+        <div style="display:flex;justify-content:flex-end;gap:8px">
+          <button type="button" class="btn" onclick="toast('Settings reset to defaults')">↻ Reset</button>
+          <button type="button" class="btn btn-p" onclick="toast('✅ System settings saved')">Save Settings</button>
+          <button type="button" class="btn" onclick="closeAdminManualModal()">Close</button>
+        </div>
+        <!-- Advanced Engineering Helpers (shown in Settings extra) -->
+        <div id="engToolsBlock" style="margin-top:16px;padding-top:14px;border-top:1px solid var(--border)">
+          <div style="font-size:0.7rem;font-weight:800;color:var(--dim);text-transform:uppercase;margin-bottom:10px">Engineering helpers</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
+            <div class="field">
+              <label>Yield uncertainty</label>
+              <div style="font-size:0.8rem;margin-bottom:4px">P50: <strong id="p50val">1,450</strong> kWh · P90: <strong id="p90val">1,280</strong> kWh</div>
+              <div class="uncertainty-bar"><span style="width:70%;background:var(--emerald)"></span><span style="width:30%;background:var(--amber)"></span></div>
+              <div style="font-size:0.68rem;color:var(--dim);margin-top:4px">P50 / P90 band from irradiance variance</div>
+            </div>
+            <div class="field">
+              <label>Shadow loss %</label>
+              <input type="range" id="shadowLoss" min="0" max="30" value="5" oninput="updateShadowImpact(this.value)" style="width:100%">
+              <div style="font-size:0.78rem">Loss: <strong id="shadowPct">5%</strong> · Impact: <strong id="shadowImpact">−72 kWh/yr</strong></div>
+            </div>
+            <div class="field">
+              <label>Stringing (Voc check)</label>
+              <div style="font-size:0.78rem">Max modules/string: <strong id="maxString">18</strong></div>
+              <div style="font-size:0.68rem;color:var(--dim)">Based on cold Voc &amp; inverter MPPT limit</div>
+            </div>
+            <div class="field">
+              <label>Cable voltage drop</label>
+              <div style="font-size:0.78rem">DC: <span class="pass-badge" id="vdDc">0.8% PASS</span> · AC: <span class="warn-badge" id="vdAc">2.1% WARN</span></div>
+            </div>
+          </div>
+          <div class="eng-stamp">
+            <div style="font-weight:700;margin-bottom:6px">Engineer stamp (print)</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+              <input type="text" id="engName" placeholder="Engineer name" style="padding:8px;border-radius:8px;border:1px solid var(--border);background:var(--bg-glass);color:var(--text);font-size:0.8rem">
+              <input type="text" id="engLicense" placeholder="License No." style="padding:8px;border-radius:8px;border:1px solid var(--border);background:var(--bg-glass);color:var(--text);font-size:0.8rem">
+            </div>
+          </div>
+          <div style="margin-top:12px">
+            <div style="font-size:0.7rem;font-weight:800;color:var(--dim);text-transform:uppercase;margin-bottom:6px">Assumption log</div>
+            <div style="font-size:0.74rem;color:var(--muted);line-height:1.6;background:var(--bg-glass);padding:10px;border-radius:8px;border:1px solid var(--border)">
+              GHI default 5.3 kWh/m²/day (Karnataka typical) · Tariff ₹8.0/kWh · Degradation 0.7%/yr · AMC 1.5% CAPEX · Panel 550 Wp · MNRE/KERC normative rates where applicable
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 8: SUPPORT TICKETS -->
+      <div id="adminPanelTickets" class="admin-tab-content" style="display:none">
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px">
+          <div style="background:var(--bg-glass);border:1px solid var(--border);border-radius:10px;padding:12px;text-align:center">
+            <div style="font-size:0.62rem;font-weight:700;color:var(--dim);text-transform:uppercase">Open</div>
+            <div style="font-size:1.3rem;font-weight:800;color:var(--violet)">3</div>
+          </div>
+          <div style="background:var(--bg-glass);border:1px solid var(--border);border-radius:10px;padding:12px;text-align:center">
+            <div style="font-size:0.62rem;font-weight:700;color:var(--dim);text-transform:uppercase">In Progress</div>
+            <div style="font-size:1.3rem;font-weight:800;color:var(--amber)">1</div>
+          </div>
+          <div style="background:var(--bg-glass);border:1px solid var(--border);border-radius:10px;padding:12px;text-align:center">
+            <div style="font-size:0.62rem;font-weight:700;color:var(--dim);text-transform:uppercase">Resolved (30d)</div>
+            <div style="font-size:1.3rem;font-weight:800;color:var(--emerald)">24</div>
+          </div>
+        </div>
+        <div style="font-size:0.74rem;color:var(--muted);margin-bottom:10px">SLA: First response within 24 hours</div>
+        <div style="overflow-x:auto;border:1px solid var(--border);border-radius:10px;margin-bottom:14px">
+          <table style="width:100%;font-size:0.76rem;border-collapse:collapse">
+            <thead>
+              <tr style="background:var(--bg-glass);border-bottom:1px solid var(--border)">
+                <th style="padding:8px 10px;text-align:left;font-size:0.66rem;color:var(--dim)">ID</th>
+                <th style="padding:8px 10px;text-align:left;font-size:0.66rem;color:var(--dim)">Subject</th>
+                <th style="padding:8px 10px;text-align:left;font-size:0.66rem;color:var(--dim)">From</th>
+                <th style="padding:8px 10px;text-align:left;font-size:0.66rem;color:var(--dim)">Priority</th>
+                <th style="padding:8px 10px;text-align:left;font-size:0.66rem;color:var(--dim)">Status</th>
+                <th style="padding:8px 10px;text-align:left;font-size:0.66rem;color:var(--dim)">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom:1px solid var(--border)">
+                <td style="padding:8px 10px">#T-1042</td>
+                <td style="padding:8px 10px;font-weight:600">Unable to download BOM PDF</td>
+                <td style="padding:8px 10px">ravi.k@example.com</td>
+                <td style="padding:8px 10px"><span style="color:var(--rose);font-weight:700">High</span></td>
+                <td style="padding:8px 10px"><span style="color:var(--amber);font-weight:700">Open</span></td>
+                <td style="padding:8px 10px"><button class="btn btn-sm" onclick="openTicketReply('T-1042','Unable to download BOM PDF')" style="padding:3px 8px;font-size:0.7rem">Reply</button></td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--border)">
+                <td style="padding:8px 10px">#T-1039</td>
+                <td style="padding:8px 10px;font-weight:600">Pricing mismatch on inverter</td>
+                <td style="padding:8px 10px">priya.s@example.com</td>
+                <td style="padding:8px 10px"><span style="color:var(--amber);font-weight:700">Medium</span></td>
+                <td style="padding:8px 10px"><span style="color:var(--amber);font-weight:700">Open</span></td>
+                <td style="padding:8px 10px"><button class="btn btn-sm" onclick="openTicketReply('T-1039','Pricing mismatch on inverter')" style="padding:3px 8px;font-size:0.7rem">Reply</button></td>
+              </tr>
+              <tr>
+                <td style="padding:8px 10px">#T-1031</td>
+                <td style="padding:8px 10px;font-weight:600">Request for commercial preset</td>
+                <td style="padding:8px 10px">anand.m@example.com</td>
+                <td style="padding:8px 10px"><span style="color:var(--primary);font-weight:700">Low</span></td>
+                <td style="padding:8px 10px"><span style="color:var(--emerald);font-weight:700">In Progress</span></td>
+                <td style="padding:8px 10px"><button class="btn btn-sm" onclick="openTicketReply('T-1031','Request for commercial preset')" style="padding:3px 8px;font-size:0.7rem">Reply</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- Simple Reply Box -->
+        <div id="ticketReplyBox" style="display:none;background:var(--bg-glass);border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:12px">
+          <div style="font-size:0.82rem;font-weight:700;margin-bottom:8px">Reply to <span id="ticketReplyId" style="color:var(--primary)"></span></div>
+          <div style="font-size:0.74rem;color:var(--muted);margin-bottom:8px" id="ticketReplySubject"></div>
+          <textarea id="ticketReplyText" rows="3" placeholder="Type your reply..." style="width:100%;padding:10px;border-radius:8px;border:1px solid var(--border);background:var(--bg-elev);color:var(--text);font-family:inherit;font-size:0.82rem;resize:vertical;margin-bottom:10px"></textarea>
+          <div style="display:flex;gap:8px;justify-content:flex-end">
+            <button class="btn btn-sm" onclick="document.getElementById('ticketReplyBox').style.display='none'">Cancel</button>
+            <button class="btn btn-sm btn-p" onclick="sendTicketReply()">Send Reply</button>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:flex-end">
+          <button type="button" class="btn" onclick="closeAdminManualModal()">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Keyboard Shortcuts Guide -->
+<div class="shortcuts-modal" id="shortcutsModal" onclick="if(event.target===this)this.classList.remove('show')">
+  <div class="gate-card" style="max-width:420px;text-align:left;padding:24px 28px" onclick="event.stopPropagation()">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+      <h3 style="margin:0;font-size:1.05rem">Keyboard Shortcuts</h3>
+      <button onclick="document.getElementById('shortcutsModal').classList.remove('show')" style="background:none;border:none;font-size:1.3rem;cursor:pointer;color:var(--muted)">×</button>
+    </div>
+    <div style="font-size:0.82rem;line-height:1.9">
+      <div><kbd style="background:var(--bg-glass);padding:2px 7px;border-radius:5px;border:1px solid var(--border);font-weight:700">?</kbd> — Open this help</div>
+      <div><kbd style="background:var(--bg-glass);padding:2px 7px;border-radius:5px;border:1px solid var(--border);font-weight:700">Ctrl + Shift + A</kbd> — Admin Control Center</div>
+      <div><kbd style="background:var(--bg-glass);padding:2px 7px;border-radius:5px;border:1px solid var(--border);font-weight:700">Esc</kbd> — Close modals</div>
+      <div><kbd style="background:var(--bg-glass);padding:2px 7px;border-radius:5px;border:1px solid var(--border);font-weight:700">Enter</kbd> — Submit login / confirm</div>
+    </div>
+  </div>
+</div>
+
+<!-- Quick Start Guided Tour -->
+<div class="tour-modal" id="tourModal" onclick="if(event.target===this)this.classList.remove('show')">
+  <div class="gate-card" style="max-width:480px;text-align:left;padding:28px 32px" onclick="event.stopPropagation()">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+      <span style="font-size:0.68rem;font-weight:800;letter-spacing:0.06em;color:var(--emerald);background:rgba(16,185,129,0.1);padding:2px 8px;border-radius:6px">QUICK START</span>
+      <button onclick="closeTour()" style="background:none;border:none;font-size:1.3rem;cursor:pointer;color:var(--muted)">×</button>
+    </div>
+    <h3 style="margin:0 0 8px;font-size:1.15rem" id="tourTitle">Welcome to VoltRoof</h3>
+    <p style="font-size:0.86rem;color:var(--muted);line-height:1.5;margin-bottom:18px" id="tourBody">This guided tour will walk you through designing a rooftop solar system in under a minute.</p>
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <span style="font-size:0.72rem;color:var(--dim)" id="tourStep">Step 1 of 4</span>
+      <div style="display:flex;gap:8px">
+        <button class="btn btn-sm" onclick="closeTour()">Skip</button>
+        <button class="btn btn-sm btn-p" id="tourNextBtn" onclick="nextTourStep()">Next →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="shortcuts-modal" id="compareModal" onclick="if(event.target===this)this.classList.remove('show')">
+  <div class="gate-card" style="max-width:720px;width:95%;text-align:left;padding:24px" onclick="event.stopPropagation()">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+      <h3 style="margin:0;font-size:1.05rem">⇄ Compare Two Designs</h3>
+      <button onclick="document.getElementById('compareModal').classList.remove('show')" style="background:none;border:none;font-size:1.3rem;cursor:pointer;color:var(--muted)" aria-label="Close">×</button>
+    </div>
+    <div class="compare-grid">
+      <div class="compare-col">
+        <h4>Design A</h4>
+        <div class="field"><label>Capacity (kW)</label><input type="number" id="cmpA_kw" value="5.5" step="0.1"></div>
+        <div class="field"><label>Panel Wp</label><input type="number" id="cmpA_wp" value="550"></div>
+        <div class="field"><label>Est. Cost (₹)</label><input type="number" id="cmpA_cost" value="275000"></div>
+        <div style="font-size:0.8rem;color:var(--muted)">Payback: <strong id="cmpA_pb" style="color:var(--text)">~4.2 yrs</strong></div>
+      </div>
+      <div class="compare-col">
+        <h4>Design B</h4>
+        <div class="field"><label>Capacity (kW)</label><input type="number" id="cmpB_kw" value="7.0" step="0.1"></div>
+        <div class="field"><label>Panel Wp</label><input type="number" id="cmpB_wp" value="550"></div>
+        <div class="field"><label>Est. Cost (₹)</label><input type="number" id="cmpB_cost" value="340000"></div>
+        <div style="font-size:0.8rem;color:var(--muted)">Payback: <strong id="cmpB_pb" style="color:var(--text)">~4.8 yrs</strong></div>
+      </div>
+    </div>
+    <div style="margin-top:14px;text-align:right">
+      <button class="btn btn-sm" onclick="document.getElementById('compareModal').classList.remove('show')">Close</button>
+      <button class="btn btn-sm btn-p" onclick="toast('Comparison noted — use BOM for full detail')">Apply insights</button>
+    </div>
+  </div>
+</div>
+
+<!-- Command Palette Ctrl+K -->
+<div class="cmd-palette" id="cmdPalette" onclick="if(event.target===this)closeCmd()">
+  <div class="cmd-box" onclick="event.stopPropagation()">
+    <input type="text" id="cmdInput" placeholder="Type a command…" autocomplete="off" aria-label="Command palette">
+    <div class="cmd-list" id="cmdList"></div>
+  </div>
+</div>
+
+<!-- Share link modal -->
+<div class="shortcuts-modal" id="shareModal" onclick="if(event.target===this)this.classList.remove('show')">
+  <div class="gate-card" style="max-width:440px;text-align:left;padding:24px" onclick="event.stopPropagation()">
+    <h3 style="margin:0 0 8px;font-size:1.05rem">Share read-only link</h3>
+    <p style="font-size:0.8rem;color:var(--muted);margin-bottom:12px">Anyone with this link can view a summary of the current design (demo token in URL hash).</p>
+    <div class="share-box">
+      <input type="text" id="shareUrl" readonly>
+      <button class="btn btn-sm btn-p" onclick="navigator.clipboard.writeText(document.getElementById('shareUrl').value);toast('Link copied')">Copy</button>
+    </div>
+    <div style="margin-top:14px;text-align:right">
+      <button class="btn btn-sm" onclick="document.getElementById('shareModal').classList.remove('show')">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- Snapshots restore -->
+<div class="shortcuts-modal" id="snapshotModal" onclick="if(event.target===this)this.classList.remove('show')">
+  <div class="gate-card" style="max-width:480px;text-align:left;padding:24px" onclick="event.stopPropagation()">
+    <h3 style="margin:0 0 12px;font-size:1.05rem">Restore autosave snapshot</h3>
+    <div id="snapshotList" style="font-size:0.82rem"></div>
+    <div style="margin-top:14px;text-align:right">
+      <button class="btn btn-sm" onclick="document.getElementById('snapshotModal').classList.remove('show')">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- Floating Engineering Feedback Trigger Button -->
+<button type="button" id="btnFloatingFeedback" onclick="openFeedbackModal()" title="Share Technical Feedback" style="position:fixed;bottom:22px;right:22px;z-index:9000;background:linear-gradient(135deg,#10b981,#059669);color:#fff;border:none;border-radius:999px;padding:10px 18px;font-weight:700;font-size:0.84rem;box-shadow:0 8px 24px rgba(16,185,129,0.38);cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:all .2s ease">
+  <span style="font-size:1.1rem">💬</span> <span>Feedback</span>
+</button>
+
+<!-- Interactive Engineering Feedback Modal -->
+<div class="name-gate" id="modalFeedback" style="display:none;z-index:99998">
+  <div class="gate-card" style="position:relative;max-width:540px;width:95%;text-align:left;box-shadow:0 24px 60px rgba(0,0,0,0.55)">
+    <button type="button" onclick="closeFeedbackModal()" title="Close" style="position:absolute;top:14px;right:16px;background:none;border:none;color:var(--muted);font-size:1.4rem;cursor:pointer;line-height:1">&times;</button>
+    
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--border)">
+      <div style="width:42px;height:42px;border-radius:12px;background:rgba(59,130,246,0.12);border:1px solid rgba(59,130,246,0.3);display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0">💬</div>
+      <div style="flex:1">
+        <span style="font-size:0.68rem;font-weight:800;letter-spacing:0.06em;color:var(--primary);background:rgba(59,130,246,0.1);padding:2px 8px;border-radius:6px;border:1px solid rgba(59,130,246,0.25)">COMMUNITY &amp; INDUSTRY FEEDBACK</span>
+        <h3 style="margin:3px 0 0;font-size:1.15rem;color:var(--text);line-height:1.3">VoltRoof Solar PV Estimator Feedback</h3>
+      </div>
+    </div>
+
+    <form id="feedbackForm" onsubmit="submitFeedbackForm(event)">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
+        <div>
+          <label style="font-size:0.72rem;font-weight:700;color:var(--dim);text-transform:uppercase;display:block;margin-bottom:4px">Your Role / Profile</label>
+          <select id="fbCategory" style="width:100%;padding:8px 10px;border-radius:10px;border:1px solid var(--border);background:var(--bg-glass);color:var(--text);font-size:0.8rem;font-weight:600">
+            <option value="Solar EPC Contractor / Installer">Solar EPC Contractor / Installer</option>
+            <option value="Electrical Engineer / Consultant">Electrical Engineer / Consultant</option>
+            <option value="Academic / Student / Researcher">Academic / Student / Researcher</option>
+            <option value="Commercial / Industrial Client">Commercial / Industrial Rooftop Client</option>
+            <option value="Residential Rooftop Client">Residential Rooftop Client</option>
+            <option value="Other">Other Energy Professional</option>
+          </select>
+        </div>
+        <div>
+          <label style="font-size:0.72rem;font-weight:700;color:var(--dim);text-transform:uppercase;display:block;margin-bottom:4px">Experience Rating</label>
+          <select id="fbExperience" style="width:100%;padding:8px 10px;border-radius:10px;border:1px solid var(--border);background:var(--bg-glass);color:var(--text);font-size:0.8rem;font-weight:600">
+            <option value="5">⭐⭐⭐⭐⭐ (5 - Exceptional)</option>
+            <option value="4">⭐⭐⭐⭐ (4 - Very Good)</option>
+            <option value="3">⭐⭐⭐ (3 - Good / Average)</option>
+            <option value="2">⭐⭐ (2 - Needs Polish)</option>
+            <option value="1">⭐ (1 - Unsatisfactory)</option>
+          </select>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
+        <div>
+          <label style="font-size:0.72rem;font-weight:700;color:var(--dim);text-transform:uppercase;display:block;margin-bottom:4px">Calculation Clarity</label>
+          <select id="fbClarity" style="width:100%;padding:8px 10px;border-radius:10px;border:1px solid var(--border);background:var(--bg-glass);color:var(--text);font-size:0.8rem;font-weight:600">
+            <option value="Extremely Clear">Extremely Clear &amp; Intuitive</option>
+            <option value="Clear & Practical">Clear &amp; Practical</option>
+            <option value="Moderate">Moderate / Needs More Guidance</option>
+            <option value="Confusing">Confusing</option>
+          </select>
+        </div>
+        <div>
+          <label style="font-size:0.72rem;font-weight:700;color:var(--dim);text-transform:uppercase;display:block;margin-bottom:4px">BOM &amp; Pricing Utility</label>
+          <select id="fbUtility" style="width:100%;padding:8px 10px;border-radius:10px;border:1px solid var(--border);background:var(--bg-glass);color:var(--text);font-size:0.8rem;font-weight:600">
+            <option value="Procurement-Ready">High Quality / Procurement-Ready</option>
+            <option value="Good Benchmark">Good Benchmark Estimate</option>
+            <option value="Needs More Specifics">Needs More Technical Specifics</option>
+          </select>
+        </div>
+      </div>
+
+      <div style="margin-bottom:12px">
+        <label style="font-size:0.72rem;font-weight:700;color:var(--dim);text-transform:uppercase;display:block;margin-bottom:4px">Would You Recommend VoltRoof?</label>
+        <select id="fbRecommend" style="width:100%;padding:8px 10px;border-radius:10px;border:1px solid var(--border);background:var(--bg-glass);color:var(--text);font-size:0.8rem;font-weight:600">
+          <option value="Definitely Yes">Definitely Yes — Excellent Tool</option>
+          <option value="Probably Yes">Probably Yes</option>
+          <option value="Maybe">Maybe with improvements</option>
+          <option value="No">No</option>
+        </select>
+      </div>
+
+      <div style="margin-bottom:14px">
+        <label style="font-size:0.72rem;font-weight:700;color:var(--dim);text-transform:uppercase;display:block;margin-bottom:4px">Comments &amp; Technical Suggestions</label>
+        <textarea id="fbComments" rows="3" placeholder="Share your experience, feature requests, inverter models, regional tariff feedback..." style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--border);background:var(--bg-glass);color:var(--text);font-size:0.82rem;font-family:inherit;resize:vertical"></textarea>
+      </div>
+
+      <div style="display:flex;gap:10px;justify-content:flex-end">
+        <button type="button" class="btn" onclick="closeFeedbackModal()">Cancel</button>
+        <button type="submit" class="btn btn-p" id="btnSubmitFeedback" style="padding:8px 18px">🚀 Submit Feedback</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+</body>
+</html>

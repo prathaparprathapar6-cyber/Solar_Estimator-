@@ -1,0 +1,19 @@
+{
+  "module_per_wp": 18.18,
+  "inverter_per_kw": 7200.0,
+  "structure_per_kw": 4800.0,
+  "dc_cable_per_m": 85.0,
+  "ac_cable_per_m": 180.0,
+  "mc4_per_pair": 300.0,
+  "dcdb_base": 4500.0,
+  "acdb_base": 4900.0,
+  "earthing_kit_base": 10800.0,
+  "lightning_arrester_base": 4000.0,
+  "accessories_per_kw": 1200.0,
+  "installation_per_kw": 2100.0,
+  "escom_application_fee": 1000.0,
+  "escom_processing_fee": 2000.0,
+  "escom_stamp_duty": 12.0,
+  "escom_net_meter": 12000.0,
+  "escom_security_deposit": 8000.0
+}

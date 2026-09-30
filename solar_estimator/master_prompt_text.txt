@@ -1,0 +1,822 @@
+<USER_REQUEST>
+After analyzing all the screenshots and comparing them with the intended workflow of your **VoltRoof Solar PV Design Tool**, these are the remaining integration issues that Antigravity still has **not** completed. Below is a consolidated prompt you can directly give to Antigravity.
+
+---
+
+# MASTER INTEGRATION & WORKFLOW FIX PROMPT
+
+The UI is now mostly complete. **Do not redesign any UI.** The remaining work is **backend integration, workflow completion, and data synchronization.**
+
+Treat this as a production release.
+
+---
+
+# 1. Complete End-to-End Workflow
+
+Perform a complete system audit.
+
+Every page must be reachable.
+
+Every button must work.
+
+Every card must work.
+
+Every menu item must work.
+
+Every modal must open.
+
+Every save button must actually save.
+
+Every export button must export.
+
+Every download button must download.
+
+Every upload button must upload.
+
+No placeholders.
+
+No dummy cards.
+
+No dummy buttons.
+
+No dead links.
+
+---
+
+# 2. Admin Login
+
+Admin window still does not open.
+
+Fix Admin button.
+
+Verify
+
+Login Page
+
+↓
+
+Admin Login
+
+↓
+
+Dashboard
+
+↓
+
+Every Menu
+
+↓
+
+Every Card
+
+↓
+
+Every Button
+
+↓
+
+Every Subpage
+
+All must work.
+
+---
+
+# 3. Remove Every Dummy Component
+
+Search entire project.
+
+Remove every
+
+dummy card
+
+dummy route
+
+dummy page
+
+dummy button
+
+dummy popup
+
+dummy menu
+
+dummy statistics
+
+dummy analytics
+
+dummy report
+
+Replace them with actual working implementation.
+
+---
+
+# 4. User Side Dummy Components
+
+User login still contains dummy actions.
+
+Verify
+
+Design
+
+Calculation
+
+Selection
+
+BOM
+
+Reports
+
+Downloads
+
+History
+
+Feedback
+
+Manual
+
+Every action.
+
+Nothing should be dummy.
+
+---
+
+# 5. Equipment & Component Pricing Integration
+
+This is the most important remaining issue.
+
+The pricing center UI is excellent.
+
+However it is still not connected.
+
+Every component edited in Admin Pricing Center must instantly affect
+
+Design Engine
+
+Calculation Engine
+
+Selection Engine
+
+BOM
+
+Quotation
+
+Reports
+
+PDF
+
+Excel
+
+CSV
+
+Cost Summary
+
+Payback
+
+Financial Analysis
+
+Everything.
+
+There must never be hardcoded prices anywhere.
+
+There must be only one central source of component prices.
+
+---
+
+# 6. Use Existing Calculation Logic
+
+DO NOT change any calculation formulas.
+
+DO NOT modify calculation engine.
+
+DO NOT modify selection logic.
+
+Simply connect all admin component prices to existing calculations.
+
+---
+
+# 7. Component Synchronization
+
+When any component changes,
+
+EVERY dependent value must automatically update.
+
+Examples
+
+Panel rating
+
+↓
+
+Panel dimensions
+
+↓
+
+Panel area
+
+↓
+
+Roof utilization
+
+↓
+
+Number of panels
+
+↓
+
+Array layout
+
+↓
+
+BOM
+
+↓
+
+Price
+
+↓
+
+Report
+
+↓
+
+Financial Analysis
+
+↓
+
+Quotation
+
+All update automatically.
+
+---
+
+Example
+
+Cable length changes
+
+↓
+
+Cable quantity changes
+
+↓
+
+Cable price changes
+
+↓
+
+BOM changes
+
+↓
+
+Quotation changes
+
+↓
+
+PDF changes
+
+↓
+
+Excel changes
+
+↓
+
+Report changes
+
+Automatically.
+
+---
+
+Example
+
+Inverter changes
+
+↓
+
+Efficiency changes
+
+↓
+
+String sizing changes
+
+↓
+
+Protection devices
+
+↓
+
+Cost
+
+↓
+
+Reports
+
+Everything updates.
+
+---
+
+# 8. ACDB Distance Bug
+
+Current bug
+
+User selected
+
+100 meters
+
+ACDB to Grid
+
+But BOM still uses
+
+15 meters.
+
+Remove every default value.
+
+Always use
+
+User Input.
+
+One source only.
+
+---
+
+# 9. Derating Factor
+
+Use
+
+70%
+
+Derating
+
+for BOTH
+
+Path 1
+
+AND
+
+Path 2
+
+calculations.
+
+Remove inconsistent values.
+
+---
+
+# 10. Panel Area Bug
+
+Currently
+
+300W
+
+500W
+
+Both use
+
+2m²
+
+This is wrong.
+
+Every panel rating must have its own
+
+Length
+
+Width
+
+Area
+
+Weight
+
+Efficiency
+
+Technology
+
+Manufacturer
+
+Model
+
+Area calculations must use actual module dimensions.
+
+---
+
+# 11. Technology Database
+
+Current UI
+
+Mono PERC
+
+TOPCon
+
+Bifacial
+
+etc.
+
+Need complete database.
+
+Each technology should contain
+
+Technology
+
+Manufacturers
+
+Available Ratings
+
+Efficiency
+
+Dimensions
+
+Weight
+
+Price
+
+Availability
+
+Compatible Inverters
+
+Everything linked.
+
+---
+
+# 12. Component Rating Database
+
+Every component selection page must display
+
+actual available ratings
+
+from admin database.
+
+Example
+
+Module
+
+380W
+
+390W
+
+400W
+
+410W
+
+...
+
+680W
+
+Selecting one rating must update
+
+Design
+
+Calculations
+
+BOM
+
+Reports
+
+Automatically.
+
+---
+
+# 13. Pricing Database
+
+Current pricing page contains many products.
+
+Verify every one.
+
+Every price must be connected.
+
+No orphan records.
+
+No unused database rows.
+
+---
+
+# 14. Feedback System
+
+Recover the removed
+
+Feedback & Reviews
+
+dashboard.
+
+Need
+
+Animated Pie Chart
+
+Average Rating
+
+Recent Reviews
+
+Monthly Rating Trend
+
+Pending Reviews
+
+Review Moderation
+
+Approval
+
+Delete
+
+Filter
+
+Search
+
+Everything operational.
+
+Important
+
+Admin should NOT submit feedback.
+
+Admin only views and moderates.
+
+Users submit feedback.
+
+---
+
+# 15. Visitor Analytics
+
+Existing charts work.
+
+Improve them.
+
+Add animation.
+
+Live counters.
+
+Monthly trends.
+
+Daily visits.
+
+Session duration.
+
+Top pages.
+
+Popular designs.
+
+Export analytics.
+
+---
+
+# 16. File Upload System
+
+Still incomplete.
+
+Fix
+
+PDF Upload
+
+Manual Upload
+
+Logo Upload
+
+Banner Upload
+
+Policy Upload
+
+Component Excel Upload
+
+Image Upload
+
+Report Upload
+
+Everything.
+
+Files must persist after restart.
+
+---
+
+# 17. Report Synchronization
+
+Generated reports must always match
+
+latest design.
+
+No stale values.
+
+No cached values.
+
+Verify
+
+PDF
+
+Excel
+
+CSV
+
+Print
+
+Share
+
+Everything.
+
+---
+
+# 18. Export Verification
+
+Verify exports.
+
+PDF
+
+CSV
+
+Excel
+
+Quotation
+
+BOM
+
+Financial Report
+
+Payback Report
+
+Design Report
+
+Everything.
+
+---
+
+# 19. One Source of Truth
+
+Never duplicate values.
+
+Store only once.
+
+Everything else reads from that source.
+
+Examples
+
+Prices
+
+Cable Length
+
+Module Rating
+
+Distance
+
+Panel Area
+
+Efficiency
+
+Derating
+
+Tariff
+
+Subsidy
+
+Everything.
+
+---
+
+# 20. End-to-End Testing
+
+Perform complete testing.
+
+Test
+
+1 kW
+
+2 kW
+
+3 kW
+
+...
+
+20 kW
+
+For every system verify
+
+Design
+
+↓
+
+Calculation
+
+↓
+
+Selection
+
+↓
+
+Pricing
+
+↓
+
+BOM
+
+↓
+
+Quotation
+
+↓
+
+Financial Analysis
+
+↓
+
+Payback
+
+↓
+
+PDF
+
+↓
+
+Excel
+
+↓
+
+CSV
+
+↓
+
+History
+
+↓
+
+Admin Dashboard
+
+↓
+
+Analytics
+
+↓
+
+Feedback
+
+↓
+
+Reports
+
+Everything.
+
+---
+
+# 21. Stress Testing
+
+Test
+
+Minimum inputs
+
+Maximum inputs
+
+Invalid inputs
+
+Repeated edits
+
+Browser refresh
+
+Session restore
+
+Admin updates while user designing
+
+Concurrent users
+
+Multiple tabs
+
+Back navigation
+
+Forward navigation
+
+---
+
+# 22. Final Verification Checklist
+
+Before marking complete verify
+
+✅ Zero dummy buttons
+
+✅ Zero dummy cards
+
+✅ Zero broken links
+
+✅ Zero missing routes
+
+✅ Zero hardcoded prices
+
+✅ Zero hardcoded cable lengths
+
+✅ Zero hardcoded panel area
+
+✅ Admin pricing fully synchronized
+
+✅ User calculations synchronized
+
+✅ BOM synchronized
+
+✅ Reports synchronized
+
+✅ PDF synchronized
+
+✅ Excel synchronized
+
+✅ Feedback operational
+
+✅ Visitor analytics operational
+
+✅ File uploads operational
+
+✅ Admin login operational
+
+✅ End-to-end workflow verified
+
+✅ Production ready
+
+---
+
+This prompt focuses entirely on **integration, synchronization, validation, and production readiness** rather than UI changes. It directly addresses the issues visible in your screenshots and should guide Antigravity toward completing the remaining backend and workflow work.
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-09-27T14:51:16+05:30.
+</ADDITIONAL_METADATA>

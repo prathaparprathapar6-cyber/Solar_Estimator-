@@ -1,0 +1,903 @@
+{
+  "modules": {
+    "name": "Solar PV Modules",
+    "icon": "\u2600\ufe0f",
+    "category": "Generation",
+    "benchmark": "\u20b918.00 \u2013 \u20b922.00 / Wp",
+    "unit": "\u20b9 / Wp",
+    "items": [
+      {
+        "id": "mod-400",
+        "mfr": "Vikram Solar",
+        "model": "Aditya 400 Mono PERC",
+        "tech": "Mono PERC Mono-facial",
+        "rating": "400 Wp",
+        "efficiency": "20.2%",
+        "warranty": "25 Years",
+        "unit": "\u20b9/Wp",
+        "old_price": 19.8,
+        "curr_price": 19.5,
+        "new_price": 19.5,
+        "availability": "In Stock",
+        "specs": "108-Cell M10 Half-Cut, IP68, 1500V DC",
+        "status": "active",
+        "image": "/uploads/equipment/panel_400w.png"
+      },
+      {
+        "id": "mod-450",
+        "mfr": "Tata Power Solar",
+        "model": "TP450M Mono PERC",
+        "tech": "Mono PERC Mono-facial",
+        "rating": "450 Wp",
+        "efficiency": "20.8%",
+        "warranty": "25 Years",
+        "unit": "\u20b9/Wp",
+        "old_price": 19.5,
+        "curr_price": 19.2,
+        "new_price": 19.2,
+        "availability": "In Stock",
+        "specs": "120-Cell Half-Cut, IP68, 1500V DC",
+        "status": "active",
+        "image": "/uploads/equipment/panel_450w.png"
+      },
+      {
+        "id": "mod-540",
+        "mfr": "Waaree Energies",
+        "model": "Arka 540 Bi-33",
+        "tech": "Mono PERC Bifacial",
+        "rating": "540 Wp",
+        "efficiency": "21.2%",
+        "warranty": "30 Years",
+        "unit": "\u20b9/Wp",
+        "old_price": 18.8,
+        "curr_price": 18.5,
+        "new_price": 18.5,
+        "availability": "In Stock",
+        "specs": "144-Cell Bifacial Dual Glass, 1500V DC",
+        "status": "active",
+        "image": "/uploads/equipment/panel_540w.png"
+      },
+      {
+        "id": "mod-550",
+        "mfr": "Waaree Energies",
+        "model": "Waaree WS-550 Mono",
+        "tech": "Mono PERC Mono-facial",
+        "rating": "550 Wp",
+        "efficiency": "21.5%",
+        "warranty": "25 Years",
+        "unit": "\u20b9/Wp",
+        "old_price": 18.5,
+        "curr_price": 18.18,
+        "new_price": 18.18,
+        "availability": "In Stock",
+        "specs": "144-Cell Half-Cut Mono PERC, 1500V DC",
+        "status": "active",
+        "image": "/uploads/equipment/panel_550w.png"
+      },
+      {
+        "id": "mod-580",
+        "mfr": "Adani Solar",
+        "model": "Elan Shine N-Type TOPCon",
+        "tech": "TOPCon N-Type",
+        "rating": "580 Wp",
+        "efficiency": "22.2%",
+        "warranty": "30 Years",
+        "unit": "\u20b9/Wp",
+        "old_price": 21.0,
+        "curr_price": 20.4,
+        "new_price": 20.4,
+        "availability": "In Stock",
+        "specs": "144-Cell TOPCon N-Type Bifacial, 1500V DC",
+        "status": "active",
+        "image": "/uploads/equipment/panel_580w.png"
+      },
+      {
+        "id": "mod-600",
+        "mfr": "Goldi Solar",
+        "model": "Heloc Plus HJT 600",
+        "tech": "HJT (Heterojunction)",
+        "rating": "600 Wp",
+        "efficiency": "22.8%",
+        "warranty": "30 Years",
+        "unit": "\u20b9/Wp",
+        "old_price": 24.0,
+        "curr_price": 23.2,
+        "new_price": 23.2,
+        "availability": "In Stock",
+        "specs": "Heterojunction Technology, Ultra-low temp coeff",
+        "status": "active",
+        "image": "/uploads/equipment/panel_600w.png"
+      },
+      {
+        "id": "mod-335",
+        "mfr": "RenewSys",
+        "model": "Deserv 3K Poly",
+        "tech": "Polycrystalline",
+        "rating": "335 Wp",
+        "efficiency": "17.1%",
+        "warranty": "25 Years",
+        "unit": "\u20b9/Wp",
+        "old_price": 16.5,
+        "curr_price": 16.0,
+        "new_price": 16.0,
+        "availability": "In Stock",
+        "specs": "72-Cell Standard Polycrystalline",
+        "status": "active",
+        "image": "/uploads/equipment/panel_335w.png"
+      },
+      {
+        "id": "mod-680",
+        "mfr": "Waaree Energies",
+        "model": "Vertex Max 680 HJT",
+        "tech": "Ultra-High Power G12",
+        "rating": "680 Wp",
+        "efficiency": "21.9%",
+        "warranty": "30 Years",
+        "unit": "?/Wp",
+        "old_price": 25.5,
+        "curr_price": 24.8,
+        "new_price": 24.8,
+        "availability": "In Stock",
+        "specs": "132-Cell G12 Bifacial Dual Glass, 1500V DC",
+        "status": "active",
+        "image": "/uploads/equipment/panel_680w.png"
+      },
+      {
+        "id": "mod-440",
+        "mfr": "First Solar",
+        "model": "Series 6 Plus CdTe",
+        "tech": "Thin Film CdTe",
+        "rating": "440 Wp",
+        "efficiency": "18.6%",
+        "warranty": "25 Years",
+        "unit": "\u20b9/Wp",
+        "old_price": 22.0,
+        "curr_price": 21.5,
+        "new_price": 21.5,
+        "availability": "In Stock",
+        "specs": "Cadmium Telluride Advanced Thin Film",
+        "status": "active",
+        "image": "/uploads/equipment/panel_440w.png"
+      }
+    ]
+  },
+  "inverters": {
+    "name": "Inverters & Power Conditioning",
+    "icon": "\u26a1",
+    "category": "Power Electronics",
+    "benchmark": "\u20b99,500 \u2013 \u20b912,000 / kW",
+    "unit": "\u20b9 / unit",
+    "items": [
+      {
+        "id": "inv-1kw",
+        "mfr": "Growatt",
+        "model": "MIC 1000TL-X",
+        "tech": "Grid-Tied String Inverter",
+        "rating": "1 kW",
+        "rating_kw": 1.0,
+        "efficiency": "97.4%",
+        "warranty": "10 Years Replacement",
+        "unit": "\u20b9/unit",
+        "old_price": 14000,
+        "curr_price": 13500,
+        "new_price": 13500,
+        "availability": "In Stock",
+        "specs": "Single Phase, 1 MPPT, OLED & Touch, IP65",
+        "status": "active",
+        "image": "/uploads/equipment/inverter_1kw.png"
+      },
+      {
+        "id": "inv-2kw",
+        "mfr": "Solis",
+        "model": "S6-GR1P2K",
+        "tech": "Grid-Tied String Inverter",
+        "rating": "2 kW",
+        "rating_kw": 2.0,
+        "efficiency": "97.6%",
+        "warranty": "10 Years Replacement",
+        "unit": "\u20b9/unit",
+        "old_price": 18500,
+        "curr_price": 18000,
+        "new_price": 18000,
+        "availability": "In Stock",
+        "specs": "Single Phase, 1 MPPT, Super high freq switching, IP66",
+        "status": "active",
+        "image": "/uploads/equipment/inverter_2kw.png"
+      },
+      {
+        "id": "inv-3kw",
+        "mfr": "Growatt",
+        "model": "MIN 3000TL-X",
+        "tech": "Grid-Tied String Inverter",
+        "rating": "3 kW",
+        "rating_kw": 3.0,
+        "efficiency": "98.2%",
+        "warranty": "10 Years Replacement",
+        "unit": "\u20b9/unit",
+        "old_price": 26000,
+        "curr_price": 25500,
+        "new_price": 25500,
+        "availability": "In Stock",
+        "specs": "Single Phase, Dual MPPT, WiFi/4G ready, IP65",
+        "status": "active",
+        "image": "/uploads/equipment/inverter_3kw.png"
+      },
+      {
+        "id": "inv-5kw",
+        "mfr": "Sungrow",
+        "model": "SG5.0RS-ADA",
+        "tech": "Dual-MPPT String Inverter",
+        "rating": "5 kW",
+        "rating_kw": 5.0,
+        "efficiency": "98.4%",
+        "warranty": "10 Years Replacement",
+        "unit": "\u20b9/unit",
+        "old_price": 41000,
+        "curr_price": 40000,
+        "new_price": 40000,
+        "availability": "In Stock",
+        "specs": "Single Phase, Dual MPPT, Built-in PID recovery, IP65",
+        "status": "active",
+        "image": "/uploads/equipment/inverter_5kw.png"
+      },
+      {
+        "id": "inv-6kw",
+        "mfr": "Solis",
+        "model": "S5-GR3P6K",
+        "tech": "Three-Phase String Inverter",
+        "rating": "6 kW",
+        "rating_kw": 6.0,
+        "efficiency": "98.3%",
+        "warranty": "10 Years Replacement",
+        "unit": "\u20b9/unit",
+        "old_price": 49500,
+        "curr_price": 48000,
+        "new_price": 48000,
+        "availability": "In Stock",
+        "specs": "Three Phase, Dual MPPT, Wide voltage range, IP66",
+        "status": "active",
+        "image": "/uploads/equipment/inverter_6kw.png"
+      },
+      {
+        "id": "inv-8kw",
+        "mfr": "Sungrow",
+        "model": "SG8.0RT",
+        "tech": "Three-Phase String Inverter",
+        "rating": "8 kW",
+        "rating_kw": 8.0,
+        "efficiency": "98.5%",
+        "warranty": "10 Years Replacement",
+        "unit": "\u20b9/unit",
+        "old_price": 62000,
+        "curr_price": 60000,
+        "new_price": 60000,
+        "availability": "In Stock",
+        "specs": "Three Phase, Dual MPPT, Smart IV curve scan, IP65",
+        "status": "active",
+        "image": "/uploads/equipment/inverter_8kw.png"
+      },
+      {
+        "id": "inv-10kw",
+        "mfr": "Sungrow",
+        "model": "SG10RT Multi-MPPT",
+        "tech": "Three-Phase Multi-MPPT Inverter",
+        "rating": "10 kW",
+        "rating_kw": 10.0,
+        "efficiency": "98.6%",
+        "warranty": "10 Years Replacement",
+        "unit": "\u20b9/unit",
+        "old_price": 74000,
+        "curr_price": 72000,
+        "new_price": 72000,
+        "availability": "In Stock",
+        "specs": "Three Phase, Dual MPPT, AFCI 2.0 safety, IP65",
+        "status": "active",
+        "image": "/uploads/equipment/inverter_10kw.png"
+      },
+      {
+        "id": "inv-15kw",
+        "mfr": "Sungrow",
+        "model": "SG15RT High Yield",
+        "tech": "Three-Phase Multi-MPPT Inverter",
+        "rating": "15 kW",
+        "rating_kw": 15.0,
+        "efficiency": "98.7%",
+        "warranty": "10 Years Replacement",
+        "unit": "\u20b9/unit",
+        "old_price": 98000,
+        "curr_price": 95000,
+        "new_price": 95000,
+        "availability": "In Stock",
+        "specs": "Three Phase, Dual MPPT, 30A DC input per MPPT, IP65",
+        "status": "active",
+        "image": "/uploads/equipment/inverter_15kw.png"
+      },
+      {
+        "id": "inv-20kw",
+        "mfr": "Fimer / ABB",
+        "model": "PVI-20.0-TL-OUTD",
+        "tech": "Three-Phase Commercial Inverter",
+        "rating": "20 kW",
+        "rating_kw": 20.0,
+        "efficiency": "98.8%",
+        "warranty": "10 Years Replacement",
+        "unit": "\u20b9/unit",
+        "old_price": 122000,
+        "curr_price": 118000,
+        "new_price": 118000,
+        "availability": "In Stock",
+        "specs": "Three Phase, Dual independent MPPT, Transformerless, IP65",
+        "status": "active",
+        "image": "/uploads/equipment/inverter_20kw.png"
+      }
+    ]
+  },
+  "structures": {
+    "name": "Mounting Structures",
+    "icon": "\ud83c\udfd7\ufe0f",
+    "category": "Mechanical Structures",
+    "benchmark": "\u20b94,200 \u2013 \u20b95,500 / kW",
+    "unit": "\u20b9 / kW",
+    "items": [
+      {
+        "id": "str-1",
+        "mfr": "Pennar Industries",
+        "tech": "Hot Dip GI (HDGI 80\u03bc)",
+        "rating": "RCC Flat Roof 15\u00b0",
+        "unit": "\u20b9/kW",
+        "old_price": 5000,
+        "curr_price": 4800,
+        "new_price": 4800
+      },
+      {
+        "id": "str-2",
+        "mfr": "Strolar Mounting",
+        "tech": "Anodized Aluminium",
+        "rating": "Tin / Metal Sheet",
+        "unit": "\u20b9/kW",
+        "old_price": 3800,
+        "curr_price": 3600,
+        "new_price": 3600
+      },
+      {
+        "id": "str-3",
+        "mfr": "Metalkraft",
+        "tech": "Elevated Superstructure (6ft)",
+        "rating": "Terrace Usable Space",
+        "unit": "\u20b9/kW",
+        "old_price": 7500,
+        "curr_price": 7200,
+        "new_price": 7200
+      },
+      {
+        "id": "str-4",
+        "mfr": "Gestamp Solar",
+        "tech": "Ground Mount Pre-Galv",
+        "rating": "Ground Rammed Pile",
+        "unit": "\u20b9/kW",
+        "old_price": 4500,
+        "curr_price": 4300,
+        "new_price": 4300
+      }
+    ]
+  },
+  "dc_cables": {
+    "name": "DC Solar Cables",
+    "icon": "\ud83d\udd0c",
+    "category": "Cables & Wiring",
+    "benchmark": "\u20b975 \u2013 \u20b9110 / meter",
+    "unit": "\u20b9 / meter",
+    "items": [
+      {
+        "id": "dcc-1",
+        "mfr": "Polycab",
+        "tech": "Tinned Copper Solar XLPO 1.5kV",
+        "rating": "4 sqmm",
+        "unit": "\u20b9/m",
+        "old_price": 72,
+        "curr_price": 70,
+        "new_price": 70
+      },
+      {
+        "id": "dcc-2",
+        "mfr": "Havells",
+        "tech": "Tinned Copper Solar XLPO 1.5kV",
+        "rating": "6 sqmm",
+        "unit": "\u20b9/m",
+        "old_price": 88,
+        "curr_price": 85,
+        "new_price": 85
+      },
+      {
+        "id": "dcc-3",
+        "mfr": "Apar Anushakti",
+        "tech": "Tinned Copper Solar XLPO 1.5kV",
+        "rating": "10 sqmm",
+        "unit": "\u20b9/m",
+        "old_price": 135,
+        "curr_price": 130,
+        "new_price": 130
+      },
+      {
+        "id": "dcc-4",
+        "mfr": "Finolex",
+        "tech": "Tinned Copper Solar XLPO 1.5kV",
+        "rating": "16 sqmm",
+        "unit": "\u20b9/m",
+        "old_price": 195,
+        "curr_price": 188,
+        "new_price": 188
+      }
+    ]
+  },
+  "ac_cables": {
+    "name": "AC Mains Cables",
+    "icon": "\u26a1",
+    "category": "Cables & Wiring",
+    "benchmark": "\u20b9150 \u2013 \u20b9320 / meter",
+    "unit": "\u20b9 / meter",
+    "items": [
+      {
+        "id": "acc-1",
+        "mfr": "Polycab",
+        "tech": "Copper Armoured 1.1kV",
+        "rating": "4 Core 6 sqmm",
+        "unit": "\u20b9/m",
+        "old_price": 210.0,
+        "curr_price": 180.0,
+        "new_price": 180.0,
+        "last_updated": "2026-09-27 16:40",
+        "updated_by": "TestAdmin"
+      },
+      {
+        "id": "acc-2",
+        "mfr": "Havells",
+        "tech": "Copper Armoured 1.1kV",
+        "rating": "4 Core 10 sqmm",
+        "unit": "\u20b9/m",
+        "old_price": 280,
+        "curr_price": 270,
+        "new_price": 270
+      },
+      {
+        "id": "acc-3",
+        "mfr": "KEI Industries",
+        "tech": "Aluminium Armoured XLPE",
+        "rating": "4 Core 16 sqmm",
+        "unit": "\u20b9/m",
+        "old_price": 125,
+        "curr_price": 120,
+        "new_price": 120
+      },
+      {
+        "id": "acc-4",
+        "mfr": "Polycab",
+        "tech": "Aluminium Armoured XLPE",
+        "rating": "4 Core 25 sqmm",
+        "unit": "\u20b9/m",
+        "old_price": 165,
+        "curr_price": 160,
+        "new_price": 160
+      }
+    ]
+  },
+  "earthing": {
+    "name": "Earthing & Grounding Kit",
+    "icon": "\ud83c\udf31",
+    "category": "Safety & Protection",
+    "benchmark": "\u20b96,500 \u2013 \u20b99,000 / kit",
+    "unit": "\u20b9 / kit",
+    "items": [
+      {
+        "id": "eth-1",
+        "mfr": "Ashlok Safe Earth",
+        "tech": "Chemical Earth Electrode 50mm",
+        "rating": "3 Meter Copper Bonded",
+        "unit": "\u20b9/pit",
+        "old_price": 3800,
+        "curr_price": 3600,
+        "new_price": 3600
+      },
+      {
+        "id": "eth-2",
+        "mfr": "True Power",
+        "tech": "Bentonite Backfill Compound",
+        "rating": "25 kg Bag",
+        "unit": "\u20b9/bag",
+        "old_price": 850,
+        "curr_price": 800,
+        "new_price": 800
+      },
+      {
+        "id": "eth-3",
+        "mfr": "Standard Metals",
+        "tech": "Pure Copper Earthing Strip",
+        "rating": "25 x 3 mm",
+        "unit": "\u20b9/m",
+        "old_price": 320,
+        "curr_price": 310,
+        "new_price": 310
+      },
+      {
+        "id": "eth-4",
+        "mfr": "Standard Metals",
+        "tech": "Hot Dip GI Strip",
+        "rating": "25 x 6 mm",
+        "unit": "\u20b9/m",
+        "old_price": 85,
+        "curr_price": 80,
+        "new_price": 80
+      },
+      {
+        "id": "eth-5",
+        "mfr": "Schneider",
+        "tech": "Complete 3-Pit Earthing Kit",
+        "rating": "AC, DC & LA Dedicated Pits",
+        "unit": "\u20b9/kit",
+        "old_price": 7800,
+        "curr_price": 7500,
+        "new_price": 7500
+      }
+    ]
+  },
+  "dcdb": {
+    "name": "DC Distribution Box (DCDB)",
+    "icon": "\ud83d\udce6",
+    "category": "Switchgear",
+    "benchmark": "\u20b96,000 \u2013 \u20b99,000 / box",
+    "unit": "\u20b9 / unit",
+    "items": [
+      {
+        "id": "dcdb-1",
+        "mfr": "Suntree / Elmex",
+        "tech": "1-In 1-Out IP65 with 1000V SPD",
+        "rating": "1000V DC 20A",
+        "unit": "\u20b9/unit",
+        "old_price": 4800,
+        "curr_price": 4500,
+        "new_price": 4500
+      },
+      {
+        "id": "dcdb-2",
+        "mfr": "Elmex Electric",
+        "tech": "2-In 2-Out IP65 with Type-II SPD",
+        "rating": "1000V DC 32A",
+        "unit": "\u20b9/unit",
+        "old_price": 7200,
+        "curr_price": 7000,
+        "new_price": 7000
+      },
+      {
+        "id": "dcdb-3",
+        "mfr": "Phoenix Contact",
+        "tech": "4-In 2-Out Multi-String Array Box",
+        "rating": "1000V DC 63A",
+        "unit": "\u20b9/unit",
+        "old_price": 12500,
+        "curr_price": 12000,
+        "new_price": 12000
+      }
+    ]
+  },
+  "acdb": {
+    "name": "AC Distribution Box (ACDB)",
+    "icon": "\ud83d\udd32",
+    "category": "Switchgear",
+    "benchmark": "\u20b96,000 \u2013 \u20b99,000 / box",
+    "unit": "\u20b9 / unit",
+    "items": [
+      {
+        "id": "acdb-1",
+        "mfr": "Schneider Electric",
+        "tech": "Single Phase 32A with SPD & Isolator",
+        "rating": "230V AC IP65",
+        "unit": "\u20b9/unit",
+        "old_price": 5200,
+        "curr_price": 4900,
+        "new_price": 4900
+      },
+      {
+        "id": "acdb-2",
+        "mfr": "Larsen & Toubro (L&T)",
+        "tech": "Three Phase 32A with Type-II SPD",
+        "rating": "415V AC IP65",
+        "unit": "\u20b9/unit",
+        "old_price": 7200,
+        "curr_price": 7000,
+        "new_price": 7000
+      },
+      {
+        "id": "acdb-3",
+        "mfr": "Havells",
+        "tech": "Three Phase 63A with Energy Meter Provision",
+        "rating": "415V AC IP65",
+        "unit": "\u20b9/unit",
+        "old_price": 9500,
+        "curr_price": 9100,
+        "new_price": 9100
+      }
+    ]
+  },
+  "spd": {
+    "name": "Surge Protection Devices (SPD)",
+    "icon": "\u26a1",
+    "category": "Protection Devices",
+    "benchmark": "\u20b91,800 \u2013 \u20b94,500 / unit",
+    "unit": "\u20b9 / unit",
+    "items": [
+      {
+        "id": "spd-1",
+        "mfr": "Dehn / Phoenix",
+        "tech": "Type 1+2 Combined Lightning & Surge",
+        "rating": "1000V DC 40kA",
+        "unit": "\u20b9/unit",
+        "old_price": 4200,
+        "curr_price": 4000,
+        "new_price": 4000
+      },
+      {
+        "id": "spd-2",
+        "mfr": "Schneider Electric",
+        "tech": "Type 2 Surge Arrester 3P+N",
+        "rating": "415V AC 40kA",
+        "unit": "\u20b9/unit",
+        "old_price": 2800,
+        "curr_price": 2600,
+        "new_price": 2600
+      },
+      {
+        "id": "spd-3",
+        "mfr": "Citel",
+        "tech": "Type 2 DC Surge Arrester 2-Pole",
+        "rating": "1000V DC 20kA",
+        "unit": "\u20b9/unit",
+        "old_price": 1950,
+        "curr_price": 1850,
+        "new_price": 1850
+      }
+    ]
+  },
+  "lightning_arrestor": {
+    "name": "Lightning Arrestor (LA)",
+    "icon": "\ud83c\udf29\ufe0f",
+    "category": "Safety & Protection",
+    "benchmark": "\u20b93,500 \u2013 \u20b97,000 / kit",
+    "unit": "\u20b9 / kit",
+    "items": [
+      {
+        "id": "la-1",
+        "mfr": "Standard Copper",
+        "tech": "Franklin 5-Prong Pure Copper Rod",
+        "rating": "1 Meter 25mm dia",
+        "unit": "\u20b9/unit",
+        "old_price": 4200,
+        "curr_price": 4000,
+        "new_price": 4000
+      },
+      {
+        "id": "la-2",
+        "mfr": "Forend / Indelec",
+        "tech": "ESE Early Streamer Emission Arrester",
+        "rating": "Delta 25m Radius",
+        "unit": "\u20b9/unit",
+        "old_price": 16500,
+        "curr_price": 15800,
+        "new_price": 15800
+      }
+    ]
+  },
+  "mc4": {
+    "name": "MC4 Solar Connectors",
+    "icon": "\ud83d\udd17",
+    "category": "Connectors & Balance",
+    "benchmark": "\u20b9250 \u2013 \u20b9350 / pair",
+    "unit": "\u20b9 / pair",
+    "items": [
+      {
+        "id": "mc4-1",
+        "mfr": "Staubli Multi-Contact",
+        "tech": "Original MC4 IP68 Snap-in",
+        "rating": "1000V/1500V 30A",
+        "unit": "\u20b9/pair",
+        "old_price": 320,
+        "curr_price": 300,
+        "new_price": 300
+      },
+      {
+        "id": "mc4-2",
+        "mfr": "Amphenol",
+        "tech": "Helios H4 PV Connector",
+        "rating": "1500V DC 32A",
+        "unit": "\u20b9/pair",
+        "old_price": 280,
+        "curr_price": 260,
+        "new_price": 260
+      },
+      {
+        "id": "mc4-3",
+        "mfr": "Staubli",
+        "tech": "Y-Branch Parallel Connector",
+        "rating": "2-to-1 String Joiner",
+        "unit": "\u20b9/pair",
+        "old_price": 550,
+        "curr_price": 520,
+        "new_price": 520
+      }
+    ]
+  },
+  "net_meter": {
+    "name": "Net Meter & Generation Meter",
+    "icon": "\u23f1\ufe0f",
+    "category": "Metering & Grid Interconnection",
+    "benchmark": "\u20b94,500 \u2013 \u20b912,000 / meter",
+    "unit": "\u20b9 / unit",
+    "items": [
+      {
+        "id": "nm-1",
+        "mfr": "Secure Meters",
+        "tech": "Bi-directional 3-Phase Net Meter (Premier 300)",
+        "rating": "3x240V 10-60A DLMS",
+        "unit": "\u20b9/unit",
+        "old_price": 9500,
+        "curr_price": 9000,
+        "new_price": 9000
+      },
+      {
+        "id": "nm-2",
+        "mfr": "L&T Electrical",
+        "tech": "Bi-directional Single Phase Meter",
+        "rating": "240V 5-30A Class 1.0",
+        "unit": "\u20b9/unit",
+        "old_price": 4200,
+        "curr_price": 4000,
+        "new_price": 4000
+      },
+      {
+        "id": "nm-3",
+        "mfr": "HPL Electric",
+        "tech": "Solar Gross Generation Check Meter",
+        "rating": "3-Phase 4-Wire Whole Current",
+        "unit": "\u20b9/unit",
+        "old_price": 4800,
+        "curr_price": 4500,
+        "new_price": 4500
+      }
+    ]
+  },
+  "installation_labour": {
+    "name": "Installation & Splicing Labour",
+    "icon": "\ud83d\udc77",
+    "category": "EPC Services",
+    "benchmark": "\u20b93,500 \u2013 \u20b94,500 / kW",
+    "unit": "\u20b9 / kW",
+    "items": [
+      {
+        "id": "lab-1",
+        "mfr": "Certified Solar Crew",
+        "tech": "Module Mounting & Mechanical Splicing",
+        "rating": "Rooftop Splicing",
+        "unit": "\u20b9/kW",
+        "old_price": 2200,
+        "curr_price": 2100,
+        "new_price": 2100
+      },
+      {
+        "id": "lab-2",
+        "mfr": "Certified Electricians",
+        "tech": "Electrical Inverter, DCDB & Cable Laying",
+        "rating": "Wiring & Terminations",
+        "unit": "\u20b9/kW",
+        "old_price": 1400,
+        "curr_price": 1350,
+        "new_price": 1350
+      },
+      {
+        "id": "lab-3",
+        "mfr": "Earth Rig Team",
+        "tech": "Pit Drilling, Backfilling & Earth Chamber",
+        "rating": "3 Pits per system",
+        "unit": "\u20b9/kW",
+        "old_price": 600,
+        "curr_price": 550,
+        "new_price": 550
+      }
+    ]
+  },
+  "testing_commissioning": {
+    "name": "Testing & Commissioning",
+    "icon": "\ud83d\udd2c",
+    "category": "EPC Services",
+    "benchmark": "\u20b9500 \u2013 \u20b91,000 / kW",
+    "unit": "\u20b9 / kW",
+    "items": [
+      {
+        "id": "tc-1",
+        "mfr": "Licensed Chartered Engineer",
+        "tech": "Pre-commissioning Megger & Earth Resistance Test",
+        "rating": "Full System Verification",
+        "unit": "\u20b9/kW",
+        "old_price": 650,
+        "curr_price": 600,
+        "new_price": 600
+      },
+      {
+        "id": "tc-2",
+        "mfr": "Solar QA Agency",
+        "tech": "String Open-Circuit Voc & Short-Circuit Isc Test",
+        "rating": "I-V Curve Check",
+        "unit": "\u20b9/kW",
+        "old_price": 450,
+        "curr_price": 400,
+        "new_price": 400
+      }
+    ]
+  },
+  "transportation": {
+    "name": "Transportation & Logistics",
+    "icon": "\ud83d\ude9a",
+    "category": "Logistics",
+    "benchmark": "\u20b9400 \u2013 \u20b9800 / kW",
+    "unit": "\u20b9 / kW",
+    "items": [
+      {
+        "id": "tr-1",
+        "mfr": "Local Logistics",
+        "tech": "Safe Freight Transit (Factory/Depot to Site)",
+        "rating": "Up to 50 km",
+        "unit": "\u20b9/kW",
+        "old_price": 450,
+        "curr_price": 400,
+        "new_price": 400
+      },
+      {
+        "id": "tr-2",
+        "mfr": "Rigging Team",
+        "tech": "Terrace Hoisting / Crane Lifting to Roof",
+        "rating": "Up to 4 Floors",
+        "unit": "\u20b9/kW",
+        "old_price": 350,
+        "curr_price": 300,
+        "new_price": 300
+      }
+    ]
+  },
+  "statutory_fees": {
+    "name": "Government & ESCOM Fees",
+    "icon": "\ud83c\udfdb\ufe0f",
+    "category": "Statutory Approvals",
+    "benchmark": "\u20b93,000 \u2013 \u20b96,000 / plant",
+    "unit": "\u20b9 / item",
+    "items": [
+      {
+        "id": "gov-1",
+        "mfr": "BESCOM / HESCOM / MESCOM",
+        "tech": "Solar Online Portal Application Registration",
+        "rating": "1 - 20 kW LT",
+        "unit": "\u20b9/appl",
+        "old_price": 1000,
+        "curr_price": 1000,
+        "new_price": 1000
+      },
+      {
+        "id": "gov-2",
+        "mfr": "ESCOM Meter Testing",
+        "tech": "Bi-directional Net Meter Calibration Fee",
+        "rating": "DLMS Meter Test",
+        "unit": "\u20b9/meter",
+        "old_price": 1500,
+        "curr_price": 1500,
+        "new_price": 1500
+      },
+      {
+        "id": "gov-3",
+        "mfr": "Electrical Inspectorate (CEIG)",
+        "tech": "Statutory Safety Inspection (>10 kW installations)",
+        "rating": "CEIG Approval",
+        "unit": "\u20b9/site",
+        "old_price": 2500,
+        "curr_price": 2500,
+        "new_price": 2500
+      }
+    ]
+  }
+}

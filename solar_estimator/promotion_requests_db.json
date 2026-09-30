@@ -1,0 +1,47 @@
+[
+  {
+    "id": "req-1790491374",
+    "username": "site_engineer_1",
+    "current_role": "admin",
+    "requested_role": "senior_admin",
+    "reason": "Completed commissioning",
+    "status": "Pending",
+    "requested_at": "2026-09-27 12:12:54"
+  },
+  {
+    "id": "req-1790452364",
+    "username": "site_engineer_1",
+    "current_role": "admin",
+    "requested_role": "senior_admin",
+    "reason": "Completed commissioning",
+    "status": "Pending",
+    "requested_at": "2026-09-27 01:22:44"
+  },
+  {
+    "id": "req-1790452340",
+    "username": "site_engineer_1",
+    "current_role": "admin",
+    "requested_role": "senior_admin",
+    "reason": "Completed Q3 milestone",
+    "status": "Pending",
+    "requested_at": "2026-09-27 01:22:20"
+  },
+  {
+    "id": "req-1790452285",
+    "username": "site_engineer_1",
+    "current_role": "admin",
+    "requested_role": "senior_admin",
+    "reason": "Completed Q3 milestone",
+    "status": "Pending",
+    "requested_at": "2026-09-27 01:21:25"
+  },
+  {
+    "id": "req-901",
+    "username": "admin",
+    "current_role": "admin",
+    "requested_role": "senior_admin",
+    "reason": "Leading the new KERC 2026 tariff updates and managing daily installer ticket resolutions.",
+    "status": "Pending",
+    "requested_at": "2026-09-25 16:20:00"
+  }
+]
